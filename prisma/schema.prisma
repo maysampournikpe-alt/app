@@ -1,0 +1,248 @@
+// Rumbo server database.
+//
+// IMPORTANT PRIVACY RULE: student personal data (profile, saved items, plans,
+// chats, hours...) is NOT stored here. It lives on the student's own device.
+// This database only keeps things that must be shared between people
+// (school groups, staff posts, parent links) or that protect the app
+// (search cache, rate limits). Device IDs are always stored hashed.
+//
+// Local development uses SQLite (zero setup). To use Postgres (Supabase/Neon)
+// run `npm run db:use-postgres` — see README.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- Cost control ----------
+
+/// Saves money: the same search within 24 hours is answered from here for $0.
+model SearchCache {
+  id         String   @id @default(cuid())
+  cacheKey   String   @unique
+  resultJson String
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+}
+
+/// One row per AI call. Used for per-device daily limits and the global daily budget cap.
+model UsageEvent {
+  id           String   @id @default(cuid())
+  clientHash   String
+  route        String
+  inputTokens  Int      @default(0)
+  outputTokens Int      @default(0)
+  searches     Int      @default(0)
+  costCents    Float    @default(0)
+  createdAt    DateTime @default(now())
+
+  @@index([clientHash, route, createdAt])
+  @@index([createdAt])
+}
+
+// ---------- Schools & verified staff ----------
+
+/// A school (or club/organization). Each role gets its own join code.
+model School {
+  id          String   @id @default(cuid())
+  name        String
+  city        String?
+  studentCode String   @unique
+  staffCode   String   @unique
+  parentCode  String   @unique
+  mentorCode  String   @unique
+  createdAt   DateTime @default(now())
+}
+
+/// An opportunity posted by verified school staff. Shows a "Verified" badge in search.
+model StaffPost {
+  id          String   @id @default(cuid())
+  schoolId    String
+  staffName   String // display name like "Ms. G (Counselor)"
+  oppJson     String // Opportunity fields as JSON
+  keywords    String // lowercase words used to match searches
+  category    String
+  status      String   @default("approved") // approved | removed
+  createdAt   DateTime @default(now())
+
+  @@index([schoolId])
+}
+
+/// A teacher recommends an opportunity to students in their school group.
+model Recommendation {
+  id        String   @id @default(cuid())
+  schoolId  String
+  staffName String
+  note      String
+  oppJson   String
+  createdAt DateTime @default(now())
+
+  @@index([schoolId])
+}
+
+/// A school club for the club directory.
+model Club {
+  id          String   @id @default(cuid())
+  schoolId    String
+  name        String
+  description String
+  meets       String?
+  sponsor     String? // title only, e.g. "Mr. R, Science"
+  createdAt   DateTime @default(now())
+
+  @@index([schoolId])
+}
+
+// ---------- Family ----------
+
+/// "Share with my parent" private link. Holds a summary (no student name) and the parent's yes/no.
+model ParentShare {
+  id          String    @id @default(cuid())
+  token       String    @unique
+  kind        String // summary | approval
+  locale      String    @default("en")
+  payloadJson String
+  decision    String? // approved | declined
+  parentNote  String?
+  decidedAt   DateTime?
+  expiresAt   DateTime
+  createdAt   DateTime  @default(now())
+}
+
+// ---------- People (moderated, group-based only) ----------
+
+model Group {
+  id          String   @id @default(cuid())
+  schoolId    String? // null = open to everyone (still moderated)
+  kind        String // school | study | team | mentor | club | shared_plan | carpool
+  slug        String   @unique
+  name        String
+  nameEs      String?
+  description String
+  descEs      String?
+  subject     String?
+  createdAt   DateTime @default(now())
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  groupId     String
+  parentId    String? // reply to another post (Q&A answers)
+  deviceHash  String
+  nickname    String
+  role        String   @default("student") // student | staff | mentor | parent
+  kind        String   @default("post") // post | question | answer | team | cheer | ride
+  body        String
+  meta        String? // small JSON (e.g. team skills needed, ride details)
+  hidden      Boolean  @default(false)
+  reportCount Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([groupId, createdAt])
+}
+
+model Report {
+  id         String   @id @default(cuid())
+  targetType String // post | review
+  targetId   String
+  reason     String
+  createdAt  DateTime @default(now())
+}
+
+/// Event buddy: who in your school group is going to the same event (nickname only).
+model EventAttendance {
+  id         String   @id @default(cuid())
+  schoolId   String
+  eventKey   String
+  eventTitle String
+  deviceHash String
+  nickname   String
+  createdAt  DateTime @default(now())
+
+  @@unique([schoolId, eventKey, deviceHash])
+}
+
+/// Students who attended rate the opportunity and leave a short tip.
+model Review {
+  id          String   @id @default(cuid())
+  oppKey      String
+  deviceHash  String
+  nickname    String
+  rating      Int
+  tip         String
+  hidden      Boolean  @default(false)
+  reportCount Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@unique([oppKey, deviceHash])
+  @@index([oppKey])
+}
+
+/// Friends follow the same plan with a share code.
+model SharedPlan {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  planJson  String
+  followers Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+// ---------- Anonymous counts (no personal data) ----------
+
+/// "Trending near you": how many students in an area saved an opportunity.
+model SaveCount {
+  id        String   @id @default(cuid())
+  areaKey   String // first 3 digits of ZIP, or "online"
+  oppKey    String
+  oppJson   String
+  count     Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([areaKey, oppKey])
+  @@index([areaKey, count])
+}
+
+/// Counselor reports: what kinds of opportunities students search for.
+model SearchStat {
+  id       String @id @default(cuid())
+  schoolId String @default("all")
+  areaKey  String
+  category String
+  day      String // YYYY-MM-DD
+  count    Int    @default(0)
+
+  @@unique([schoolId, areaKey, category, day])
+}
+
+/// Teacher dashboard (student opts in): nickname + activity counts only.
+model EngagementStat {
+  id         String   @id @default(cuid())
+  schoolId   String
+  deviceHash String
+  nickname   String
+  grade      Int?
+  searches   Int      @default(0)
+  saves      Int      @default(0)
+  applied    Int      @default(0)
+  planSteps  Int      @default(0)
+  hours      Float    @default(0)
+  updatedAt  DateTime @updatedAt
+
+  @@unique([schoolId, deviceHash])
+}
+
+/// School volunteer-hour leaderboard. Only school totals are ever shown.
+model HoursContribution {
+  id         String   @id @default(cuid())
+  schoolId   String
+  deviceHash String
+  month      String // YYYY-MM
+  hours      Float    @default(0)
+  updatedAt  DateTime @updatedAt
+
+  @@unique([schoolId, deviceHash, month])
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Privacidad, en palabras sencillas",
+  "updated": "Actualizado en octubre de 2026",
+  "short": "Lo corto: tus cosas se quedan en tu teléfono. No queremos tu nombre, dirección ni fotos, y nunca vendemos nada.",
+  "s1t": "Qué guarda Rumbo y dónde",
+  "s1": "Tu perfil (grado, intereses, metas), oportunidades guardadas, planes, chats, horas y todo lo que agregas se guarda solo en este aparato, en el almacenamiento de tu navegador. No se sube a nuestro servidor. Si borras los datos de la app o usas “Borrar mis datos”, desaparece.",
+  "s2t": "Lo que nunca pedimos",
+  "s2": "Tu nombre completo, dirección, número de teléfono, correo, fotos ni redes sociales. El apodo es opcional y se queda en tu aparato (a menos que te unas a un grupo escolar, donde solo se muestra tu apodo).",
+  "s3t": "Qué se envía a la IA",
+  "s3": "Cuando buscas o chateas, tu pregunta y algunos datos de tu perfil (grado, edad, intereses, metas, cómo te mueves y tu ciudad) se envían a nuestro servidor y luego a la empresa de IA Anthropic para obtener una respuesta. Tu apodo nunca se envía. Nuestro servidor no guarda tus chats. Las reglas de Anthropic para clientes de empresa (API) dicen que no usa estas solicitudes para entrenar su IA.",
+  "s4t": "Lo que sí guarda nuestro servidor",
+  "s4": "Para mantener bajos los costos y la app segura, el servidor guarda: copias de resultados de búsqueda por 24 horas (así repetir una búsqueda es gratis), cuántas solicitudes a la IA hizo cada aparato hoy (con un código revuelto del aparato — nunca tu dirección IP), y lo que tú decides compartir: publicaciones en grupos moderados, reseñas, enlaces para tus papás y conteos anónimos (como “12 estudiantes cerca de 785 guardaron esto”).",
+  "s5t": "Niños menores de 13",
+  "s5": "Si tienes menos de 13 años, tu mamá, papá o tutor debe aceptar antes de que uses Rumbo (así lo pide COPPA, una ley de EE. UU. que protege a los niños en internet). Los padres pueden bloquear funciones con un PIN y borrar todo cuando quieran.",
+  "s6t": "Gente y grupos",
+  "s6": "No hay mensajes privados. Los grupos están moderados. Los teléfonos, correos, direcciones y usuarios de redes sociales se quitan automáticamente de las publicaciones. Los grupos escolares necesitan un código de un maestro, padre o escuela.",
+  "s7t": "Tus opciones",
+  "s7": "Puedes descargar o borrar todos tus datos en Yo → Descargar o borrar mis datos. Al borrar, todo se quita de este aparato al instante.",
+  "s8t": "Preguntas",
+  "s8": "Pide ayuda a tu mamá, papá, maestro o consejero escolar, o contacta al estudiante que creó la app en la página del proyecto en GitHub.",
+  "aiLink": "Cómo funciona la IA y sus límites"
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Privacy, in plain words",
+  "updated": "Last updated October 2026",
+  "short": "The short version: your stuff stays on your phone. We don't want your name, address, or photos, and we never sell anything.",
+  "s1t": "What Rumbo saves, and where",
+  "s1": "Your profile (grade, interests, goals), saved opportunities, plans, chats, hours and everything else you add is saved only on this device, in your browser's storage. It is not uploaded to our server. If you delete the app's data or use “Delete my data,” it's gone.",
+  "s2t": "What we never ask for",
+  "s2": "Your full name, home address, phone number, email, photos, or social media. A nickname is optional and stays on your device (unless you join a school group, where only your nickname is shown).",
+  "s3t": "What goes to the AI",
+  "s3": "When you search or chat, your question plus a few profile details (grade, age, interests, goals, how you get around, and your town) are sent to our server and then to the AI company Anthropic to get an answer. Your nickname is never sent. Our server does not keep your chats. Anthropic's rules for business (API) customers say it does not use these requests to train its AI.",
+  "s4t": "What our server does keep",
+  "s4": "To keep costs low and the app safe, our server keeps: copies of search results for 24 hours (so repeat searches are free), a count of how many AI requests each device made today (using a scrambled device code — never your IP address), and anything you choose to share: posts in moderated groups, reviews, parent share links, and anonymous counts (like “12 students near 785 saved this”).",
+  "s5t": "Kids under 13",
+  "s5": "If you're under 13, a parent or guardian must agree before you use Rumbo (this follows COPPA, a U.S. law that protects kids online). Parents can lock features with a PIN and delete everything at any time.",
+  "s6t": "People and groups",
+  "s6": "There is no private messaging. Groups are moderated. Phone numbers, emails, addresses and social media handles are removed automatically from posts. School groups need a code from a teacher, parent, or school.",
+  "s7t": "Your choices",
+  "s7": "You can download all your data or delete it from Me → Download or delete my data. Deleting removes everything from this device right away.",
+  "s8t": "Questions",
+  "s8": "Ask a parent, teacher, or school counselor to help, or contact the student developer through the project's GitHub page.",
+  "aiLink": "How the AI works and its limits"
+}

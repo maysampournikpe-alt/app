@@ -1,0 +1,14 @@
+{
+  "title": "Pide ayuda ahora",
+  "intro": "No estás solo(a). Estos servicios son gratis, privados, y muchos tienen personas que hablan español. Un adulto de confianza — tu mamá, papá, maestro, entrenador o consejero escolar — también puede ayudarte.",
+  "urgent": "Si estás en peligro ahora mismo, llama al 911.",
+  "call": "Llamar al {n}",
+  "text": "Textea {word} al {n}",
+  "textOnly": "Textear al {n}",
+  "website": "Sitio web",
+  "spanish": "Habla español",
+  "counselorTitle": "Mi consejero escolar",
+  "counselorHelp": "Agrega el nombre de tu consejero y cómo contactarlo en Yo → Perfil, para que siempre esté aquí.",
+  "counselorEdit": "Agregar mi consejero",
+  "trustedAdult": "Hablar con un adulto de confianza es de valientes, no de débiles."
+}

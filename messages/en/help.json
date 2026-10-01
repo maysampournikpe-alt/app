@@ -1,0 +1,14 @@
+{
+  "title": "Get help now",
+  "intro": "You're not alone. These are free, private, and many have Spanish speakers. A trusted adult — a parent, teacher, coach, or your school counselor — can help too.",
+  "urgent": "If you are in danger right now, call 911.",
+  "call": "Call {n}",
+  "text": "Text {word} to {n}",
+  "textOnly": "Text {n}",
+  "website": "Website",
+  "spanish": "Habla español",
+  "counselorTitle": "My school counselor",
+  "counselorHelp": "Add your counselor's name and how to reach them in Me → Profile, so it's always here.",
+  "counselorEdit": "Add my counselor",
+  "trustedAdult": "Talking to a trusted adult is a strong move, not a weak one."
+}

@@ -1,0 +1,260 @@
+@import "tailwindcss";
+
+/* Dark mode is controlled by a "dark" class on <html> (set from Settings),
+   not only by the phone's setting, so students can choose. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Fonts (self-hosted, no Google requests) ----------
+   Atkinson Hyperlegible: designed by the Braille Institute to be easy to read.
+   OpenDyslexic: optional dyslexia-friendly font (turned on in Settings). */
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/atkinson-hyperlegible-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/atkinson-hyperlegible-latin-ext-700-normal.woff2") format("woff2");
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/opendyslexic-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/opendyslexic-latin-700-normal.woff2") format("woff2");
+}
+
+/* ---------- Color tokens ----------
+   All text/background pairs were chosen to pass WCAG AA contrast (4.5:1+).
+   Teal = the river, orange = the Valley sunset. */
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --surface-2: #efede6;
+  --border: #d4d0c4;
+  --text: #1c1b1a;
+  --muted: #57544c;
+  --primary: #0b6b66;
+  --primary-hover: #08534f;
+  --on-primary: #ffffff;
+  --primary-soft: #d9efec;
+  --on-primary-soft: #074440;
+  --accent: #a83c0c;
+  --accent-soft: #fde6d6;
+  --on-accent-soft: #6e2706;
+  --success: #1c6e35;
+  --success-soft: #dcf1e2;
+  --warning: #7a4e00;
+  --warning-soft: #fdf0cf;
+  --danger: #ad1f14;
+  --danger-soft: #fde2df;
+  --focus: #1d4ed8;
+  --font-body: "Atkinson Hyperlegible", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0e1416;
+  --surface: #172024;
+  --surface-2: #202b30;
+  --border: #364750;
+  --text: #eef3f2;
+  --muted: #b0bebc;
+  --primary: #62d6ca;
+  --primary-hover: #8be3da;
+  --on-primary: #05302c;
+  --primary-soft: #133b38;
+  --on-primary-soft: #bdf1ea;
+  --accent: #ffab78;
+  --accent-soft: #3f2414;
+  --on-accent-soft: #ffd8bf;
+  --success: #7ddc98;
+  --success-soft: #16301f;
+  --warning: #f7cd61;
+  --warning-soft: #352a0d;
+  --danger: #ff958c;
+  --danger-soft: #3d1714;
+  --focus: #93b4ff;
+  color-scheme: dark;
+}
+
+/* Dyslexia-friendly font option */
+.dyslexia {
+  --font-body: "OpenDyslexic", "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+}
+.dyslexia body {
+  letter-spacing: 0.02em;
+  word-spacing: 0.08em;
+  line-height: 1.7;
+}
+
+/* Large text option: everything is sized in rem, so this scales the whole app. */
+.large-text {
+  font-size: 118.75%;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-on-primary-soft: var(--on-primary-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent-soft: var(--on-accent-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-focus: var(--focus);
+  --font-sans: var(--font-body);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  min-height: 100dvh;
+}
+
+/* Big, clear keyboard focus ring everywhere */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Respect "reduce motion" and Low data mode: no animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.low-data *,
+.low-data *::before,
+.low-data *::after {
+  animation: none !important;
+  transition: none !important;
+}
+.low-data .decorative {
+  display: none !important;
+}
+
+/* Hide scrollbars on horizontal chip rows but keep them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Bottom padding so content is never hidden behind the phone tab bar */
+.pb-tabbar {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 1024px) {
+  .pb-tabbar {
+    padding-bottom: 2rem;
+  }
+}
+
+/* Celebration confetti (Phase 9) */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0.8;
+  }
+}
+.confetti-piece {
+  position: fixed;
+  top: 0;
+  width: 10px;
+  height: 14px;
+  border-radius: 2px;
+  animation: confetti-fall 2.8s linear forwards;
+  pointer-events: none;
+  z-index: 60;
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.pop-in {
+  animation: pop-in 0.25s ease-out;
+}
+
+/* Printing (resume, flyers, parent summary): plain black on white, no app chrome */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .print-plain {
+    border: none !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+}
