@@ -1,0 +1,14 @@
+{
+  "job": "Trabajo",
+  "internship": "Prácticas",
+  "academic_competition": "Competencia académica",
+  "sports_competition": "Competencia deportiva",
+  "event": "Evento",
+  "volunteer": "Voluntariado",
+  "club": "Club",
+  "scholarship": "Beca",
+  "summer_program": "Programa de verano",
+  "camp": "Campamento",
+  "course": "Curso",
+  "certification": "Certificación"
+}

@@ -1,0 +1,14 @@
+{
+  "job": "Job",
+  "internship": "Internship",
+  "academic_competition": "Academic competition",
+  "sports_competition": "Sports competition",
+  "event": "Event",
+  "volunteer": "Volunteering",
+  "club": "Club",
+  "scholarship": "Scholarship",
+  "summer_program": "Summer program",
+  "camp": "Camp",
+  "course": "Course",
+  "certification": "Certification"
+}

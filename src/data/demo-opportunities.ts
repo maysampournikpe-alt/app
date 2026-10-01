@@ -1,0 +1,483 @@
+// SAMPLE DATA used in demo mode (when no AI key is set) and as a backup when the
+// daily AI budget runs out. Every item is a REAL program with a REAL official link,
+// checked in October 2026, but dates change — so each card is labeled "Sample" and
+// students are told to confirm details on the official site.
+import type { Localized } from "@/i18n/config";
+import type { Category, CostType, Mode, YesNoUnknown } from "@/types";
+
+export interface DemoOpp {
+  id: string;
+  title: Localized;
+  organization: string;
+  description: Localized;
+  category: Category;
+  cost: { type: CostType; text?: Localized; feeWaiver?: Localized };
+  paid?: boolean;
+  payText?: Localized;
+  grades?: { min?: number; max?: number };
+  ages?: { min?: number; max?: number };
+  eligibility?: Localized;
+  deadline?: string;
+  startDate?: string;
+  dateText?: Localized;
+  mode: Mode;
+  city?: string; // used to measure distance
+  carFree: YesNoUnknown;
+  transitNote?: Localized;
+  sourceUrl: string;
+  /** words (English + Spanish) used by the demo search */
+  tags: string[];
+  /** Example of a scam for teaching (only appears for job searches) */
+  scamExample?: boolean;
+}
+
+export const DEMO_OPPORTUNITIES: DemoOpp[] = [
+  {
+    id: "demo-cac",
+    title: { en: "Congressional App Challenge 2026", es: "Congressional App Challenge 2026" },
+    organization: "U.S. House of Representatives",
+    description: {
+      en: "Build an app (alone or with up to 3 teammates) and submit it with a short video. Winners in each congressional district are recognized by their Member of Congress and their apps are displayed in the U.S. Capitol.",
+      es: "Crea una app (solo o con hasta 3 compañeros) y envíala con un video corto. Los ganadores de cada distrito reciben reconocimiento de su congresista y sus apps se exhiben en el Capitolio de EE. UU.",
+    },
+    category: "academic_competition",
+    cost: { type: "free" },
+    grades: { min: 6, max: 12 },
+    eligibility: { en: "Middle and high school students in participating districts.", es: "Estudiantes de secundaria y preparatoria en distritos participantes." },
+    deadline: "2026-10-26",
+    dateText: { en: "Submissions due Oct 26, 2026 at 12:00 PM ET", es: "Fecha límite: 26 de octubre de 2026 a las 12:00 PM (hora del Este)" },
+    mode: "online",
+    carFree: "yes",
+    sourceUrl: "https://www.congressionalappchallenge.us/",
+    tags: ["coding", "app", "apps", "programming", "computer", "tech", "competition", "programación", "competencia", "concurso", "stem", "congress"],
+  },
+  {
+    id: "demo-usaco",
+    title: { en: "USA Computing Olympiad (USACO)", es: "Olimpiada de Computación de EE. UU. (USACO)" },
+    organization: "USA Computing Olympiad",
+    description: {
+      en: "Free online programming contests for pre-college students. Start in Bronze and get promoted by solving problems. Great practice for coding interviews and college.",
+      es: "Concursos de programación en línea y gratis para estudiantes. Empiezas en Bronce y subes de nivel resolviendo problemas. Buena práctica para entrevistas y la universidad.",
+    },
+    category: "academic_competition",
+    cost: { type: "free" },
+    grades: { min: 6, max: 12 },
+    dateText: { en: "Online contests are usually held January–March. Check the site for this season's dates.", es: "Los concursos en línea suelen ser de enero a marzo. Revisa el sitio para las fechas de esta temporada." },
+    mode: "online",
+    carFree: "yes",
+    sourceUrl: "https://usaco.org/",
+    tags: ["coding", "programming", "computer", "olympiad", "competition", "math", "programación", "competencia", "concurso", "stem", "c++", "python", "java"],
+  },
+  {
+    id: "demo-mathcounts",
+    title: { en: "MATHCOUNTS Competition Series", es: "Competencia MATHCOUNTS" },
+    organization: "MATHCOUNTS Foundation",
+    description: {
+      en: "The national middle school math competition. Schools register teams of students who compete at chapter, state and national levels.",
+      es: "La competencia nacional de matemáticas para secundaria. Las escuelas inscriben equipos que compiten a nivel regional, estatal y nacional.",
+    },
+    category: "academic_competition",
+    cost: { type: "paid", text: { en: "$42–$53 per student, usually paid by the school", es: "$42–$53 por estudiante, normalmente lo paga la escuela" } },
+    grades: { min: 6, max: 8 },
+    deadline: "2026-11-03",
+    dateText: { en: "School early-bird registration Nov 3, 2026; regular deadline Dec 15, 2026", es: "Inscripción anticipada de la escuela: 3 nov 2026; fecha normal: 15 dic 2026" },
+    mode: "in_person",
+    carFree: "unknown",
+    sourceUrl: "https://www.mathcounts.org/programs/mathcounts-competition-series",
+    tags: ["math", "mathematics", "competition", "middle school", "matemáticas", "competencia", "concurso", "academic"],
+  },
+  {
+    id: "demo-scholastic",
+    title: { en: "Scholastic Art & Writing Awards 2027", es: "Premios Scholastic de Arte y Escritura 2027" },
+    organization: "Alliance for Young Artists & Writers",
+    description: {
+      en: "Submit original art or writing in 29 categories — from poetry and short stories to photography, comics, and video games — for regional and national awards and scholarships.",
+      es: "Envía arte o escritura original en 29 categorías — poesía, cuentos, fotografía, cómics, videojuegos y más — para premios regionales y nacionales y becas.",
+    },
+    category: "academic_competition",
+    cost: {
+      type: "paid",
+      text: { en: "$15 per entry ($40 portfolio)", es: "$15 por obra ($40 portafolio)" },
+      feeWaiver: { en: "Fee waivers available: just select “fee waiver” when you enter.", es: "Hay exención de pago: solo elige “fee waiver” al inscribirte." },
+    },
+    grades: { min: 7, max: 12 },
+    ages: { min: 13 },
+    deadline: "2026-12-01",
+    dateText: { en: "Opens Oct 1, 2026. Regional deadlines Dec 1, 2026 – Jan 6, 2027 (check your region).", es: "Abre el 1 oct 2026. Fechas regionales del 1 dic 2026 al 6 ene 2027 (revisa tu región)." },
+    mode: "online",
+    carFree: "yes",
+    sourceUrl: "https://www.artandwriting.org/",
+    tags: ["art", "writing", "poetry", "photography", "design", "comics", "film", "competition", "scholarship", "arte", "escritura", "poesía", "fotografía", "concurso"],
+  },
+  {
+    id: "demo-mites",
+    title: { en: "MITES Summer (MIT)", es: "MITES Summer (MIT)" },
+    organization: "Massachusetts Institute of Technology",
+    description: {
+      en: "A free six-week live-in STEM program at MIT for rising high school seniors, with college-level math, science and engineering courses. Travel, housing and food are covered.",
+      es: "Un programa de STEM gratis de seis semanas viviendo en MIT para estudiantes que entrarán a 12.º grado, con clases de matemáticas, ciencias e ingeniería a nivel universitario. Incluye viaje, cuarto y comida.",
+    },
+    category: "summer_program",
+    cost: { type: "free" },
+    grades: { min: 11, max: 11 },
+    eligibility: { en: "11th graders who are U.S. citizens or permanent residents.", es: "Estudiantes de 11.º grado que sean ciudadanos o residentes permanentes de EE. UU." },
+    dateText: { en: "Applications usually open in November and are due around Feb 1.", es: "La solicitud suele abrir en noviembre y cierra alrededor del 1 de febrero." },
+    mode: "in_person",
+    city: "Cambridge, MA",
+    carFree: "yes",
+    transitNote: { en: "Travel to MIT is provided for admitted students.", es: "Se paga el viaje a MIT a los estudiantes aceptados." },
+    sourceUrl: "https://mites.mit.edu/",
+    tags: ["summer", "stem", "engineering", "science", "math", "college", "free", "verano", "ciencia", "ingeniería", "programa", "mit", "residential"],
+  },
+  {
+    id: "demo-gwc",
+    title: { en: "Girls Who Code Summer Programs", es: "Programas de verano de Girls Who Code" },
+    organization: "Girls Who Code",
+    description: {
+      en: "Free virtual summer coding programs for high school students who identify as girls or non-binary. No experience needed; need-based stipends may be available.",
+      es: "Programas de programación virtuales y gratis en verano para estudiantes de prepa que se identifican como chicas o no binarias. No necesitas experiencia; puede haber apoyos económicos.",
+    },
+    category: "summer_program",
+    cost: { type: "free" },
+    grades: { min: 9, max: 12 },
+    dateText: { en: "Applications usually open in winter for the next summer.", es: "La solicitud suele abrir en invierno para el siguiente verano." },
+    mode: "online",
+    carFree: "yes",
+    sourceUrl: "https://girlswhocode.com/",
+    tags: ["coding", "programming", "computer", "girls", "summer", "tech", "virtual", "programación", "verano", "chicas", "stem", "camp", "campamento"],
+  },
+  {
+    id: "demo-hsf",
+    title: { en: "Hispanic Scholarship Fund (HSF) Scholar Program", es: "Becas del Hispanic Scholarship Fund (HSF)" },
+    organization: "Hispanic Scholarship Fund",
+    description: {
+      en: "Merit-based college scholarships for students of Hispanic heritage, plus support services for scholars. High school seniors with at least a 3.0 GPA can apply.",
+      es: "Becas universitarias por mérito para estudiantes de herencia hispana, además de apoyo para los becados. Pueden aplicar estudiantes de 12.º grado con promedio de 3.0 o más.",
+    },
+    category: "scholarship",
+    cost: { type: "free" },
+    grades: { min: 12, max: 12 },
+    eligibility: {
+      en: "Hispanic heritage; U.S. citizen, permanent resident, or DACA; 3.0+ GPA; plans to attend a 4-year college.",
+      es: "Herencia hispana; ciudadano, residente permanente o DACA; promedio 3.0+; planea ir a una universidad de 4 años.",
+    },
+    deadline: "2027-02-15",
+    mode: "online",
+    carFree: "yes",
+    sourceUrl: "https://www.hsf.net/scholarship",
+    tags: ["scholarship", "college", "money", "hispanic", "latino", "latina", "beca", "becas", "universidad", "dinero", "senior", "first generation", "primera generación"],
+  },
+  {
+    id: "demo-dell",
+    title: { en: "Dell Scholars Program", es: "Programa Dell Scholars" },
+    organization: "Michael & Susan Dell Foundation",
+    description: {
+      en: "A college scholarship plus a laptop, textbook credits and ongoing support, for high school seniors who are Pell Grant eligible and have overcome challenges.",
+      es: "Una beca universitaria más una laptop, créditos para libros y apoyo continuo, para estudiantes de 12.º grado elegibles para la beca Pell que han superado retos.",
+    },
+    category: "scholarship",
+    cost: { type: "free" },
+    grades: { min: 12, max: 12 },
+    eligibility: { en: "Seniors who are Pell Grant eligible and in a college-readiness program.", es: "Estudiantes de último año elegibles para la beca Pell y en un programa de preparación universitaria." },
+    dateText: { en: "Applications usually open in the winter of senior year. Check the official site for dates.", es: "La solicitud suele abrir en el invierno del último año. Revisa las fechas en el sitio oficial." },
+    mode: "online",
+    carFree: "yes",
+    sourceUrl: "https://www.dellscholars.org/",
+    tags: ["scholarship", "college", "laptop", "money", "first generation", "beca", "becas", "universidad", "computadora", "primera generación"],
+  },
+  {
+    id: "demo-stc-dual",
+    title: { en: "South Texas College Dual Credit", es: "Doble crédito en South Texas College" },
+    organization: "South Texas College",
+    description: {
+      en: "Take college classes while in high school, tuition-free for most courses, and earn high school and college credit at the same time. STC partners with districts across Hidalgo and Starr counties.",
+      es: "Toma clases universitarias mientras estás en la prepa, sin pagar matrícula en la mayoría de los cursos, y gana créditos de prepa y universidad al mismo tiempo. STC trabaja con distritos de los condados Hidalgo y Starr.",
+    },
+    category: "course",
+    cost: { type: "free", text: { en: "Tuition waived for most dual credit courses", es: "Sin matrícula en la mayoría de los cursos de doble crédito" } },
+    grades: { min: 9, max: 12 },
+    eligibility: { en: "Students at a partner high school. Ask your counselor.", es: "Estudiantes de una prepa asociada. Pregunta a tu consejero." },
+    mode: "hybrid",
+    city: "McAllen, TX",
+    carFree: "unknown",
+    transitNote: { en: "Many classes are taught at your own high school.", es: "Muchas clases se dan en tu propia prepa." },
+    sourceUrl: "https://www.southtexascollege.edu/dual/",
+    tags: ["college", "dual credit", "dual enrollment", "class", "course", "free", "doble crédito", "universidad", "clases", "curso", "early college"],
+  },
+  {
+    id: "demo-utrgv-collegiate",
+    title: { en: "UTRGV Collegiate High School & Dual Enrollment", es: "Collegiate High School y doble inscripción en UTRGV" },
+    organization: "University of Texas Rio Grande Valley",
+    description: {
+      en: "UTRGV works with Valley school districts so high school students can take university courses free of charge and earn college credit early.",
+      es: "UTRGV trabaja con distritos del Valle para que estudiantes de prepa tomen cursos universitarios sin costo y ganen créditos universitarios antes.",
+    },
+    category: "course",
+    cost: { type: "free" },
+    grades: { min: 9, max: 12 },
+    eligibility: { en: "Through partner high schools and districts. Ask your counselor.", es: "A través de prepas y distritos asociados. Pregunta a tu consejero." },
+    mode: "hybrid",
+    city: "Edinburg, TX",
+    carFree: "unknown",
+    sourceUrl: "https://www.utrgv.edu/admissions/non-degree/undergraduate-non-degree/collegiate-high-school/index.htm",
+    tags: ["college", "dual enrollment", "dual credit", "university", "utrgv", "course", "free", "universidad", "doble crédito", "curso", "early college"],
+  },
+  {
+    id: "demo-tx-chess",
+    title: { en: "Texas Scholastic Chess Championships", es: "Campeonatos Escolares de Ajedrez de Texas" },
+    organization: "Texas Chess Association",
+    description: {
+      en: "Statewide scholastic chess championships for K–12 players, with separate North and South Texas state events and an online quick-chess championship.",
+      es: "Campeonatos estatales de ajedrez escolar para jugadores de K–12, con eventos estatales del Norte y Sur de Texas y un campeonato rápido en línea.",
+    },
+    category: "academic_competition",
+    cost: { type: "paid", text: { en: "Entry fee varies by event", es: "La cuota de inscripción depende del evento" } },
+    grades: { min: 1, max: 12 },
+    dateText: { en: "2027 dates and host cities to be announced. Check Texas Chess Association events.", es: "Fechas y ciudades de 2027 por anunciar. Revisa los eventos de la Texas Chess Association." },
+    mode: "in_person",
+    carFree: "unknown",
+    sourceUrl: "https://texaschess.org/upcoming/",
+    tags: ["chess", "ajedrez", "tournament", "torneo", "competition", "competencia", "state", "estatal", "scholastic"],
+  },
+  {
+    id: "demo-nasa",
+    title: { en: "NASA OSTEM Internships", es: "Pasantías NASA OSTEM" },
+    organization: "NASA Office of STEM Engagement",
+    description: {
+      en: "Paid internships working with NASA scientists and engineers. High school applicants must be at least 16 and full-time students; spots for high schoolers are limited and competitive.",
+      es: "Pasantías pagadas trabajando con científicos e ingenieros de la NASA. Quienes están en prepa deben tener al menos 16 años y estudiar tiempo completo; hay pocos lugares para estudiantes de prepa.",
+    },
+    category: "internship",
+    cost: { type: "free" },
+    paid: true,
+    payText: { en: "Paid stipend", es: "Pago (estipendio)" },
+    grades: { min: 10, max: 12 },
+    ages: { min: 16 },
+    eligibility: { en: "U.S. citizens, age 16+, 3.0+ GPA.", es: "Ciudadanos de EE. UU., 16 años o más, promedio 3.0+." },
+    dateText: { en: "Summer 2027 applications are usually due around late February–March 1.", es: "La solicitud para el verano de 2027 suele cerrar entre finales de febrero y el 1 de marzo." },
+    mode: "hybrid",
+    carFree: "unknown",
+    sourceUrl: "https://intern.nasa.gov/",
+    tags: ["internship", "nasa", "space", "engineering", "science", "paid", "stem", "pasantía", "prácticas", "espacio", "ingeniería", "ciencia", "pagado"],
+  },
+  {
+    id: "demo-wfs-youth",
+    title: { en: "Workforce Solutions Youth Services (paid work experience)", es: "Servicios para Jóvenes de Workforce Solutions (experiencia laboral pagada)" },
+    organization: "Workforce Solutions Lower Rio Grande Valley",
+    description: {
+      en: "Free job-readiness help, career counseling, and paid work experience or internships for young people in Hidalgo, Willacy and Starr counties.",
+      es: "Ayuda gratis para prepararte para trabajar, orientación de carreras y experiencia laboral o pasantías pagadas para jóvenes de los condados Hidalgo, Willacy y Starr.",
+    },
+    category: "job",
+    cost: { type: "free" },
+    paid: true,
+    payText: { en: "Paid work experience (for eligible youth)", es: "Experiencia laboral pagada (para jóvenes elegibles)" },
+    ages: { min: 16, max: 24 },
+    eligibility: { en: "Ages 16–24; some programs have income or other requirements.", es: "Edades 16–24; algunos programas tienen requisitos de ingresos u otros." },
+    mode: "in_person",
+    city: "McAllen, TX",
+    carFree: "unknown",
+    sourceUrl: "https://www.wfsolutions.org/how-we-help/job-seekers/youth-services.html",
+    tags: ["job", "jobs", "work", "first job", "paid", "internship", "summer job", "trabajo", "empleo", "primer trabajo", "pagado", "pasantía", "money", "dinero"],
+  },
+  {
+    id: "demo-foodbank",
+    title: { en: "Volunteer at the Food Bank of the RGV", es: "Voluntariado en el Food Bank of the RGV" },
+    organization: "Food Bank of the Rio Grande Valley",
+    description: {
+      en: "Sort and pack food in the warehouse, help at food distributions, or work in the garden. A great way to earn service hours.",
+      es: "Clasifica y empaca comida en el almacén, ayuda en las distribuciones de comida o trabaja en el jardín. Una gran forma de ganar horas de servicio.",
+    },
+    category: "volunteer",
+    cost: { type: "free" },
+    ages: { min: 12 },
+    eligibility: { en: "Ages 12+ for the warehouse; under 16 must come with an adult. The garden welcomes all ages.", es: "Desde 12 años en el almacén; menores de 16 deben ir con un adulto. El jardín acepta todas las edades." },
+    mode: "in_person",
+    city: "Pharr, TX",
+    carFree: "unknown",
+    sourceUrl: "https://foodbankrgv.com/stay-connected/volunteer/",
+    tags: ["volunteer", "service hours", "community", "food", "help", "voluntario", "voluntariado", "horas de servicio", "comunidad", "comida", "nhs"],
+  },
+  {
+    id: "demo-mcallen-tac",
+    title: { en: "McAllen Public Library Teen Advisory Committee", es: "Comité Asesor de Adolescentes de la Biblioteca de McAllen" },
+    organization: "McAllen Public Library",
+    description: {
+      en: "A teen-led volunteer group that plans library programs and helps at events. Each meeting counts as 1 community service hour. Runs September–April.",
+      es: "Un grupo de voluntarios adolescentes que planea programas de la biblioteca y ayuda en eventos. Cada reunión cuenta como 1 hora de servicio comunitario. De septiembre a abril.",
+    },
+    category: "volunteer",
+    cost: { type: "free" },
+    grades: { min: 6, max: 12 },
+    ages: { min: 11, max: 18 },
+    dateText: { en: "Meets every other week, September–April", es: "Se reúne cada dos semanas, de septiembre a abril" },
+    mode: "in_person",
+    city: "McAllen, TX",
+    carFree: "unknown",
+    sourceUrl: "https://mcallenlibrary.net/services/teens/tacvolunteers",
+    tags: ["volunteer", "library", "service hours", "leadership", "teens", "books", "reading", "voluntario", "biblioteca", "horas de servicio", "liderazgo", "club"],
+  },
+  {
+    id: "demo-redcross",
+    title: { en: "American Red Cross Youth Volunteers", es: "Voluntarios Jóvenes de la Cruz Roja Americana" },
+    organization: "American Red Cross",
+    description: {
+      en: "Youth ages 13–17 can volunteer as Blood Donor Ambassadors, start or join a Red Cross Club, and help with disaster preparedness in their community.",
+      es: "Jóvenes de 13 a 17 años pueden ser Embajadores de Donación de Sangre, unirse a un Club de la Cruz Roja y ayudar a su comunidad a prepararse para desastres.",
+    },
+    category: "volunteer",
+    cost: { type: "free" },
+    ages: { min: 13, max: 17 },
+    eligibility: { en: "Parent consent required for under 18.", es: "Menores de 18 necesitan permiso de sus padres." },
+    mode: "hybrid",
+    carFree: "unknown",
+    sourceUrl: "https://www.redcross.org/local/texas/central-and-south-texas/volunteer/youth-services.html",
+    tags: ["volunteer", "health", "medicine", "medical", "blood", "disaster", "community", "voluntario", "salud", "medicina", "cruz roja", "club"],
+  },
+  {
+    id: "demo-redcross-cpr",
+    title: { en: "CPR & First Aid Certification", es: "Certificación de RCP y primeros auxilios" },
+    organization: "American Red Cross",
+    description: {
+      en: "Learn to respond to emergencies and earn a CPR/First Aid certificate. Useful for babysitting, lifeguarding, coaching, and health careers.",
+      es: "Aprende a responder a emergencias y obtén un certificado de RCP y primeros auxilios. Útil para cuidar niños, ser salvavidas, entrenar y carreras de salud.",
+    },
+    category: "certification",
+    cost: { type: "paid", text: { en: "Class fee varies by location and format", es: "El costo depende del lugar y el formato" } },
+    mode: "hybrid",
+    carFree: "unknown",
+    sourceUrl: "https://www.redcross.org/take-a-class/cpr",
+    tags: ["cpr", "first aid", "certification", "certificate", "health", "medicine", "lifeguard", "babysitting", "rcp", "primeros auxilios", "certificación", "salud"],
+  },
+  {
+    id: "demo-4h",
+    title: { en: "Texas 4-H (Hidalgo County)", es: "Texas 4-H (Condado Hidalgo)" },
+    organization: "Texas A&M AgriLife Extension",
+    description: {
+      en: "Join a local 4-H club for hands-on projects in animals, agriculture, robotics, cooking, public speaking and leadership, with county and state contests.",
+      es: "Únete a un club 4-H local para proyectos prácticos de animales, agricultura, robótica, cocina, oratoria y liderazgo, con concursos del condado y del estado.",
+    },
+    category: "club",
+    cost: { type: "paid", text: { en: "Small yearly enrollment fee (varies by county)", es: "Pequeña cuota anual (depende del condado)" } },
+    grades: { min: 3, max: 12 },
+    mode: "in_person",
+    city: "Edinburg, TX",
+    carFree: "unknown",
+    sourceUrl: "https://hidalgo.agrilife.org/",
+    tags: ["club", "4-h", "animals", "agriculture", "farming", "leadership", "cooking", "public speaking", "animales", "agricultura", "liderazgo", "cocina", "ranch"],
+  },
+  {
+    id: "demo-ftc",
+    title: { en: "FIRST Tech Challenge robotics (Texas)", es: "Robótica FIRST Tech Challenge (Texas)" },
+    organization: "FIRST in Texas",
+    description: {
+      en: "Teams of students design, build and code robots to compete in leagues and tournaments, including South Texas events in the Valley. Schools and clubs can start a team.",
+      es: "Equipos de estudiantes diseñan, construyen y programan robots para competir en ligas y torneos, incluidos eventos del Sur de Texas en el Valle. Escuelas y clubes pueden formar un equipo.",
+    },
+    category: "club",
+    cost: { type: "paid", text: { en: "Team registration fees (often covered by schools or grants)", es: "Cuotas de equipo (muchas veces las cubre la escuela o becas)" } },
+    grades: { min: 7, max: 12 },
+    mode: "in_person",
+    city: "Mission, TX",
+    carFree: "unknown",
+    sourceUrl: "https://firstintexas.org/starting-a-first-tech-challenge-team/",
+    tags: ["robotics", "robots", "engineering", "coding", "team", "competition", "stem", "robótica", "ingeniería", "equipo", "competencia", "club"],
+  },
+  {
+    id: "demo-taaf",
+    title: { en: "TAAF Games of Texas & youth sports", es: "Juegos de Texas de TAAF y deportes juveniles" },
+    organization: "Texas Amateur Athletic Federation",
+    description: {
+      en: "Statewide amateur sports like basketball, track and field, swimming, flag football and volleyball. Play locally through your city and advance to state competitions.",
+      es: "Deportes amateurs en todo el estado como básquetbol, atletismo, natación, flag football y voleibol. Juega en tu ciudad y avanza a competencias estatales.",
+    },
+    category: "sports_competition",
+    cost: { type: "paid", text: { en: "Registration fees vary by sport and city", es: "Las cuotas dependen del deporte y la ciudad" } },
+    mode: "in_person",
+    carFree: "unknown",
+    sourceUrl: "https://taaf.com/",
+    tags: ["sports", "basketball", "track", "swimming", "volleyball", "football", "soccer", "competition", "deportes", "básquetbol", "atletismo", "natación", "voleibol", "fútbol", "varsity"],
+  },
+  {
+    id: "demo-khan",
+    title: { en: "Khan Academy (free courses)", es: "Khan Academy (cursos gratis)" },
+    organization: "Khan Academy",
+    description: {
+      en: "Free lessons and practice in math, science, computing, SAT prep and more — in English and Spanish.",
+      es: "Lecciones y práctica gratis de matemáticas, ciencias, computación, SAT y más — en inglés y español.",
+    },
+    category: "course",
+    cost: { type: "free" },
+    mode: "online",
+    carFree: "yes",
+    sourceUrl: "https://www.khanacademy.org/",
+    tags: ["course", "class", "math", "science", "sat", "homework", "study", "free", "online", "curso", "clase", "matemáticas", "ciencias", "tarea", "gratis"],
+  },
+  {
+    id: "demo-cs50",
+    title: { en: "Harvard CS50x: Intro to Computer Science", es: "Harvard CS50x: Introducción a la informática" },
+    organization: "Harvard University",
+    description: {
+      en: "Harvard's famous intro computer science course, free online at your own pace, with a free certificate when you finish.",
+      es: "El famoso curso de introducción a la informática de Harvard, gratis en línea a tu ritmo, con certificado gratis al terminar.",
+    },
+    category: "course",
+    cost: { type: "free" },
+    mode: "online",
+    carFree: "yes",
+    sourceUrl: "https://cs50.harvard.edu/x/",
+    tags: ["coding", "programming", "computer science", "course", "certificate", "free", "online", "programación", "curso", "certificado", "gratis", "python", "harvard"],
+  },
+  {
+    id: "demo-scam-example",
+    title: { en: "PRACTICE: Spot the scam — “Easy $80/hour job from home!”", es: "PRÁCTICA: Detecta la estafa — “¡Trabajo fácil desde casa a $80 la hora!”" },
+    organization: "Example only — not a real listing",
+    description: {
+      en: "This is a made-up example to help you learn the warning signs. It promises easy money, asks you to pay a training fee with gift cards, and wants your Social Security number before any interview. Text us on WhatsApp to apply!",
+      es: "Este es un ejemplo inventado para que aprendas las señales de alerta. Promete dinero fácil, pide pagar una cuota de entrenamiento con tarjetas de regalo y quiere tu número de seguro social antes de una entrevista. ¡Escríbenos por WhatsApp para aplicar!",
+    },
+    category: "job",
+    cost: { type: "paid", text: { en: "$50 training fee (paid with gift cards)", es: "Cuota de entrenamiento de $50 (con tarjetas de regalo)" } },
+    paid: true,
+    payText: { en: "$80/hour", es: "$80/hour" },
+    mode: "online",
+    carFree: "yes",
+    sourceUrl: "https://consumer.ftc.gov/articles/job-scams",
+    tags: ["job", "jobs", "work", "from home", "paid", "trabajo", "empleo", "desde casa", "dinero"],
+    scamExample: true,
+  },
+];
+
+/** Topic → kinds of places that might offer opportunities (used for demo "suggestions"). */
+export const SUGGESTION_TOPICS: { match: RegExp; places: { name: Localized; kind: Localized; why: Localized; howToFind: Localized }[] }[] = [
+  {
+    match: /\b(law|legal|lawyer|attorney|court|judge|government|politic|leyes|abogad|derecho|corte|juez|gobierno)\w*/i,
+    places: [
+      { name: { en: "Local law firms", es: "Despachos de abogados locales" }, kind: { en: "Law office", es: "Despacho legal" }, why: { en: "Small firms sometimes take high school helpers for filing, scanning, or shadowing.", es: "Algunos despachos pequeños aceptan estudiantes para archivar, escanear u observar." }, howToFind: { en: "Search “law firm” + your town on a map app.", es: "Busca “abogado” + tu ciudad en un mapa." } },
+      { name: { en: "County courthouse (District Clerk's office)", es: "Juzgado del condado (oficina del Secretario de Distrito)" }, kind: { en: "Government office", es: "Oficina de gobierno" }, why: { en: "Courts may allow students to watch hearings or volunteer, and staff can tell you about youth programs.", es: "Los juzgados pueden dejar que estudiantes observen audiencias o sean voluntarios, y el personal conoce programas para jóvenes." }, howToFind: { en: "Look up your county's official website.", es: "Busca el sitio oficial de tu condado." } },
+      { name: { en: "Legal aid offices", es: "Oficinas de asistencia legal" }, kind: { en: "Nonprofit", es: "Organización sin fines de lucro" }, why: { en: "Nonprofit legal aid groups often need bilingual volunteers.", es: "Los grupos de ayuda legal sin fines de lucro a menudo necesitan voluntarios bilingües." }, howToFind: { en: "Search “legal aid” + your county.", es: "Busca “legal aid” + tu condado." } },
+    ],
+  },
+  {
+    match: /\b(medic|doctor|nurs|hospital|health|clinic|dent|pharm|vet|medicina|doctor|enfermer|salud|cl[ií]nica|hospital|dentist|veterin)\w*/i,
+    places: [
+      { name: { en: "Hospital volunteer (junior volunteer) programs", es: "Programas de voluntarios jóvenes en hospitales" }, kind: { en: "Hospital", es: "Hospital" }, why: { en: "Many hospitals have teen volunteer programs, often for ages 14 or 16+.", es: "Muchos hospitales tienen programas de voluntarios adolescentes, a menudo desde los 14 o 16 años." }, howToFind: { en: "Call the hospital's volunteer services office.", es: "Llama a la oficina de voluntarios del hospital." } },
+      { name: { en: "Community health clinics", es: "Clínicas de salud comunitarias" }, kind: { en: "Clinic", es: "Clínica" }, why: { en: "Clinics may need bilingual helpers at health fairs.", es: "Las clínicas pueden necesitar ayudantes bilingües en ferias de salud." }, howToFind: { en: "Search “community health center” + your town.", es: "Busca “centro de salud comunitario” + tu ciudad." } },
+      { name: { en: "Veterinary offices and animal shelters", es: "Veterinarias y refugios de animales" }, kind: { en: "Animal care", es: "Cuidado de animales" }, why: { en: "Shelters often welcome teen volunteers; vets sometimes allow shadowing.", es: "Los refugios suelen aceptar voluntarios jóvenes; algunos veterinarios dejan observar." }, howToFind: { en: "Search your city's animal shelter.", es: "Busca el refugio de animales de tu ciudad." } },
+    ],
+  },
+  {
+    match: /\b(cod|program|comput|tech|software|app|robot|engineer|program|inform[aá]tic|tecnolog|ingenier)\w*/i,
+    places: [
+      { name: { en: "Local libraries and maker spaces", es: "Bibliotecas locales y makerspaces" }, kind: { en: "Library", es: "Biblioteca" }, why: { en: "Libraries often run free coding clubs, robotics, and tech help desks that need teen volunteers.", es: "Las bibliotecas a menudo tienen clubes gratis de programación y robótica, y mesas de ayuda tecnológica que necesitan voluntarios." }, howToFind: { en: "Check your city library's teen events calendar.", es: "Revisa el calendario de eventos para adolescentes de tu biblioteca." } },
+      { name: { en: "Small businesses that need a website", es: "Negocios pequeños que necesitan página web" }, kind: { en: "Local business", es: "Negocio local" }, why: { en: "A family restaurant or shop may let you build or update its website for experience.", es: "Un restaurante o tienda familiar puede dejarte hacer o mejorar su página web para ganar experiencia." }, howToFind: { en: "Ask businesses you already know.", es: "Pregunta en negocios que ya conoces." } },
+      { name: { en: "College computer science departments", es: "Departamentos de informática de universidades" }, kind: { en: "University", es: "Universidad" }, why: { en: "Colleges host camps, hackathons, and outreach days for high schoolers.", es: "Las universidades organizan campamentos, hackatones y días de visita para estudiantes de prepa." }, howToFind: { en: "Search the department's “outreach” or “K-12” page.", es: "Busca la página de “outreach” o “K-12” del departamento." } },
+    ],
+  },
+];
+
+export const GENERAL_SUGGESTIONS = [
+  { name: { en: "Your school counselor or career center", es: "Tu consejero escolar o centro de carreras" }, kind: { en: "School", es: "Escuela" }, why: { en: "Counselors hear about local programs first and can recommend you.", es: "Los consejeros se enteran primero de programas locales y te pueden recomendar." }, howToFind: { en: "Visit the counseling office or email your counselor.", es: "Visita la oficina de consejería o escribe a tu consejero." } },
+  { name: { en: "City parks & recreation department", es: "Departamento de parques y recreación de tu ciudad" }, kind: { en: "City government", es: "Gobierno de la ciudad" }, why: { en: "Cities run camps, sports leagues, and summer youth jobs.", es: "Las ciudades organizan campamentos, ligas deportivas y trabajos de verano para jóvenes." }, howToFind: { en: "Look up your city's official website.", es: "Busca el sitio oficial de tu ciudad." } },
+  { name: { en: "Public library", es: "Biblioteca pública" }, kind: { en: "Library", es: "Biblioteca" }, why: { en: "Free programs, volunteer roles, and staff who know local opportunities.", es: "Programas gratis, puestos de voluntario y personal que conoce oportunidades locales." }, howToFind: { en: "Ask at the teen desk.", es: "Pregunta en el área de adolescentes." } },
+];
