@@ -62,7 +62,9 @@ interface FinderSession {
   setFilters: (f: Partial<FinderFilters>) => void;
   resetFilters: () => void;
   setGeo: (g?: { lat: number; lng: number }) => void;
-  search: (q?: string) => Promise<FinderResult | null>;
+  /** true when the current search came from the "Surprise me" button */
+  surprise: boolean;
+  search: (q?: string, opts?: { surprise?: boolean }) => Promise<FinderResult | null>;
 }
 
 /** Search state for this visit (not saved — searches stay private and fresh). */
@@ -72,16 +74,17 @@ export const useFinder = create<FinderSession>()((set, get) => ({
   loading: false,
   error: false,
   response: null,
+  surprise: false,
   filters: DEFAULT_FILTERS,
   setQuery: (query) => set({ query }),
   setFilters: (f) => set((s) => ({ filters: { ...s.filters, ...f } })),
   resetFilters: () => set({ filters: DEFAULT_FILTERS }),
   setGeo: (geo) => set({ geo }),
-  search: async (q) => {
+  search: async (q, opts) => {
     const query = (q ?? get().query).trim();
     if (query.length < 2) return null;
     const app = useApp.getState();
-    set({ loading: true, error: false, query, lastQuery: query });
+    set({ loading: true, error: false, query, lastQuery: query, surprise: !!opts?.surprise });
     const { geo, filters } = get();
     try {
       const res = await apiPost<FinderResult>("/api/search", {
@@ -102,7 +105,12 @@ export const useFinder = create<FinderSession>()((set, get) => ({
         demoOnly: app.consent.under13 && !app.parental.aiSearchEnabled ? true : undefined,
       });
       set({ response: res, loading: false });
-      if (!res.crisis && !res.blocked) app.addHistory(query, res.results.length);
+      if (!res.crisis && !res.blocked) {
+        app.addHistory(query, res.results.length);
+        // If this is a saved search, remember what we've seen so we can spot new results later.
+        const ss = app.savedSearches.find((x) => x.query.toLowerCase() === query.toLowerCase());
+        if (ss) app.updateSavedSearch(ss.id, { knownIds: res.results.map((r) => r.id), lastCheckedAt: new Date().toISOString(), newCount: 0 });
+      }
       return res;
     } catch {
       set({ loading: false, error: true });

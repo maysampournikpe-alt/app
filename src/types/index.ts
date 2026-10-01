@@ -83,6 +83,8 @@ export interface FinderResponse {
   /** "limit" when the daily limit was reached */
   notice?: "limit" | "budget" | "error" | "demo";
   areaLabel?: string;
+  /** Approximate center of the search area (for the map). */
+  center?: { lat: number; lng: number };
 }
 
 export interface LocationInput {

@@ -116,12 +116,14 @@ export async function runFinder(httpReq: Request, input: FinderRequest): Promise
 
   const where = resolveLocation(input.location);
   const areaLabel = where?.label;
+  // Rounded to about 1 km so the exact spot is never shown.
+  const center = where ? { lat: Math.round(where.lat * 100) / 100, lng: Math.round(where.lng * 100) / 100 } : undefined;
   const staff = await staffMatches(input.query);
   void countSearch(input.query, where, input.schoolCode);
 
   const demo = (notice: FinderResponse["notice"]): FinderResult => {
     const d = demoSearch(input);
-    return { results: finish([...staff, ...d.results], input, where), suggestions: d.suggestions, demo: true, notice, areaLabel };
+    return { results: finish([...staff, ...d.results], input, where), suggestions: d.suggestions, demo: true, notice, areaLabel, center };
   };
 
   if (!aiEnabled() || input.demoOnly) return demo("demo");
@@ -130,7 +132,7 @@ export async function runFinder(httpReq: Request, input: FinderRequest): Promise
   const key = cacheKey([input.query.toLowerCase().replace(/\s+/g, " "), where?.zip3 ?? where?.label ?? "none", gradeBand, input.locale, input.filters ?? {}, !!input.lowData]);
   const cached = await getCached<FinderResponse>(key).catch(() => null);
   if (cached) {
-    return { ...cached, results: finish([...staff, ...cached.results], input, where), cached: true, areaLabel };
+    return { ...cached, results: finish([...staff, ...cached.results], input, where), cached: true, areaLabel, center };
   }
 
   const limit = await checkLimits(httpReq, "search");
@@ -147,7 +149,7 @@ export async function runFinder(httpReq: Request, input: FinderRequest): Promise
     });
     const response: FinderResponse = { results: ai.results, suggestions: ai.suggestions, message: ai.message, demo: false, removedCount: ai.removed };
     if (!ai.refused && (ai.results.length || ai.suggestions.length)) await setCached(key, response);
-    return { ...response, results: finish([...staff, ...ai.results], input, where), areaLabel };
+    return { ...response, results: finish([...staff, ...ai.results], input, where), areaLabel, center };
   } catch (e) {
     console.error("finder AI error", e);
     return demo("error");

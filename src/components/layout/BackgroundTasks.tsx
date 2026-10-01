@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useApp } from "@/lib/store";
+import { useApp, profileSummary } from "@/lib/store";
 import { useT } from "@/i18n/useT";
 import { dueReminders } from "@/lib/calendar";
 import { refreshParentDecision } from "@/lib/family-client";
@@ -84,6 +84,44 @@ export function BackgroundTasks() {
         })
         .catch(() => {});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Trending near you: when something new is saved, add 1 to its anonymous area count.
+  useEffect(() => {
+    return useApp.subscribe((state, prev) => {
+      if (state.saved.length <= prev.saved.length) return;
+      const added = state.saved.filter((s) => !prev.saved.some((p) => p.id === s.id));
+      for (const s of added) {
+        const o = s.opp;
+        if (!o.sourceUrl || o.tags?.includes("scam-example")) continue;
+        void apiPost("/api/trending", {
+          area: state.profile.zip?.slice(0, 3),
+          opp: { id: o.id, title: o.title, organization: o.organization || undefined, description: o.description.slice(0, 800), category: o.category, cost: { type: o.cost.type, text: o.cost.text }, mode: o.mode, city: o.city, deadline: o.deadline, sourceUrl: o.sourceUrl, source: o.source },
+        }).catch(() => {});
+      }
+    });
+  }, []);
+
+  // Saved searches: once a day, re-check the one checked longest ago and count new results.
+  useEffect(() => {
+    const app = useApp.getState();
+    if (!app.savedSearches.length || !navigator.onLine) return;
+    const oldest = [...app.savedSearches].sort((a, b) => (a.lastCheckedAt ?? "").localeCompare(b.lastCheckedAt ?? ""))[0];
+    if (oldest.lastCheckedAt && oldest.lastCheckedAt.slice(0, 10) === todayISO()) return;
+    void apiPost<{ results: { id: string }[] }>("/api/search", {
+      query: oldest.query,
+      locale: app.settings.locale,
+      location: { zip: app.profile.zip, city: app.profile.city },
+      profile: profileSummary(app),
+      lowData: app.settings.lowData,
+    })
+      .then((r) => {
+        const fresh = r.results.filter((x) => !oldest.knownIds.includes(x.id)).length;
+        useApp.getState().updateSavedSearch(oldest.id, { lastCheckedAt: new Date().toISOString(), newCount: fresh });
+        if (fresh > 0) useApp.getState().notify({ text: t("explore.alertNew", { q: oldest.query }), href: "/", key: `ss-${oldest.id}-${todayISO()}` });
+      })
+      .catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

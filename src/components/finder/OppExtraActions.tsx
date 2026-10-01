@@ -11,7 +11,7 @@ import { AskParentButton } from "@/components/family/AskParentButton";
 import { OppPhaseExtras } from "./OppPhaseExtras";
 
 /** Extra actions for an opportunity: ask a parent, add to calendar, email helper, and more. */
-export function OppExtraActions({ opp }: { opp: Opportunity }) {
+export function OppExtraActions({ opp, onOpen, pool }: { opp: Opportunity; onOpen?: (o: Opportunity) => void; pool?: Opportunity[] }) {
   const { t } = useT();
   const save = useApp((s) => s.saveOpportunity);
   const isSaved = useApp((s) => s.saved.some((x) => x.id === opp.id));
@@ -50,7 +50,7 @@ export function OppExtraActions({ opp }: { opp: Opportunity }) {
           </button>
         </div>
       )}
-      <OppPhaseExtras opp={opp} />
+      <OppPhaseExtras opp={opp} onOpen={onOpen} pool={pool} />
     </div>
   );
 }

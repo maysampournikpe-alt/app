@@ -4,11 +4,13 @@ import ns_calendar from "./calendar.json";
 import ns_cat from "./cat.json";
 import ns_coach from "./coach.json";
 import ns_common from "./common.json";
+import ns_explore from "./explore.json";
 import ns_family from "./family.json";
 import ns_find from "./find.json";
 import ns_help from "./help.json";
 import ns_interests from "./interests.json";
 import ns_me from "./me.json";
+import ns_money from "./money.json";
 import ns_nav from "./nav.json";
 import ns_offline from "./offline.json";
 import ns_opp from "./opp.json";
@@ -29,11 +31,13 @@ const messages = {
   "cat": ns_cat,
   "coach": ns_coach,
   "common": ns_common,
+  "explore": ns_explore,
   "family": ns_family,
   "find": ns_find,
   "help": ns_help,
   "interests": ns_interests,
   "me": ns_me,
+  "money": ns_money,
   "nav": ns_nav,
   "offline": ns_offline,
   "opp": ns_opp,

@@ -17,7 +17,19 @@ import { oppFacts, scamTexts } from "./format";
 import { OppExtraActions } from "./OppExtraActions";
 
 /** Everything we know about one opportunity, in a pop-up panel. */
-export function OpportunityDetails({ opp, onClose }: { opp: Opportunity | null; onClose: () => void }) {
+export function OpportunityDetails({
+  opp,
+  onClose,
+  onOpen,
+  pool,
+}: {
+  opp: Opportunity | null;
+  onClose: () => void;
+  /** Open a different opportunity (used by "Similar opportunities") */
+  onOpen?: (o: Opportunity) => void;
+  /** Other opportunities to pick similar ones from (e.g. current search results) */
+  pool?: Opportunity[];
+}) {
   const { t, dateLocale } = useT();
   const saved = useApp((s) => (opp ? s.saved.some((x) => x.id === opp.id) : false));
   const save = useApp((s) => s.saveOpportunity);
@@ -133,7 +145,7 @@ export function OpportunityDetails({ opp, onClose }: { opp: Opportunity | null; 
             </Link>
           )}
         </div>
-        <OppExtraActions opp={opp} />
+        <OppExtraActions opp={opp} onOpen={onOpen} pool={pool} />
       </div>
     </Sheet>
   );

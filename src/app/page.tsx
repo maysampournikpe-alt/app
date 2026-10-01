@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, type FormEvent } from "react";
+import dynamic from "next/dynamic";
 import { Search, Sparkles, RotateCcw } from "lucide-react";
 import { useT } from "@/i18n/useT";
 import { useApp } from "@/lib/store";
@@ -18,6 +19,10 @@ import { FilterBar } from "@/components/finder/Filters";
 import { LocationControl } from "@/components/finder/LocationControl";
 import { FinderExtras, FinderHomeSections } from "@/components/finder/FinderExtras";
 import { CrisisHelp } from "@/components/safety/CrisisHelp";
+import { Segmented } from "@/components/ui/misc";
+
+// The map library is big, so it's only downloaded when the student opens the map.
+const ResultsMap = dynamic(() => import("@/components/finder/ResultsMap"), { ssr: false, loading: () => <div className="h-80 animate-pulse rounded-2xl bg-surface-2" /> });
 
 /** 1.1 Opportunity Finder — the home page. */
 export default function FindPage() {
@@ -28,6 +33,9 @@ export default function FindPage() {
   const aiAllowed = useApp((s) => s.parental.aiSearchEnabled || !s.consent.under13);
   const { query, setQuery, search, loading, error, response, filters, lastQuery } = useFinder();
   const [open, setOpen] = useState<Opportunity | null>(null);
+  const [view, setView] = useState<"list" | "map">("list");
+  const lowData = useApp((s) => s.settings.lowData);
+  const surprise = useFinder((s) => s.surprise);
 
   const visible = useMemo(() => (response ? applyFilters(response.results, filters, { grade, onlineOnly }) : []), [response, filters, grade, onlineOnly]);
   const hidden = (response?.results.length ?? 0) - visible.length;
@@ -168,8 +176,32 @@ export default function FindPage() {
 
               <FilterBar />
               <FinderExtras response={response} visible={visible} onOpen={setOpen} />
+              {surprise && <Alert className="mt-3">🎁 {t("explore.surpriseTitle")}</Alert>}
+              {visible.length > 0 && (
+                <div className="mt-3">
+                  <Segmented<"list" | "map">
+                    label={t("explore.mapTitle")}
+                    value={view}
+                    onChange={setView}
+                    options={[
+                      { value: "list", label: t("find.listView") },
+                      { value: "map", label: t("find.mapView") },
+                    ]}
+                  />
+                </div>
+              )}
 
-              {visible.length === 0 ? (
+              {view === "map" && visible.length > 0 ? (
+                <div className="mt-3">
+                  {lowData ? (
+                    <Alert>{t("explore.mapLowData")}</Alert>
+                  ) : visible.some((o) => o.lat !== undefined) ? (
+                    <ResultsMap items={visible} center={response.center} youLabel={t("explore.mapYou")} onOpen={setOpen} detailsLabel={t("opp.details")} />
+                  ) : (
+                    <Alert>{t("explore.mapNoPoints")}</Alert>
+                  )}
+                </div>
+              ) : visible.length === 0 ? (
                 <div className="mt-3 rounded-2xl border-2 border-dashed border-border p-5 text-center">
                   <p className="font-bold">{t("find.noResults")}</p>
                   <p className="mt-1 text-sm text-muted">{t("find.noResultsHelp")}</p>
@@ -204,7 +236,7 @@ export default function FindPage() {
 
       {!response && !loading && <FinderHomeSections onOpen={setOpen} />}
 
-      <OpportunityDetails opp={open} onClose={() => setOpen(null)} />
+      <OpportunityDetails opp={open} onClose={() => setOpen(null)} onOpen={setOpen} pool={response?.results} />
     </div>
   );
 }
