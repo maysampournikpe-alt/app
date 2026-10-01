@@ -130,7 +130,7 @@ export function BackgroundTasks() {
   useEffect(() => {
     if (!breakMinutes) return;
     const id = window.setInterval(() => {
-      useApp.getState().notify({ text: t("wellbeing.breakNow"), href: "/plan/wellbeing", key: `break-${Date.now()}` });
+      useApp.getState().notify({ text: t("wellbeing.breakNow"), href: "/help", key: `break-${Date.now()}` });
     }, breakMinutes * 60_000);
     return () => window.clearInterval(id);
   }, [breakMinutes, t]);
