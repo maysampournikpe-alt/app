@@ -15,6 +15,7 @@ import { Chip } from "@/components/ui/Chip";
 import { Toggle } from "@/components/ui/Toggle";
 import { Button } from "@/components/ui/Button";
 import { TagInput } from "@/components/ui/TagInput";
+import { SchoolGroupCard } from "@/components/me/SchoolGroupCard";
 
 /** 1.4 Student profile. Saved only on this device. The AI uses it so students don't retype details. */
 export default function ProfilePage() {
@@ -33,8 +34,17 @@ export default function ProfilePage() {
 
   function save(e: FormEvent) {
     e.preventDefault();
+    // Only the fields on this form (school group settings are saved by their own card).
     setProfile({
-      ...p,
+      grade: p.grade,
+      birthYear: p.birthYear,
+      interests: p.interests,
+      skills: p.skills,
+      goals: p.goals,
+      transport: p.transport,
+      firstGen: p.firstGen,
+      counselorName: p.counselorName?.trim() || undefined,
+      counselorContact: p.counselorContact?.trim() || undefined,
       nickname: p.nickname?.trim().slice(0, 24) || undefined,
       zip: p.zip && /^\d{5}$/.test(p.zip) ? p.zip : undefined,
       city: p.city?.trim() || undefined,
@@ -164,6 +174,9 @@ export default function ProfilePage() {
           {t("common.save")}
         </Button>
       </form>
+      <div className="mt-6">
+        <SchoolGroupCard />
+      </div>
     </div>
   );
 }

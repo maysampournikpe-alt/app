@@ -5,7 +5,7 @@ import { SectionTitle } from "@/components/ui/misc";
 import { LinkCard } from "@/components/ui/Card";
 
 /** Links to the other planning tools (calendar, schedule, budget, packing, wellbeing). Filled in as they're built. */
-export const PLAN_TOOL_LINKS: { href: string; icon: string; key: string }[] = [];
+export const PLAN_TOOL_LINKS: { href: string; icon: string; key: string }[] = [{ href: "/plan/calendar", icon: "📅", key: "calendar" }];
 
 export function PlanTools() {
   const { t } = useT();

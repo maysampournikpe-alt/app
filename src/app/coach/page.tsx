@@ -62,14 +62,14 @@ function CoachInner() {
       setChatId(id);
     }
     setBusy(true);
-    const r = await sendToCoach(id, mode, text, mode === "interview" ? opp : undefined);
+    const r = await sendToCoach(id, mode, text, mode === "interview" || mode === "email" ? opp : undefined);
     setBusy(false);
     setDemo(!!r.demo);
     setNotice(r.notice);
   }
 
   const starters = [1, 2, 3].map((n) => t(`coach.starter_${mode}_${n}`));
-  const intro = opp && mode === "interview" ? `${t("coach.intro_interview")} (${opp.title})` : t(`coach.intro_${mode}`);
+  const intro = opp && (mode === "interview" || mode === "email") ? `${t(`coach.intro_${mode}`)} (${opp.title})` : t(`coach.intro_${mode}`);
 
   return (
     <div>

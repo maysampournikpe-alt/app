@@ -25,6 +25,7 @@ test("coach: mock interview asks one question at a time", async ({ page }) => {
   await waitForApp(page);
   await page.getByRole("button", { name: /Practice for a first job/ }).click();
   await expect(page.getByText(/Question 1:/)).toBeVisible();
+  await expect(page.getByRole("log")).toHaveAttribute("aria-busy", "false");
   await page.getByLabel("Message the coach").fill("I'm a hard worker who likes helping people and I volunteer at my church food pantry every Saturday.");
   await page.keyboard.press("Enter");
   await expect(page.getByText(/Question 2:/)).toBeVisible();

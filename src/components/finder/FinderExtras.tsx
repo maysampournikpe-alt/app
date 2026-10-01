@@ -7,6 +7,9 @@ import { useFinder, type FinderResult } from "@/lib/finder-client";
 import type { Opportunity } from "@/types";
 import { Chip } from "@/components/ui/Chip";
 import { SectionTitle } from "@/components/ui/misc";
+import { useEffect, useState } from "react";
+import { apiGet } from "@/lib/api";
+import { OpportunityCard } from "./OpportunityCard";
 
 /** Extra tools shown with search results (save search; more added in Phase 3). */
 export function FinderExtras({ response }: { response: FinderResult; visible: Opportunity[]; onOpen: (o: Opportunity) => void }) {
@@ -30,9 +33,48 @@ export function FinderExtras({ response }: { response: FinderResult; visible: Op
   );
 }
 
-/** What shows on the Find page before searching: recent searches (more added in Phase 3). */
+/** Opportunities recommended by verified staff at the student's school (2.1.4). */
+function SchoolRecommendations({ onOpen }: { onOpen: (o: Opportunity) => void }) {
+  const { t } = useT();
+  const code = useApp((s) => s.profile.schoolCode);
+  const [items, setItems] = useState<{ id: string; staffName: string; note: string; opp: Opportunity }[]>([]);
+  useEffect(() => {
+    if (!code) return;
+    apiGet<{ items: typeof items }>(`/api/school/recommendations?code=${encodeURIComponent(code)}`)
+      .then((r) => setItems(r.items.slice(0, 5)))
+      .catch(() => {});
+  }, [code]);
+  if (!code || !items.length) return null;
+  return (
+    <section aria-labelledby="rec-title">
+      <SectionTitle id="rec-title">{t("school.recommendedTitle")}</SectionTitle>
+      <ul className="space-y-3">
+        {items.map((r) => (
+          <li key={r.id}>
+            {r.note && (
+              <p className="mb-1 text-sm">
+                <span className="font-bold">{t("school.from", { name: r.staffName })}:</span> {r.note}
+              </p>
+            )}
+            <OpportunityCard opp={r.opp} onOpen={onOpen} compact />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/** What shows on the Find page before searching: school picks, recent searches, and more. */
 export function FinderHomeSections({ onOpen }: { onOpen: (o: Opportunity) => void }) {
-  void onOpen;
+  return (
+    <>
+      <SchoolRecommendations onOpen={onOpen} />
+      <RecentSearches />
+    </>
+  );
+}
+
+function RecentSearches() {
   const { t } = useT();
   const history = useApp((s) => s.history);
   const { setQuery, search } = useFinder();

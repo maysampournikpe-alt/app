@@ -1,0 +1,20 @@
+{
+  "title": "My progress",
+  "subtitle": "Look how far you've come.",
+  "saved": "Saved",
+  "applied": "Applied",
+  "accepted": "Accepted",
+  "hours": "Volunteer hours",
+  "steps": "Plan steps done",
+  "certs": "Certificates",
+  "hoursByMonth": "Volunteer hours by month",
+  "plans": "Plans",
+  "noPlans": "No plans yet.",
+  "badges": "Badges",
+  "tracker": "Open my tracker",
+  "trackerSub": "Accomplishments, volunteer hours and certificates",
+  "resume": "Build my resume",
+  "resumeSub": "Turn your tracker into a resume PDF",
+  "calendar": "Deadlines & calendar",
+  "calendarSub": "Reminders and conflict checker"
+}

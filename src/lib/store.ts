@@ -56,6 +56,18 @@ export interface AvatarConfig {
   frame: string;
 }
 
+export interface ResumeInfo {
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  cityLine?: string;
+  gradYear?: string;
+  gpa?: string;
+  objective?: string;
+  /** AI-polished bullet text, by entry id */
+  bullets: Record<string, string>;
+}
+
 export interface AppState {
   deviceId: string;
   profile: Profile;
@@ -83,6 +95,7 @@ export interface AppState {
   dailyDone: string[]; // dates (YYYY-MM-DD) when the daily challenge was completed
   practiceScores: { test: string; score: number; total: number; at: string }[];
   celebrate?: { title: string; at: string } | null;
+  resume: ResumeInfo;
   lastSeenVersion?: string;
 
   // ---- actions ----
@@ -142,6 +155,7 @@ export interface AppState {
   completeDaily: () => void;
   addPracticeScore: (test: string, score: number, total: number) => void;
   setAvatar: (a: Partial<AvatarConfig>) => void;
+  setResume: (r: Partial<ResumeInfo>) => void;
   triggerCelebrate: (title: string) => void;
   clearCelebrate: () => void;
 
@@ -196,6 +210,7 @@ function freshData() {
     dailyDone: [] as string[],
     practiceScores: [] as AppState["practiceScores"],
     celebrate: null,
+    resume: { bullets: {} } as ResumeInfo,
   };
 }
 
@@ -397,6 +412,7 @@ export const useApp = create<AppState>()(
         get().awardXp("practice_test");
       },
       setAvatar: (a) => set((s) => ({ avatar: { ...s.avatar, ...a } })),
+      setResume: (r) => set((s) => ({ resume: { ...s.resume, ...r } })),
       triggerCelebrate: (title) => set({ celebrate: { title, at: now() } }),
       clearCelebrate: () => set({ celebrate: null }),
 
@@ -429,6 +445,7 @@ export const useApp = create<AppState>()(
           parental: { ...current.parental, ...(p.parental ?? {}) },
           avatar: { ...current.avatar, ...(p.avatar ?? {}) },
           streak: { ...current.streak, ...(p.streak ?? {}) },
+          resume: { ...current.resume, ...(p.resume ?? {}) },
         };
       },
     },

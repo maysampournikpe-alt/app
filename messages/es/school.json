@@ -1,0 +1,17 @@
+{
+  "title": "Mi grupo escolar",
+  "intro": "Únete con el código de tu maestro, consejero o escuela. Verás recomendaciones del personal y podrás entrar a espacios solo para tu escuela.",
+  "code": "Código de la escuela",
+  "join": "Unirme",
+  "joined": "Estás en el grupo de {school}",
+  "leave": "Salir del grupo escolar",
+  "notFound": "Ese código no funcionó. Pregúntale a tu maestro.",
+  "staffCode": "Ese es un código para el personal. Maestros y consejeros pueden usarlo en la página de Herramientas para personal.",
+  "parentCode": "Ese es un código para padres. Los padres pueden usarlo en el tablero de aventones de la pestaña Gente.",
+  "mentorCode": "Ese es un código de mentor. Úsalo en Gente para responder preguntas como mentor verificado.",
+  "share": "Compartir mi actividad con mi escuela",
+  "shareHelp": "Tus maestros ven tu apodo y conteos sencillos (búsquedas, guardados, solicitudes, pasos del plan, horas de voluntariado) para recomendarte oportunidades. Nunca tus búsquedas, chats ni guardados. Puedes apagarlo cuando quieras.",
+  "demoCodes": "¿Probando la demo? Usa el código de estudiante RGV-STUDENT.",
+  "recommendedTitle": "Recomendado por tu escuela",
+  "from": "De {name}"
+}

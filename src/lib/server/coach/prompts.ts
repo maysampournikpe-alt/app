@@ -69,6 +69,6 @@ export function studentContext(p: ProfileSummary, opp?: { title: string; organiz
     p.firstGen ? "first-generation college student" : "",
   ].filter(Boolean);
   let s = bits.length ? `[About me: ${bits.join("; ")}.]` : "";
-  if (opp) s += `\n[Interview practice is for this opportunity: ${opp.title}${opp.organization ? ` at ${opp.organization}` : ""}${opp.category ? ` (${opp.category})` : ""}. ${opp.description ?? ""}]`;
+  if (opp) s += `\n[This is about the opportunity: ${opp.title}${opp.organization ? ` at ${opp.organization}` : ""}${opp.category ? ` (${opp.category})` : ""}. ${opp.description ?? ""}]`;
   return s;
 }

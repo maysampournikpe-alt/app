@@ -124,6 +124,9 @@ export interface Profile {
   schoolName?: string;
   schoolId?: string;
   shareEngagement?: boolean;
+  /** Extra verified roles on this device (People tab): mentor or parent codes */
+  mentorCode?: string;
+  parentCode?: string;
 }
 
 export type SavedStatus = "saved" | "applied" | "accepted" | "declined" | "attended";

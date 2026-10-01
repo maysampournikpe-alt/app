@@ -1,0 +1,20 @@
+{
+  "title": "Mi progreso",
+  "subtitle": "Mira todo lo que has avanzado.",
+  "saved": "Guardados",
+  "applied": "Solicitudes",
+  "accepted": "Aceptado",
+  "hours": "Horas de voluntariado",
+  "steps": "Pasos del plan listos",
+  "certs": "Certificados",
+  "hoursByMonth": "Horas de voluntariado por mes",
+  "plans": "Planes",
+  "noPlans": "Todavía no hay planes.",
+  "badges": "Insignias",
+  "tracker": "Abrir mi registro",
+  "trackerSub": "Logros, horas de voluntariado y certificados",
+  "resume": "Hacer mi currículum",
+  "resumeSub": "Convierte tu registro en un currículum PDF",
+  "calendar": "Fechas límite y calendario",
+  "calendarSub": "Recordatorios y choques de horario"
+}

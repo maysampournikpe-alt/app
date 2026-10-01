@@ -1,0 +1,17 @@
+{
+  "title": "My school group",
+  "intro": "Join with the code from your teacher, counselor or school. You'll see recommendations from school staff and can join school-only spaces.",
+  "code": "School code",
+  "join": "Join",
+  "joined": "You're in {school}'s group",
+  "leave": "Leave school group",
+  "notFound": "That code didn't work. Check with your teacher.",
+  "staffCode": "That's a staff code. Teachers and counselors can use the Staff tools page.",
+  "parentCode": "That's a parent code. Parents can use it on the People tab's carpool board.",
+  "mentorCode": "That's a mentor code. Use it in People to answer questions as a verified mentor.",
+  "share": "Share my activity with my school",
+  "shareHelp": "Your teachers see your nickname and simple counts (searches, saves, applications, plan steps, volunteer hours) so they can recommend opportunities. Never your searches, chats or saved items. You can turn it off any time.",
+  "demoCodes": "Trying the demo? Use the student code RGV-STUDENT.",
+  "recommendedTitle": "Recommended by your school",
+  "from": "From {name}"
+}

@@ -15,6 +15,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { OpportunityCard } from "@/components/finder/OpportunityCard";
 import { OpportunityDetails } from "@/components/finder/OpportunityDetails";
 import { SavedItemExtras } from "@/components/me/SavedItemExtras";
+import { ShareListButton } from "@/components/family/ShareListButton";
 
 const STATUSES: SavedStatus[] = ["saved", "applied", "accepted", "attended", "declined"];
 type Filter = "all" | "soon" | SavedStatus;
@@ -49,6 +50,7 @@ export default function SavedPage() {
         <EmptyState icon="💾" title={t("me.savedEmpty")} body={t("me.savedEmptyHelp")} action={<ButtonLink href="/">{t("me.goFind")}</ButtonLink>} />
       ) : (
         <>
+          <ShareListButton />
           <div className="-mx-4 mb-4 flex gap-2 overflow-x-auto px-4 pb-1 no-scrollbar">
             {(["all", "soon", "saved", "applied", "accepted"] as Filter[]).map((f) => (
               <Chip key={f} size="sm" selected={filter === f} onClick={() => setFilter(f)}>
