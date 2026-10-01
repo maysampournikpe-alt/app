@@ -19,3 +19,18 @@ export async function apiGet<T>(path: string): Promise<T> {
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return (await res.json()) as T;
 }
+
+export interface TaskResponse<T> {
+  output?: T;
+  demo?: boolean;
+  notice?: string;
+  crisis?: string;
+  blocked?: boolean;
+}
+
+/** Run an AI task on the server (plans, flashcards, resume...). Falls back to demo answers automatically. */
+export async function runTask<T>(task: string, input: unknown): Promise<TaskResponse<T>> {
+  const { profileSummary } = await import("./store");
+  const app = useApp.getState();
+  return apiPost<TaskResponse<T>>(`/api/ai/${task}`, { input, locale: app.settings.locale, profile: profileSummary(app) });
+}

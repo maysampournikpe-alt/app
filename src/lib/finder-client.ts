@@ -99,6 +99,7 @@ export const useFinder = create<FinderSession>()((set, get) => ({
         },
         lowData: app.settings.lowData,
         schoolCode: app.profile.schoolCode,
+        demoOnly: app.consent.under13 && !app.parental.aiSearchEnabled ? true : undefined,
       });
       set({ response: res, loading: false });
       if (!res.crisis && !res.blocked) app.addHistory(query, res.results.length);

@@ -46,6 +46,7 @@ export const FinderRequestSchema = z.object({
     .optional(),
   lowData: z.boolean().optional(),
   schoolCode: z.string().max(40).optional(),
+  demoOnly: z.boolean().optional(),
 });
 
 export type FinderResult = FinderResponse & { crisis?: CrisisKind; blocked?: boolean };
@@ -123,7 +124,7 @@ export async function runFinder(httpReq: Request, input: FinderRequest): Promise
     return { results: finish([...staff, ...d.results], input, where), suggestions: d.suggestions, demo: true, notice, areaLabel };
   };
 
-  if (!aiEnabled()) return demo("demo");
+  if (!aiEnabled() || input.demoOnly) return demo("demo");
 
   const gradeBand = input.profile.grade ? (input.profile.grade <= 8 ? "ms" : "hs") : "any";
   const key = cacheKey([input.query.toLowerCase().replace(/\s+/g, " "), where?.zip3 ?? where?.label ?? "none", gradeBand, input.locale, input.filters ?? {}, !!input.lowData]);

@@ -8,4 +8,6 @@ export interface FinderRequest {
   filters?: { freeOnly?: boolean; category?: Category; onlineOnly?: boolean; paidOnly?: boolean };
   lowData?: boolean;
   schoolCode?: string;
+  /** Parental controls turned AI search off: sample results only */
+  demoOnly?: boolean;
 }

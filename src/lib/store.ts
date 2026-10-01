@@ -104,7 +104,7 @@ export interface AppState {
 
   startChat: (mode: CoachMode, title: string, oppId?: string) => string;
   addChatMessage: (chatId: string, m: ChatMessage) => void;
-  updateLastAssistant: (chatId: string, text: string) => void;
+  updateLastAssistant: (chatId: string, text: string, extra?: Partial<ChatMessage>) => void;
   deleteChat: (id: string) => void;
 
   addHistory: (query: string, count: number) => void;
@@ -293,13 +293,13 @@ export const useApp = create<AppState>()(
         set((s) => ({
           chats: s.chats.map((c) => (c.id === chatId ? { ...c, messages: [...c.messages, m], updatedAt: now() } : c)),
         })),
-      updateLastAssistant: (chatId, text) =>
+      updateLastAssistant: (chatId, text, extra) =>
         set((s) => ({
           chats: s.chats.map((c) => {
             if (c.id !== chatId) return c;
             const msgs = [...c.messages];
             const last = msgs[msgs.length - 1];
-            if (last && last.role === "assistant") msgs[msgs.length - 1] = { ...last, text };
+            if (last && last.role === "assistant") msgs[msgs.length - 1] = { ...last, ...extra, text };
             return { ...c, messages: msgs, updatedAt: now() };
           }),
         })),
