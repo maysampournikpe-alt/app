@@ -2,6 +2,30 @@
 
 What was built in each work session. Newest at the top.
 
+## Session 2 (continued) — Phases 2, 3, 4 (part) and 8
+
+### Phase 2 — Family and school
+- **Parent view + approval:** "Ask a parent" and "Share my list" create a private link (no name included). Parents see dates, costs and places in English or Spanish and tap **Yes / No**; the student's app shows the answer.
+- **Verified staff posting** at `/staff` (staff code): posts show in student searches with a ✓ Verified badge and can be recommended to the school's students.
+- **Teacher dashboard** (opt-in, nickname + counts only), **counselor report** (anonymous search counts by type), **club directory**, **moderation queue**.
+- **School groups** joined with a code (Me → Profile).
+- **Tracker:** accomplishments, volunteer hours (with supervisor contact), certificates. **Progress dashboard** with hours by month.
+- **Deadline calendar** with month view, **reminders 1 week and 1 day before** (in-app + phone notifications), **.ics download with alarms**, **Google Calendar links**, and a **time-conflict checker**.
+- **Resume builder** (AI polishes the student's own bullets without adding facts) → print / save as PDF.
+- **Email helper** linked from every opportunity; interview practice and essay feedback in Coach.
+
+### Phase 3 — Discovery and exploration
+- **Map view** of results, **Surprise me**, **Trending near you** (anonymous), **seasonal suggestions**, **saved searches with new-result alerts**, **similar opportunities**, **student reviews/tips** (filtered for personal info and reportable), **getting there** (Valley Metro, Metro McAllen, Brownsville Metro + ride tips).
+- **Explore hub:** career explorer (22 careers, BLS pay, Texas pay + day-in-the-life videos via CareerOneStop), "What should I do?" interest quiz, college finder (Valley first), dual credit & early college guide, scholarship matcher, FAFSA/TASFA helper, trades & certifications, military & ROTC.
+
+### Phase 8 — Money and access
+- Fee waivers, free gear & supplies, and free/low-cost internet resources, each with a "search near me" button.
+
+### Phase 4 — Skill building (started)
+- **Daily challenge:** chess mate-in-one puzzles (verified by a chess engine), math problems, word of the day (EN/ES), debate prompts. Accessible chess board + type-your-move option.
+- **Flashcard maker:** notes → cards (AI, or "term - definition" lines in demo mode), flip-card study mode, works offline.
+- **Language practice** via Coach.
+
 ## Session 2 — Thu Oct 1, 2026 — Building the app
 
 ### Foundation

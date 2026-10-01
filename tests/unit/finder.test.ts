@@ -82,3 +82,26 @@ describe("demo search", () => {
     expect(demoSearch({ query: "coding camps", locale: "en", profile: {} }).results.some((o) => o.id === "demo-scam-example")).toBe(false);
   });
 });
+
+import { Chess } from "chess.js";
+import { CHESS_PUZZLES } from "@/data/daily";
+import { cardsFromLines } from "@/lib/server/tasks/flashcards";
+
+describe("daily challenge content", () => {
+  it("every chess puzzle has exactly one mate in one, matching the answer", () => {
+    for (const p of CHESS_PUZZLES) {
+      const mates = new Chess(p.fen).moves().filter((m) => {
+        const g = new Chess(p.fen);
+        g.move(m);
+        return g.isCheckmate();
+      });
+      expect(mates, p.fen).toEqual([p.solution]);
+    }
+  });
+  it("turns 'term - definition' notes into flashcards", () => {
+    expect(cardsFromLines("mitochondria - makes energy\nnucleus: holds DNA\nrandom sentence")).toEqual([
+      { front: "mitochondria", back: "makes energy" },
+      { front: "nucleus", back: "holds DNA" },
+    ]);
+  });
+});

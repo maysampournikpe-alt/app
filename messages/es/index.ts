@@ -20,6 +20,7 @@ import ns_progress from "./progress.json";
 import ns_resume from "./resume.json";
 import ns_school from "./school.json";
 import ns_settings from "./settings.json";
+import ns_skills from "./skills.json";
 import ns_staff from "./staff.json";
 import ns_tracker from "./tracker.json";
 import ns_welcome from "./welcome.json";
@@ -47,6 +48,7 @@ const messages = {
   "resume": ns_resume,
   "school": ns_school,
   "settings": ns_settings,
+  "skills": ns_skills,
   "staff": ns_staff,
   "tracker": ns_tracker,
   "welcome": ns_welcome,

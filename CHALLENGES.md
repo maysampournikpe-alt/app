@@ -37,3 +37,19 @@ Technical problems we hit and how we solved them. Useful for the submission vide
 ## 9. Census website blocked
 **Problem:** We planned to download U.S. Census ZIP code coordinates to measure distances, but the download was blocked in our build environment.
 **Solution:** We used the open-source `zipcodes` package (BSD license), which contains the same ZIP code coordinates, and only load it on the server so it doesn't slow down phones.
+
+## 10. Making sure chess puzzles are really correct
+**Problem:** A wrong puzzle answer would frustrate students and teach the wrong thing.
+**Solution:** Every puzzle was checked with the chess.js engine, and a unit test plays every legal move in every puzzle to prove there is exactly one checkmate and that it matches our answer. Students can tap squares or type the move, so the board works with a keyboard and screen readers too.
+
+## 11. Parents without the app
+**Problem:** Many parents won't install a new app or make an account, and some read Spanish only.
+**Solution:** "Ask a parent" creates a private link (a long random code) that opens a simple page in the student's language with a big Yes / No. It never includes the student's name. The student's app checks the answer automatically.
+
+## 12. Reminders without collecting emails or phone numbers
+**Problem:** Email and text reminders would mean storing students' contact info — and texting services need carrier registration that takes weeks.
+**Solution:** Rumbo makes a calendar file with two alarms (1 week and 1 day before each deadline). Once added to Google, Apple or Outlook calendar, the student's own phone reminds them — privately — even when Rumbo is closed. In-app and browser notifications cover the rest.
+
+## 13. Keeping student posts safe
+**Problem:** Students are minors. Posts and reviews must never share phone numbers, addresses or social media handles.
+**Solution:** A server-side filter removes phone numbers, emails, street addresses, links and social handles from every post, review and parent note, and blocks profanity, bullying and sexual content in English and Spanish. Reported posts are hidden after 2 reports until staff review them.

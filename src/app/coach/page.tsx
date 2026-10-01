@@ -108,7 +108,7 @@ function CoachInner() {
       {notice === "limit" && <Alert tone="warning" className="mb-3">{t("coach.limitNote")}</Alert>}
       {demo && notice !== "limit" && <Alert tone="info" className="mb-3">{t("coach.demoNote")}</Alert>}
 
-      <ChatView key={`${mode}-${chatId ?? "new"}`} chat={chat} busy={busy} onSend={send} starters={starters} intro={intro} />
+      <ChatView key={`${mode}-${chatId ?? "new"}`} chat={chat} busy={busy} onSend={send} starters={starters} intro={intro} initialText={chatId ? undefined : (params.get("prompt") ?? undefined)} />
 
       <p className="mt-3 text-center text-xs text-muted">{t("coach.safetyNote")}</p>
 

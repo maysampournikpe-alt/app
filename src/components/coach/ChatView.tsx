@@ -18,15 +18,18 @@ export function ChatView({
   onSend,
   starters,
   intro,
+  initialText,
 }: {
   chat?: Chat;
   busy: boolean;
   onSend: (text: string) => void;
   starters: string[];
   intro: string;
+  /** Text to pre-fill in the message box (e.g. a debate prompt from the Daily challenge) */
+  initialText?: string;
 }) {
   const { t } = useT();
-  const [text, setText] = useState("");
+  const [text, setText] = useState(initialText ?? "");
   const endRef = useRef<HTMLDivElement>(null);
   const messages = chat?.messages ?? [];
   const lastText = messages[messages.length - 1]?.text;

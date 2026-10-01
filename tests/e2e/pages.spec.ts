@@ -3,7 +3,7 @@ import { asStudent, expectAccessible, trackErrors, waitForApp } from "./helpers"
 
 // Every page in the app. Each one is opened at phone and desktop size, in
 // light and dark mode, and checked for errors and accessibility problems.
-export const ROUTES = ["/", "/coach", "/coach/practice", "/plan", "/people", "/me", "/me/profile", "/me/saved", "/me/settings", "/me/data", "/me/parental", "/me/tracker", "/me/progress", "/me/resume", "/plan/calendar", "/staff", "/explore", "/explore/careers", "/explore/quiz", "/explore/colleges", "/explore/dual", "/explore/scholarships", "/explore/fafsa", "/explore/trades", "/explore/military", "/explore/transport", "/explore/money", "/privacy", "/help", "/how-ai-works", "/offline"];
+export const ROUTES = ["/", "/coach", "/coach/practice", "/coach/daily", "/coach/flashcards", "/plan", "/people", "/me", "/me/profile", "/me/saved", "/me/settings", "/me/data", "/me/parental", "/me/tracker", "/me/progress", "/me/resume", "/plan/calendar", "/staff", "/explore", "/explore/careers", "/explore/quiz", "/explore/colleges", "/explore/dual", "/explore/scholarships", "/explore/fafsa", "/explore/trades", "/explore/military", "/explore/transport", "/explore/money", "/privacy", "/help", "/how-ai-works", "/offline"];
 
 for (const route of ROUTES) {
   for (const theme of ["light", "dark"] as const) {
