@@ -2,18 +2,38 @@
 
 Technical problems we hit and how we solved them. Useful for the submission video.
 
-## 1. Too many features for 25 days
-**Problem:** The full feature list has 10 phases. There are 25 days until the Oct 26 deadline.
-**Solution:** Build in phases. Each phase must be fully working and polished before the next one starts. Phase 1 gets most of the time. The big Phase 2 features get simpler versions (for example, an "Add to calendar" file instead of Google Calendar sync). Phases 3–10 become the "future plans" part of the video.
+## 1. Too many features for the time we had
+**Problem:** The full feature list has 10 phases.
+**Solution:** Build in phases and keep a working app after every phase. Each phase has to pass the build, the linter, the type checker and all tests before the next one starts.
 
-## 2. How do we stop the AI from making up opportunities? (designed, not built yet)
-**Problem:** AI models can sometimes "hallucinate": write things that sound real but aren't. A fake listing could waste a student's time or be unsafe.
-**Solution:** Instructions alone aren't enough, so the server checks the AI's work. Every result's source link must be one of the web pages the search tool actually returned in that same request. If it isn't, the result is removed. Missing details show "Not listed, check with organizer" instead of a guess.
+## 2. Stopping the AI from making up opportunities
+**Problem:** AI models can "hallucinate": write things that sound real but aren't. A fake listing could waste a student's time or be unsafe.
+**Solution:** Instructions alone aren't enough, so the server checks the AI's work. While the AI searches, we collect every web address the search tool really returned. Then we compare each listing's link to that list (ignoring small differences like `www.` or a trailing slash). If the link isn't there, the listing is deleted and the student sees a note like "I removed 1 result because I couldn't confirm its link was real." There's a unit test with a fake "Nowhere Inc" internship to prove it gets removed (`tests/unit/finder.test.ts`).
 
-## 3. Keeping AI costs low (designed, not built yet)
-**Problem:** Every AI web search costs money, and a popular app could run up a big bill.
-**Solution:** Repeat searches come from a 24-hour cache for free. Each device gets a daily limit. A global daily budget cap switches the app to cached and demo results instead of spending more.
+## 3. Keeping AI costs low
+**Problem:** Every AI web search costs money. A popular app could run up a big bill.
+**Solution:** Three layers. (1) A 24-hour cache: the same search near the same place costs $0 the second time. (2) Each device gets a daily limit, and each network gets a bigger one (school Wi-Fi is shared). (3) The server estimates the cost of every AI call from its token counts and stops calling the AI when the daily budget is reached — the app then shows sample results instead of breaking.
 
-## 4. Protecting kids' privacy (designed, not built yet)
+## 4. Protecting kids' privacy
 **Problem:** Users are 11–18, and some are under 13 (COPPA).
-**Solution:** No login, no full names, no addresses. The profile, saved items, and plans are stored only on the student's own phone. Students under 13 go through a parent consent screen. The server never stores raw IP addresses, only scrambled (hashed) versions used for rate limiting.
+**Solution:** No login, no full names, no addresses. The profile, saved items, plans and chats are stored only in the student's own browser. Students under 13 go through a parent consent screen, and parents can lock features with a PIN (stored only as a scrambled SHA-256 hash). The server never stores raw IP addresses or device IDs — only salted hashes used for rate limits.
+
+## 5. A database that works on free hosting with zero setup
+**Problem:** SQLite is easy on a laptop, but free hosts like Vercel can't run database migration steps for it, and we didn't want students or judges to need a database account just to try the app.
+**Solution:** A script turns the Prisma schema into `CREATE TABLE IF NOT EXISTS` statements (`scripts/gen-init-sql.mjs`). The first time the server touches the database, it creates any missing tables and adds a demo school. The same schema can switch to Postgres for a permanent database.
+
+## 6. Language flicker and dark-mode flash
+**Problem:** The student's language and theme are saved in their browser, so the server doesn't know them. Pages first appeared in English/light mode and then "jumped."
+**Solution:** A tiny script runs before the page is drawn and applies the saved theme, font and text size. The app waits until the saved data is loaded before showing content, so the first thing students see is already in their language.
+
+## 7. Safety before AI
+**Problem:** If a student types something like "I want to die" into a search box, a normal search result would be the wrong response.
+**Solution:** Every search, coach message and plan goal is checked on the server *before* it goes to the AI. Messages about self-harm, abuse or danger (in English and Spanish) immediately show trusted help lines like 988 and Crisis Text Line (text AYUDA to 741741 for Spanish). Tests make sure normal homework like "how do I kill a process in Linux" doesn't trigger it.
+
+## 8. Testing on real phone sizes
+**Problem:** It's easy to build something that looks good on a laptop and breaks on a small phone.
+**Solution:** Automated Playwright tests open every page at iPhone SE size (375px) and desktop size, in light and dark mode, check there's no sideways scrolling and no errors, run the axe accessibility checker, and save screenshots we review.
+
+## 9. Census website blocked
+**Problem:** We planned to download U.S. Census ZIP code coordinates to measure distances, but the download was blocked in our build environment.
+**Solution:** We used the open-source `zipcodes` package (BSD license), which contains the same ZIP code coordinates, and only load it on the server so it doesn't slow down phones.
