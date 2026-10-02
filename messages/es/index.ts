@@ -9,6 +9,7 @@ import ns_family from "./family.json";
 import ns_find from "./find.json";
 import ns_help from "./help.json";
 import ns_interests from "./interests.json";
+import ns_life from "./life.json";
 import ns_me from "./me.json";
 import ns_money from "./money.json";
 import ns_nav from "./nav.json";
@@ -37,6 +38,7 @@ const messages = {
   "find": ns_find,
   "help": ns_help,
   "interests": ns_interests,
+  "life": ns_life,
   "me": ns_me,
   "money": ns_money,
   "nav": ns_nav,

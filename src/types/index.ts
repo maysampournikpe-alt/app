@@ -278,6 +278,8 @@ export interface BudgetEntry {
   kind: "earn" | "spend" | "save";
   amount: number;
   note?: string;
+  /** For "save" entries: which savings goal it goes toward */
+  goalId?: string;
 }
 
 export interface SavingsGoal {
