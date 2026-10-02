@@ -30,3 +30,30 @@ test("flashcards from notes, then study", async ({ page }, info) => {
   await expectAccessible(page);
   await page.screenshot({ path: `.screenshots/${info.project.name}-flashcards.png`, fullPage: true });
 });
+
+test("practice test: answer every question and see a score", async ({ page }, info) => {
+  const errors = trackErrors(page);
+  await asStudent(page);
+  await page.goto("/coach/tests");
+  await waitForApp(page);
+  await page.getByRole("button", { name: /Start practice test.*TSI/ }).click();
+  for (let i = 0; i < 10; i++) {
+    await page.locator("main fieldset input[type=radio]").first().check();
+    await page.getByRole("button", { name: "Check answer" }).click();
+    await expect(page.locator("main [role=note], main div[aria-live] > div").first()).toBeVisible();
+    if (i === 0) await expectAccessible(page);
+    await page.getByRole("button", { name: i === 9 ? "See my score" : "Next question" }).click();
+  }
+  await expect(page.getByText(/You got \d+ of 10/)).toBeVisible();
+  await page.screenshot({ path: `.screenshots/${info.project.name}-tests.png`, fullPage: true });
+  expect(errors).toEqual([]);
+});
+
+test("courses and speaking coach pages load", async ({ page }) => {
+  await asStudent(page);
+  await page.goto("/coach/courses");
+  await waitForApp(page);
+  await expect(page.getByRole("heading", { name: "Harvard CS50x" })).toBeVisible();
+  await page.goto("/coach/speaking");
+  await expect(page.getByRole("button", { name: "Record" })).toBeVisible();
+});

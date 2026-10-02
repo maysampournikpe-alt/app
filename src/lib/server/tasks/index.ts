@@ -3,6 +3,7 @@ import type { TaskDef } from "./types";
 import { planCreate, planAdjust } from "./plan";
 import { resumeTask } from "./resume";
 import { flashcardsTask } from "./flashcards";
+import { speakingTask } from "./speaking";
 
 /** Every AI "task" the app can run through /api/ai/[task]. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,4 +12,5 @@ export const TASKS: Record<string, TaskDef<any, any>> = {
   "plan-adjust": planAdjust,
   resume: resumeTask,
   flashcards: flashcardsTask,
+  speaking: speakingTask,
 };

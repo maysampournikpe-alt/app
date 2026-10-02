@@ -105,3 +105,18 @@ describe("daily challenge content", () => {
     ]);
   });
 });
+
+import { analyzeSpeech } from "@/lib/speech-analysis";
+
+describe("speaking coach", () => {
+  it("counts words per minute and filler words in English and Spanish", () => {
+    const s = analyzeSpeech("um so I think like school should um start later because este we need sleep", 6);
+    expect(s.words).toBe(15);
+    expect(s.wpm).toBe(150);
+    expect(s.fillerTotal).toBe(4);
+    expect(s.fillers[0]).toEqual({ word: "um", count: 2 });
+  });
+  it("says pace is unknown for very short recordings", () => {
+    expect(analyzeSpeech("hi", 2).pace).toBe("unknown");
+  });
+});
