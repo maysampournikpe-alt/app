@@ -5,7 +5,7 @@ Rumbo is a free, bilingual (English/Spanish) web app that helps middle and high 
 - **Find** — tell the AI what you want in your own words; it searches the web, checks every link, flags scams, and explains why each result fits you.
 - **Coach** — AI homework help that teaches step by step, mock interviews, debate practice, quizzes, essay feedback, plus daily challenges and flashcards.
 - **Plan** — turn a big goal into weekly, monthly and yearly steps, with a deadline calendar and reminders.
-- **People** — (planned) safe, moderated, group-only spaces.
+- **People** — safe, moderated, group-only spaces: study rooms, team finder, mentor Q&A, school group, alumni stories, club directory, parent carpool board, shared plans with cheers, and event buddy. No private messages.
 - **Me** — profile, saved opportunities, progress, volunteer hours, resume builder, privacy controls.
 
 Student data stays **on the student's own device**. See `PLAN.md` for the full design, `CHANGELOG.md` for what's built, and `CHALLENGES.md` for problems we solved.

@@ -53,3 +53,15 @@ Technical problems we hit and how we solved them. Useful for the submission vide
 ## 13. Keeping student posts safe
 **Problem:** Students are minors. Posts and reviews must never share phone numbers, addresses or social media handles.
 **Solution:** A server-side filter removes phone numbers, emails, street addresses, links and social handles from every post, review and parent note, and blocks profanity, bullying and sexual content in English and Spanish. Reported posts are hidden after 2 reports until staff review them.
+
+## 14. A "people" tab that is safe for minors
+**Problem:** Students wanted to find teammates and study partners, but a social feature for 11–18 year olds can expose them to strangers.
+**Solution:** There is no private messaging at all — only groups. Posting needs a school code from a teacher, so every student poster belongs to a real school. Mentors can only answer (not start conversations), and only with a mentor code. Parents only see the carpool board. Personal info is stripped by the server before anything is saved, and cheers on shared plans come from a fixed list so nothing can be hidden in them.
+
+## 15. One person hiding posts by reporting many times
+**Problem:** The first version hid a post after 2 reports — but one device could report twice and hide anything. The automatic tests caught this.
+**Solution:** Each device can report a post once (stored as a salted hash, not an identity). A post is hidden after reports from 2 different devices.
+
+## 16. Speaking practice without uploading kids' voices
+**Problem:** Voice recordings are sensitive.
+**Solution:** Rumbo never uploads or saves the recording — it stays on the phone so the student can play it back. Words come from the browser's built-in voice typing (in some browsers, like Chrome, that service runs on the browser maker's servers, the same as any voice typing). Rumbo counts pace and filler words on the phone, and only the words are sent to the AI — and only when the student taps "Get tips".

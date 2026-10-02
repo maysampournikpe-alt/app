@@ -40,7 +40,10 @@ const OPEN_GROUPS: {
 
 export async function seedDemoData(db: PrismaClient) {
   const existing = await db.school.findUnique({ where: { studentCode: DEMO_CODES.student } });
-  if (existing) return;
+  if (existing) {
+    await ensureGroups(db, existing.id);
+    return;
+  }
 
   const school = await db.school.create({
     data: {
@@ -77,7 +80,7 @@ export async function seedDemoData(db: PrismaClient) {
     },
   });
 
-  for (const g of OPEN_GROUPS) await db.group.create({ data: g });
+  await ensureGroups(db, school.id);
 
   // A few demo posts so the spaces don't look empty (clearly labeled "Demo").
   const algebra = await db.group.findUnique({ where: { slug: "study-algebra" } });
@@ -161,4 +164,36 @@ export async function seedDemoData(db: PrismaClient) {
       oppJson: JSON.stringify(opp),
     },
   });
+}
+
+/**
+ * Groups added in later versions are created here, so older databases get them too.
+ * Safe to run every time the server starts.
+ */
+async function ensureGroups(db: PrismaClient, schoolId: string) {
+  for (const g of OPEN_GROUPS) {
+    await db.group.upsert({ where: { slug: g.slug }, create: g, update: {} });
+  }
+  const alumniSlug = `alumni-${schoolId}`;
+  const alumni = await db.group.findUnique({ where: { slug: alumniSlug } });
+  if (!alumni) {
+    const g = await db.group.create({
+      data: {
+        schoolId,
+        kind: "alumni",
+        slug: alumniSlug,
+        name: "Alumni stories",
+        nameEs: "Historias de exalumnos",
+        description: "Graduates share what happened after high school. Posted by school staff.",
+        descEs: "Exalumnos cuentan qué pasó después de la prepa. Publicado por el personal escolar.",
+      },
+    });
+    const stories = [
+      "SAMPLE STORY (made up to show how this works): I took dual credit at STC in 11th and 12th grade and started at UTRGV with a semester of credits already done. My advice: ask your counselor about dual credit early, and use the free tutoring center.",
+      "SAMPLE STORY (made up to show how this works): I wasn't sure about college, so I did a welding certificate at TSTC after graduation. Now I work full-time and my company is paying for more training. Trades are a real path!",
+    ];
+    for (const body of stories) {
+      await db.post.create({ data: { groupId: g.id, deviceHash: "demo-staff", nickname: "Ms. P (Counselor)", role: "staff", kind: "story", body } });
+    }
+  }
 }

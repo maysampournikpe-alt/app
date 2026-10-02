@@ -15,6 +15,7 @@ import ns_money from "./money.json";
 import ns_nav from "./nav.json";
 import ns_offline from "./offline.json";
 import ns_opp from "./opp.json";
+import ns_people from "./people.json";
 import ns_plan from "./plan.json";
 import ns_privacy from "./privacy.json";
 import ns_progress from "./progress.json";
@@ -44,6 +45,7 @@ const messages = {
   "nav": ns_nav,
   "offline": ns_offline,
   "opp": ns_opp,
+  "people": ns_people,
   "plan": ns_plan,
   "privacy": ns_privacy,
   "progress": ns_progress,

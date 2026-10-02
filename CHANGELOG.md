@@ -2,6 +2,31 @@
 
 What was built in each work session. Newest at the top.
 
+## Session 3 — Fri Oct 2, 2026 — Phases 4, 5, 6 and 7
+
+### Phase 4 — Skill building (finished)
+- **Practice tests** in SAT, PSAT, ACT and TSI style with a timer, score, and review of every answer. Scores are saved to Progress.
+- **Public speaking coach:** record yourself; Rumbo counts words per minute and filler words ("um", "like", "este", "o sea") and the AI gives 3 tips. Rumbo never uploads the recording — only the words are sent to the AI, and only if the student asks for tips.
+- **Free courses** (Khan Academy, Code.org, CS50, etc.) sorted by the student's interests and goals.
+
+### Phase 5 — Life planning
+- **Weekly schedule builder** (school, practice, work, study, family, sleep) with an overlap warning.
+- **Budget planner** for activity costs with **savings goals** and progress bars.
+- **Packing lists** from templates (sports, academic competition, camp, trip, interview, volunteering).
+
+### Phase 6 — People (safe, group-only)
+- **No private messages anywhere.** Everything happens in moderated groups.
+- **Study rooms** (Algebra, Biology, English, test prep, Computer Science), **Find a team** (post the competition and the skills you need), **Ask a mentor** (only verified mentors with a mentor code can answer), **school group**, **alumni stories** (posted by staff), **club directory**, **parent carpool board** (parent code only; meet at the school).
+- **Every post is filtered on the server:** phone numbers, emails, street addresses, links and social media handles are removed automatically; mean, sexual or bullying posts are blocked; a post that sounds like a crisis isn't shared — the student sees help lines instead.
+- **Report button** on every post. A post is hidden after reports from 2 different devices. 20 posts per device per day.
+- Students must join a school group (code from a teacher) to post. Anyone can read open groups. Under-13s only see People if a parent turns it on.
+- **Shared plans:** share a plan with a 6-letter code; friends follow it, copy it, and send **preset cheers only** (no free text).
+- **Event buddy:** on any opportunity, tell classmates in your school group "I'm going" — they see your nickname only.
+
+### Phase 7 — Wellbeing
+- **Burnout check** that looks at the weekly schedule and deadlines (too many hours, no rest, no sleep, late-night work).
+- **Balance meter** (learning / activities / work / recharge), **mood check-in**, **breathing exercise**, **stress tips**, **study-break reminders**, and a link to free, private help lines.
+
 ## Session 2 (continued) — Phases 2, 3, 4 (part) and 8
 
 ### Phase 2 — Family and school
