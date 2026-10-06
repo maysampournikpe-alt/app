@@ -65,7 +65,7 @@
   "imported": "Data restored!",
   "importError": "That file didn't look like a Rumbo backup.",
   "delete": "Delete all my data",
-  "deleteHelp": "Erases everything from this device right away. This can't be undone.",
+  "deleteHelp": "Erases everything from this device right away, and removes your posts, reviews, shared plans, parent links and anything you shared with your school from our server. This can't be undone.",
   "deleteConfirm": "Delete ALL your Rumbo data on this device? This can't be undone.",
   "deleted": "All data deleted.",
   "parentalTitle": "Parental controls",
@@ -85,5 +85,6 @@
   "lock": "Lock again",
   "progress": "My progress",
   "progressSub": "Applications, hours, plan steps and badges",
-  "editAvatar": "Customize avatar"
+  "editAvatar": "Customize avatar",
+  "deleteOffline": "We couldn't reach the server (are you offline?), so your posts and shared items there weren't deleted. Delete the data on this device anyway?"
 }

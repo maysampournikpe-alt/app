@@ -65,3 +65,15 @@ Technical problems we hit and how we solved them. Useful for the submission vide
 ## 16. Speaking practice without uploading kids' voices
 **Problem:** Voice recordings are sensitive.
 **Solution:** Rumbo never uploads or saves the recording — it stays on the phone so the student can play it back. Words come from the browser's built-in voice typing (in some browsers, like Chrome, that service runs on the browser maker's servers, the same as any voice typing). Rumbo counts pace and filler words on the phone, and only the words are sent to the AI — and only when the student taps "Get tips".
+
+## 17. A leaderboard that doesn't make kids compete with each other
+**Problem:** Leaderboards can pressure students and expose who does (or doesn't do) volunteer work.
+**Solution:** Only school totals are ranked. The server API returns just school name, city and total hours — a test checks that no other fields come back. Hours only count when a student opts in to sharing with their school.
+
+## 18. "Delete my data" has to mean all of it
+**Problem:** Most data lives on the phone, but posts, reviews, shared plans and parent links are on the server, so wiping the phone wasn't enough.
+**Solution:** Deleting first asks the server to remove everything made by this device (matched by its scrambled device code, plus the share codes and parent-link tokens saved on the phone). If the phone is offline, the student is told the server copies couldn't be removed yet.
+
+## 19. Translating into a third language
+**Problem:** Vietnamese is spoken by many Texas families, but translating 1,500 strings at once isn't realistic.
+**Solution:** The app falls back to English for any missing line, so Vietnamese can grow screen by screen. The most important screens (welcome, parent consent, search, opportunity details) are done first. A test checks that every Vietnamese line keeps the same {placeholders} as English. These translations should be checked by a native speaker before relying on them.

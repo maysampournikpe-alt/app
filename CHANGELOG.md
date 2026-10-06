@@ -2,6 +2,22 @@
 
 What was built in each work session. Newest at the top.
 
+## Session 4 — Tue Oct 6, 2026 — Phases 9 and 10
+
+### Phase 9 — Motivation and fun
+- **Badges** (20) and **this month's challenge** (rotates monthly, e.g. "Volunteer 5 hours this month") on Me → My progress. Badges are calculated from what the student actually did.
+- **Avatar editor:** colors, faces, hats and frames unlock as the student levels up.
+- **Year in review:** school-year summary (Aug–Jul) of XP, applications, acceptances, hours, plan steps, accomplishments and certificates. Printable and can be read aloud.
+- **School volunteer leaderboard:** school totals only — never student names or individual numbers. Two demo schools are sample data.
+- **Celebration screen** with confetti when a student marks "Accepted!" or finishes a plan (confetti is off when the device asks for reduced motion).
+- **Printable flyers:** any opportunity → a black-and-white flyer in English **and** Spanish with a QR code to the official page.
+
+### Phase 10 — Accessibility and trust (finished)
+- **"Delete all my data" now also deletes from the server:** the student's posts, reviews, event check-ins, school activity counts, shared plans and parent links.
+- **Privacy page** updated to list exactly what the server keeps (including scrambled device and internet-address codes used for fair-use limits).
+- **Vietnamese (beta)** now covers the welcome steps, search and opportunity details; other screens fall back to English.
+- More pages saved for offline use (plan details, progress, tracker).
+
 ## Session 3 — Fri Oct 2, 2026 — Phases 4, 5, 6 and 7
 
 ### Phase 4 — Skill building (finished)

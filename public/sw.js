@@ -12,7 +12,7 @@
  * All the student's data (saved opportunities, plans...) lives in browser
  * storage, so once a page is cached it works fully offline.
  */
-const VERSION = "rumbo-v3";
+const VERSION = "rumbo-v4";
 const PAGE_CACHE = `${VERSION}-pages`;
 const STATIC_CACHE = `${VERSION}-static`;
 
@@ -24,9 +24,12 @@ const PRECACHE_PAGES = [
   "/people",
   "/me",
   "/me/saved",
+  "/plan/view",
   "/plan/calendar",
   "/plan/schedule",
   "/coach/flashcards",
+  "/me/progress",
+  "/me/tracker",
   "/help",
   "/privacy",
 ];

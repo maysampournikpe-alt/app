@@ -31,6 +31,13 @@ describe("translations", () => {
     expect(translate("vi", "common.appName")).toBe("Rumbo");
     expect(translate("vi", "nav.find")).toBe("Tìm");
   });
+  it("Vietnamese (beta) has no extra keys and its placeholders match English", () => {
+    const vi = keys(MESSAGES.vi);
+    expect(vi.filter((k) => !en.has(k))).toEqual([]);
+    const bad = vi.filter((k) => (translate("en", k).match(/\{\w+\}/g) ?? []).sort().join() !== (translate("vi", k).match(/\{\w+\}/g) ?? []).sort().join());
+    expect(bad).toEqual([]);
+    expect(translate("vi", "find.searchButton")).toBe("Tìm");
+  });
   it("handles plurals and variables", () => {
     expect(translate("en", "common.daysLeft", { count: 1 })).toBe("1 day left");
     expect(translate("es", "common.daysLeft", { count: 3 })).toBe("Quedan 3 días");

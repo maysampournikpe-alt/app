@@ -65,7 +65,7 @@
   "imported": "¡Datos restaurados!",
   "importError": "Ese archivo no parece un respaldo de Rumbo.",
   "delete": "Borrar todos mis datos",
-  "deleteHelp": "Borra todo de este aparato al instante. No se puede deshacer.",
+  "deleteHelp": "Borra todo de este aparato al instante, y quita de nuestro servidor tus publicaciones, reseñas, planes compartidos, enlaces para padres y lo que compartiste con tu escuela. No se puede deshacer.",
   "deleteConfirm": "¿Borrar TODOS tus datos de Rumbo en este aparato? No se puede deshacer.",
   "deleted": "Se borraron todos los datos.",
   "parentalTitle": "Control para padres",
@@ -85,5 +85,6 @@
   "lock": "Bloquear otra vez",
   "progress": "Mi progreso",
   "progressSub": "Solicitudes, horas, pasos del plan e insignias",
-  "editAvatar": "Personalizar avatar"
+  "editAvatar": "Personalizar avatar",
+  "deleteOffline": "No pudimos conectar con el servidor (¿estás sin internet?), así que tus publicaciones y cosas compartidas allí no se borraron. ¿Borrar de todos modos los datos de este aparato?"
 }

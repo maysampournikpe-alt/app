@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Download, Upload, Trash2 } from "lucide-react";
 import { useT } from "@/i18n/useT";
+import { apiPost } from "@/lib/api";
 import { useApp, STORE_KEY, type AppState } from "@/lib/store";
 import { downloadFile, todayISO } from "@/lib/utils";
 import { PageHeader, Alert } from "@/components/ui/misc";
@@ -37,8 +38,18 @@ export default function DataPage() {
     }
   }
 
-  function wipe() {
+  async function wipe() {
     if (!window.confirm(t("me.deleteConfirm"))) return;
+    const app = useApp.getState();
+    // First remove what this device shared with the server (posts, reviews, shared plans, parent links...).
+    try {
+      await apiPost("/api/me/forget", {
+        parentTokens: app.saved.map((s) => s.parentShareToken).filter(Boolean),
+        sharedPlanCodes: app.plans.map((p) => p.sharedCode).filter(Boolean),
+      });
+    } catch {
+      if (!window.confirm(t("me.deleteOffline"))) return;
+    }
     useApp.getState().resetAll();
     try {
       localStorage.removeItem(STORE_KEY);
@@ -80,7 +91,7 @@ export default function DataPage() {
         <Card className="border-danger/40">
           <h2 className="font-bold text-danger">{t("me.delete")}</h2>
           <p className="mt-1 text-sm text-muted">{t("me.deleteHelp")}</p>
-          <Button variant="danger" className="mt-3" onClick={wipe} icon={<Trash2 aria-hidden="true" className="size-4" />}>
+          <Button variant="danger" className="mt-3" onClick={() => void wipe()} icon={<Trash2 aria-hidden="true" className="size-4" />}>
             {t("me.delete")}
           </Button>
         </Card>
