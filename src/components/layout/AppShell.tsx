@@ -42,7 +42,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </a>
       <Header minimal={!showTabs} />
       <OfflineBanner />
-      <main id="main" tabIndex={-1} className={cn("mx-auto w-full max-w-5xl px-4 pt-5 focus:outline-none lg:pl-60", showTabs ? "pb-tabbar" : "pb-10")}>
+      <main id="main" tabIndex={-1} className={cn("mx-auto w-full max-w-5xl px-4 pt-5 focus:outline-none lg:pl-60 print:p-0", showTabs ? "pb-tabbar" : "pb-10")}>
         {!hydrated || mustOnboard ? (
           <div className="flex min-h-[60dvh] flex-col items-center justify-center gap-4" role="status">
             <Logo className="size-16 animate-pulse" />

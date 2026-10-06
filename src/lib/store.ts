@@ -94,7 +94,7 @@ export interface AppState {
   avatar: AvatarConfig;
   dailyDone: string[]; // dates (YYYY-MM-DD) when the daily challenge was completed
   practiceScores: { test: string; score: number; total: number; at: string }[];
-  celebrate?: { title: string; at: string } | null;
+  celebrate?: { title: string; at: string; kind?: "accepted" | "plan" } | null;
   resume: ResumeInfo;
   lastSeenVersion?: string;
 
@@ -156,7 +156,7 @@ export interface AppState {
   addPracticeScore: (test: string, score: number, total: number) => void;
   setAvatar: (a: Partial<AvatarConfig>) => void;
   setResume: (r: Partial<ResumeInfo>) => void;
-  triggerCelebrate: (title: string) => void;
+  triggerCelebrate: (title: string, kind?: "accepted" | "plan") => void;
   clearCelebrate: () => void;
 
   importData: (data: Partial<AppState>) => void;
@@ -285,7 +285,7 @@ export const useApp = create<AppState>()(
         if (planDone) {
           get().awardXp("plan_complete");
           const plan = get().plans.find((p) => p.id === planId);
-          if (plan) get().triggerCelebrate(plan.goal);
+          if (plan) get().triggerCelebrate(plan.goal, "plan");
         }
       },
       replaceMilestones: (planId, milestones, summary) =>
@@ -413,7 +413,7 @@ export const useApp = create<AppState>()(
       },
       setAvatar: (a) => set((s) => ({ avatar: { ...s.avatar, ...a } })),
       setResume: (r) => set((s) => ({ resume: { ...s.resume, ...r } })),
-      triggerCelebrate: (title) => set({ celebrate: { title, at: now() } }),
+      triggerCelebrate: (title, kind = "accepted") => set({ celebrate: { title, at: now(), kind } }),
       clearCelebrate: () => set({ celebrate: null }),
 
       // ---------- My data ----------

@@ -171,6 +171,7 @@ export async function seedDemoData(db: PrismaClient) {
  * Safe to run every time the server starts.
  */
 async function ensureGroups(db: PrismaClient, schoolId: string) {
+  await ensureLeaderboardDemo(db, schoolId);
   for (const g of OPEN_GROUPS) {
     await db.group.upsert({ where: { slug: g.slug }, create: g, update: {} });
   }
@@ -195,5 +196,34 @@ async function ensureGroups(db: PrismaClient, schoolId: string) {
     for (const body of stories) {
       await db.post.create({ data: { groupId: g.id, deviceHash: "demo-staff", nickname: "Ms. P (Counselor)", role: "staff", kind: "story", body } });
     }
+  }
+}
+
+/**
+ * Sample numbers for the school volunteer leaderboard (9.4) so it isn't empty in the demo.
+ * Two extra demo schools (clearly named "Demo …") get made-up totals for the current month.
+ * Only school totals are ever shown.
+ */
+async function ensureLeaderboardDemo(db: PrismaClient, demoSchoolId: string) {
+  const month = new Date().toISOString().slice(0, 7);
+  const demos = [
+    { name: "Demo Early College High School", city: "Pharr, TX", key: "DEMO-ECHS", hours: [12, 8.5, 20] },
+    { name: "Demo Middle School", city: "McAllen, TX", key: "DEMO-MS", hours: [6, 4] },
+  ];
+  for (const d of demos) {
+    const school = await db.school.upsert({
+      where: { studentCode: `${d.key}-STUDENT` },
+      create: { name: d.name, city: d.city, studentCode: `${d.key}-STUDENT`, staffCode: `${d.key}-STAFF-${Math.random().toString(36).slice(2, 10)}`, parentCode: `${d.key}-PARENT-${Math.random().toString(36).slice(2, 10)}`, mentorCode: `${d.key}-MENTOR-${Math.random().toString(36).slice(2, 10)}` },
+      update: {},
+    });
+    await seedHours(db, school.id, month, d.hours);
+  }
+  await seedHours(db, demoSchoolId, month, [10, 7, 5.5]);
+}
+
+async function seedHours(db: PrismaClient, schoolId: string, month: string, hours: number[]) {
+  for (const [i, h] of hours.entries()) {
+    const deviceHash = `demo-${i}`;
+    await db.hoursContribution.upsert({ where: { schoolId_deviceHash_month: { schoolId, deviceHash, month } }, create: { schoolId, deviceHash, month, hours: h }, update: {} });
   }
 }

@@ -7,6 +7,7 @@ import ns_common from "./common.json";
 import ns_explore from "./explore.json";
 import ns_family from "./family.json";
 import ns_find from "./find.json";
+import ns_fun from "./fun.json";
 import ns_help from "./help.json";
 import ns_interests from "./interests.json";
 import ns_life from "./life.json";
@@ -37,6 +38,7 @@ const messages = {
   "explore": ns_explore,
   "family": ns_family,
   "find": ns_find,
+  "fun": ns_fun,
   "help": ns_help,
   "interests": ns_interests,
   "life": ns_life,

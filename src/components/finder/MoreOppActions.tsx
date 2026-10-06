@@ -1,15 +1,43 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { UserCheck } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { UserCheck, FileImage } from "lucide-react";
 import type { Opportunity } from "@/types";
 import { useT } from "@/i18n/useT";
 import { useApp } from "@/lib/store";
 import { apiGet, apiPost } from "@/lib/api";
 import { Button } from "@/components/ui/Button";
+import { FLYER_KEY } from "./flyer-key";
+
+/** More actions on an opportunity: printable flyer (9.8) and event buddy (6.7). */
+export function MoreOppActions({ opp }: { opp: Opportunity }) {
+  const { t } = useT();
+  const router = useRouter();
+  return (
+    <>
+      <Button
+        variant="ghost"
+        size="sm"
+        icon={<FileImage aria-hidden="true" className="size-4" />}
+        onClick={() => {
+          try {
+            sessionStorage.setItem(FLYER_KEY, JSON.stringify(opp));
+          } catch {
+            /* the flyer page can still find saved items by id */
+          }
+          router.push(`/flyer?id=${encodeURIComponent(opp.id)}`);
+        }}
+      >
+        {t("fun.flyer")}
+      </Button>
+      <EventBuddy opp={opp} />
+    </>
+  );
+}
 
 /** 6.7 Event buddy: see which classmates in your school group are going (nicknames only). */
-export function MoreOppActions({ opp }: { opp: Opportunity }) {
+function EventBuddy({ opp }: { opp: Opportunity }) {
   const { t } = useT();
   const code = useApp((s) => s.profile.schoolCode);
   const nickname = useApp((s) => s.profile.nickname);

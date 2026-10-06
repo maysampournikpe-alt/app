@@ -1,6 +1,7 @@
 "use client";
 
 import { UserRound, Heart, Settings, ShieldCheck, Download, LifeBuoy, Lock, Sparkles, Flame } from "lucide-react";
+import Link from "next/link";
 import { useT } from "@/i18n/useT";
 import { useApp } from "@/lib/store";
 import { levelFromXp } from "@/lib/gamification";
@@ -19,7 +20,9 @@ export default function MePage() {
   return (
     <div>
       <Card className="mb-2 flex items-center gap-4">
-        <Avatar config={s.avatar} size="lg" />
+        <Link href="/me/avatar" aria-label={t("me.editAvatar")} className="rounded-full">
+          <Avatar config={s.avatar} size="lg" />
+        </Link>
         <div className="min-w-0 flex-1">
           <h1 className="text-2xl font-bold">{s.profile.nickname ? t("me.hello", { name: s.profile.nickname }) : t("me.helloAnon")}</h1>
           <div className="mt-1 flex flex-wrap items-center gap-2">

@@ -251,10 +251,27 @@ body {
     background: #fff !important;
     color: #000 !important;
   }
-  .print-plain {
+  .print-plain:not(.print-keep-border) {
     border: none !important;
+  }
+  .print-plain {
     box-shadow: none !important;
     background: #fff !important;
     color: #000 !important;
+  }
+}
+
+/* Celebration confetti (9.7). Turned off when the device asks for reduced motion. */
+@keyframes confetti-fall {
+  0% { transform: translateY(-20px); opacity: 1; }
+  100% { transform: translateY(420px) rotate(540deg); opacity: 0; }
+}
+.confetti {
+  animation: confetti-fall 2.4s ease-in forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .confetti {
+    animation: none;
+    display: none;
   }
 }
