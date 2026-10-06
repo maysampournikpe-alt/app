@@ -2,6 +2,8 @@
 
 Rumbo is a free, bilingual (English/Spanish) web app that helps middle and high school students find **real** opportunities near them and online — jobs, internships, competitions, camps, scholarships and more — build skills, and reach their goals. It was built for the 2026 Congressional App Challenge with students in the Rio Grande Valley of South Texas in mind.
 
+**Try it:** https://app-mocha-eight-54.vercel.app (runs in demo mode — real sample programs, no AI key needed). Demo school code: `RGV-STUDENT`.
+
 - **Find** — tell the AI what you want in your own words; it searches the web, checks every link, flags scams, and explains why each result fits you.
 - **Coach** — AI homework help that teaches step by step, mock interviews, debate practice, quizzes, essay feedback, plus daily challenges and flashcards.
 - **Plan** — turn a big goal into weekly, monthly and yearly steps, with a deadline calendar and reminders.
