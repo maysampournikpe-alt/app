@@ -1,8 +1,10 @@
 // Small helpers used all over the app.
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-/** Join CSS class names, skipping empty ones. */
-export function cn(...parts: (string | false | null | undefined)[]): string {
-  return parts.filter(Boolean).join(" ");
+/** Join CSS class names, skipping empty ones. Later Tailwind classes win (e.g. "px-2" then "px-4" → "px-4"). Same helper shadcn/ui uses. */
+export function cn(...inputs: ClassValue[]): string {
+  return twMerge(clsx(inputs));
 }
 
 /** Random ID made of letters and numbers. */

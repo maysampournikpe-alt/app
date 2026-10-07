@@ -49,7 +49,7 @@ export default function AvatarPage() {
                   aria-label={`${t(`fun.item_${item.id}`)}${locked ? ` — ${t("fun.unlockAt", { n: item.level })}` : ""}`}
                   onClick={() => !locked && setAvatar({ [part.key]: item.id })}
                   className={cn(
-                    "flex min-h-24 flex-col items-center justify-center gap-1 rounded-2xl border-2 p-2 text-center text-xs",
+                    "flex min-h-24 flex-col items-center justify-center gap-1 rounded-xl border-2 p-2 text-center text-xs",
                     selected ? "border-primary bg-primary-soft" : "border-border bg-surface",
                     locked ? "cursor-not-allowed" : "hover:border-primary",
                   )}

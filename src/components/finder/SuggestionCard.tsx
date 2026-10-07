@@ -45,7 +45,7 @@ function CopyBlock({ label, text, icon }: { label: string; text: string; icon: R
 export function SuggestionCard({ s }: { s: Suggestion }) {
   const { t } = useT();
   return (
-    <article className="rounded-2xl border-2 border-dashed border-border bg-surface p-4">
+    <article className="rounded-xl border border-dashed bg-surface p-4">
       <Badge tone="warning" icon={<HelpCircle aria-hidden="true" className="size-3.5" />}>
         {t("find.notConfirmed")}
       </Badge>

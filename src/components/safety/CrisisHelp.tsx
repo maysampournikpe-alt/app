@@ -11,7 +11,7 @@ export function CrisisHelp() {
   const { t, L, locale } = useT();
   const profile = useApp((s) => s.profile);
   return (
-    <section role="alert" aria-labelledby="crisis-title" className="rounded-2xl border-2 border-danger/50 bg-danger-soft p-4 text-text">
+    <section role="alert" aria-labelledby="crisis-title" className="rounded-xl border-2 border-danger/50 bg-danger-soft p-4 text-text">
       <h2 id="crisis-title" className="flex items-center gap-2 text-lg font-bold text-danger">
         <HeartHandshake aria-hidden="true" className="size-6" />
         {t("find.crisisTitle")}
@@ -33,7 +33,7 @@ export function CrisisHelp() {
                 {h.text && (
                   <a
                     href={`sms:${h.text.number.replace(/[^\d]/g, "")}${word ? `?&body=${encodeURIComponent(word)}` : ""}`}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl border-2 border-border px-4 font-bold"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-md border border-input bg-card px-4 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2"
                   >
                     <MessageSquare aria-hidden="true" className="size-4" />
                     {word ? t("help.text", { word, n: h.text.number }) : t("help.textOnly", { n: h.text.number })}

@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Animations used by shadcn/ui dialogs and sheets */
+@import "tw-animate-css";
 
 /* Dark mode is controlled by a "dark" class on <html> (set from Settings),
    not only by the phone's setting, so students can choose. */
@@ -57,17 +59,23 @@
 /* ---------- Color tokens ----------
    All text/background pairs were chosen to pass WCAG AA contrast (4.5:1+).
    Teal = the river, orange = the Valley sunset. */
+/* ---------- Color tokens ----------
+   Neutral grays follow shadcn/ui's "zinc" look; teal (the river) and orange (the Valley sunset)
+   are Rumbo's brand colors. All text/background pairs pass WCAG AA contrast (4.5:1+), and form
+   borders (--input) pass 3:1 so students can see where to type. */
 :root {
-  --bg: #f7f6f2;
+  --radius: 0.625rem;
+  --bg: #fafafa;
   --surface: #ffffff;
-  --surface-2: #efede6;
-  --border: #d4d0c4;
-  --text: #1c1b1a;
-  --muted: #57544c;
+  --surface-2: #f4f4f5;
+  --border: #e4e4e7;
+  --input: #8e8e96;
+  --text: #09090b;
+  --muted: #52525b;
   --primary: #0b6b66;
   --primary-hover: #08534f;
   --on-primary: #ffffff;
-  --primary-soft: #d9efec;
+  --primary-soft: #dcf2ef;
   --on-primary-soft: #074440;
   --accent: #a83c0c;
   --accent-soft: #fde6d6;
@@ -76,7 +84,7 @@
   --success-soft: #dcf1e2;
   --warning: #7a4e00;
   --warning-soft: #fdf0cf;
-  --danger: #ad1f14;
+  --danger: #b91c1c;
   --danger-soft: #fde2df;
   --focus: #1d4ed8;
   --font-body: "Atkinson Hyperlegible", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -84,28 +92,48 @@
 }
 
 .dark {
-  --bg: #0e1416;
-  --surface: #172024;
-  --surface-2: #202b30;
-  --border: #364750;
-  --text: #eef3f2;
-  --muted: #b0bebc;
+  --bg: #09090b;
+  --surface: #18181b;
+  --surface-2: #27272a;
+  --border: #303036;
+  --input: #74747e;
+  --text: #fafafa;
+  --muted: #a1a1aa;
   --primary: #62d6ca;
   --primary-hover: #8be3da;
   --on-primary: #05302c;
-  --primary-soft: #133b38;
+  --primary-soft: #12302d;
   --on-primary-soft: #bdf1ea;
   --accent: #ffab78;
-  --accent-soft: #3f2414;
+  --accent-soft: #3a2214;
   --on-accent-soft: #ffd8bf;
   --success: #7ddc98;
-  --success-soft: #16301f;
+  --success-soft: #142a1c;
   --warning: #f7cd61;
-  --warning-soft: #352a0d;
+  --warning-soft: #30260c;
   --danger: #ff958c;
-  --danger-soft: #3d1714;
+  --danger-soft: #3a1513;
   --focus: #93b4ff;
   color-scheme: dark;
+}
+
+/* shadcn/ui color names, pointed at Rumbo's colors so shadcn components match the app.
+   (Rumbo already uses "accent" for orange and "muted" for gray text, so shadcn components
+   use the surface colors for those roles.) */
+:root,
+.dark {
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+  --primary-foreground: var(--on-primary);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--text);
+  --muted-foreground: var(--muted);
+  --destructive: var(--danger);
+  --ring: var(--focus);
 }
 
 /* Dyslexia-friendly font option */
@@ -146,6 +174,42 @@
   --color-danger-soft: var(--danger-soft);
   --color-focus: var(--focus);
   --font-sans: var(--font-body);
+  /* shadcn/ui names */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Borders default to the theme border color (shadcn/ui convention). */
+@layer base {
+  *,
+  ::after,
+  ::before {
+    border-color: var(--border);
+  }
+}
+
+/* Dropdown arrow for native <select> boxes (shadcn "native select" look, one element so widths work). */
+.select-chevron {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
 }
 
 html {

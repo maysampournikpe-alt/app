@@ -75,7 +75,7 @@ export default function PlanPage() {
               const pr = planProgress(p);
               return (
                 <li key={p.id}>
-                  <Link href={`/plan/view?id=${p.id}`} className="block rounded-2xl border border-border bg-surface p-4 shadow-sm hover:border-primary">
+                  <Link href={`/plan/view?id=${p.id}`} className="block rounded-xl border border-border bg-surface p-4 shadow-sm hover:border-primary">
                     <span className="flex items-center gap-2 font-bold">
                       <ListChecks aria-hidden="true" className="size-5 text-primary" />
                       {p.goal}
@@ -129,7 +129,7 @@ export default function PlanPage() {
         <p className="-mt-2 mb-3 text-sm text-muted">{t("plan.templatesHelp")}</p>
         <ul className="grid gap-3 sm:grid-cols-2">
           {GOAL_TEMPLATES.map((tpl) => (
-            <li key={tpl.id} className="flex flex-col rounded-2xl border border-border bg-surface p-4 shadow-sm">
+            <li key={tpl.id} className="flex flex-col rounded-xl border border-border bg-surface p-4 shadow-sm">
               <p className="flex items-center gap-2 font-bold">
                 <span aria-hidden="true" className="text-2xl">
                   {tpl.emoji}

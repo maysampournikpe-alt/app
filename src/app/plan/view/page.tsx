@@ -114,7 +114,7 @@ function PlanView() {
             <SectionTitle id={`h-${h}`}>{t(`plan.${h}`)}</SectionTitle>
             <ul className="space-y-2">
               {items.map((m) => (
-                <li key={m.id} className={cn("rounded-2xl border bg-surface p-3", m.done ? "border-success/40" : "border-border")}>
+                <li key={m.id} className={cn("rounded-xl border bg-surface p-3", m.done ? "border-success/40" : "border-border")}>
                   <div className="flex items-start gap-3">
                     <button
                       type="button"

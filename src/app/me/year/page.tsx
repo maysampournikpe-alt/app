@@ -79,7 +79,7 @@ export default function YearPage() {
           <>
             <ul className="mt-4 grid grid-cols-3 gap-2">
               {tiles.map(([k, n, e]) => (
-                <li key={k} className="rounded-2xl bg-surface p-3 text-center">
+                <li key={k} className="rounded-xl bg-surface p-3 text-center">
                   <span aria-hidden="true" className="block text-2xl">
                     {e}
                   </span>

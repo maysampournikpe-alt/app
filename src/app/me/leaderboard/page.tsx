@@ -51,7 +51,7 @@ export default function LeaderboardPage() {
       {rows && rows.length > 0 && (
         <ol className="space-y-2">
           {rows.map((r, i) => (
-            <li key={r.name} className={cn("rounded-2xl border p-3", r.yours ? "border-primary bg-primary-soft" : "border-border bg-surface")}>
+            <li key={r.name} className={cn("rounded-xl border p-3", r.yours ? "border-primary bg-primary-soft" : "border-border bg-surface")}>
               <div className="flex items-center gap-3">
                 <span className="w-8 text-center text-xl font-bold" aria-hidden="true">
                   {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}

@@ -22,7 +22,7 @@ export default function ResultsMap({
   const points = items.filter((o) => typeof o.lat === "number" && typeof o.lng === "number");
   const start = center ?? (points[0] ? { lat: points[0].lat!, lng: points[0].lng! } : { lat: 26.2, lng: -98.2 });
   return (
-    <MapContainer center={[start.lat, start.lng]} zoom={center ? 10 : 8} scrollWheelZoom={false} className="h-[60vh] min-h-80 w-full rounded-2xl" style={{ zIndex: 0 }}>
+    <MapContainer center={[start.lat, start.lng]} zoom={center ? 10 : 8} scrollWheelZoom={false} className="h-[60vh] min-h-80 w-full rounded-xl" style={{ zIndex: 0 }}>
       <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {center && (
         <CircleMarker center={[center.lat, center.lng]} radius={9} pathOptions={{ color: "#1d4ed8", fillColor: "#3b82f6", fillOpacity: 0.9 }}>

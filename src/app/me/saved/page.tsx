@@ -87,7 +87,7 @@ export default function SavedPage() {
                     defaultValue={s.notes}
                     onBlur={(e) => updateSaved(s.id, { notes: e.target.value.slice(0, 2000) })}
                     placeholder={t("me.notesPlaceholder")}
-                    className="mb-3 min-h-20 w-full rounded-lg border-2 border-border bg-surface p-2 text-sm focus:border-primary focus:outline-none"
+                    className="mb-3 min-h-20 w-full rounded-md border border-input bg-card p-2 text-sm shadow-xs focus:border-primary focus:outline-none"
                   />
                 </details>
                 <SavedItemExtras item={s} />

@@ -77,3 +77,11 @@ Technical problems we hit and how we solved them. Useful for the submission vide
 ## 19. Translating into a third language
 **Problem:** Vietnamese is spoken by many Texas families, but translating 1,500 strings at once isn't realistic.
 **Solution:** The app falls back to English for any missing line, so Vietnamese can grow screen by screen. The most important screens (welcome, parent consent, search, opportunity details) are done first. A test checks that every Vietnamese line keeps the same {placeholders} as English. These translations should be checked by a native speaker before relying on them.
+
+## 20. Switching to shadcn/ui without breaking 60+ screens
+**Problem:** shadcn/ui and Rumbo both use the color names "accent" and "muted" — but for different things (shadcn: background colors; Rumbo: orange and gray text). Copying shadcn in as-is would have turned hover backgrounds orange.
+**Solution:** Rumbo's own building blocks (Button, Card, Field, Sheet…) were rebuilt on top of the shadcn components, keeping the same names, so every page got the new look at once. The copied shadcn files were adjusted to use Rumbo's neutral surface colors for those two roles, and shadcn's other color names were added to the theme.
+
+## 21. A button that pushed the page sideways
+**Problem:** After the switch, the "Next" button on the welcome screen became unclickable on phones in the tests. shadcn buttons never shrink, so a full-width "Next" next to "Back" made the page wider than the phone, and other content covered the button.
+**Solution:** Full-width buttons are now allowed to shrink. A new test opens every page at phone size and fails if anything is wider than the screen.

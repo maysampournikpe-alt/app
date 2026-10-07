@@ -1,0 +1,14 @@
+// From shadcn/ui (https://github.com/shadcn-ui/ui, MIT license), adapted to Rumbo's color names.
+import { cn } from "@/lib/utils"
+
+function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="skeleton"
+      className={cn("animate-pulse rounded-md bg-surface-2", className)}
+      {...props}
+    />
+  )
+}
+
+export { Skeleton }

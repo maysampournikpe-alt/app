@@ -14,7 +14,7 @@ export function LanguageToggle() {
   const setSettings = useApp((s) => s.setSettings);
   const shown = LOCALES.filter((l) => !l.beta || l.code === locale);
   return (
-    <div role="group" aria-label={t("nav.changeLanguage")} className="flex rounded-full border-2 border-border bg-surface p-0.5">
+    <div role="group" aria-label={t("nav.changeLanguage")} className="flex rounded-lg bg-surface-2 p-1">
       {shown.map((l) => (
         <button
           key={l.code}
@@ -24,8 +24,8 @@ export function LanguageToggle() {
           aria-label={l.name}
           onClick={() => setSettings({ locale: l.code })}
           className={cn(
-            "min-h-9 min-w-10 rounded-full px-2.5 text-sm font-bold uppercase",
-            locale === l.code ? "bg-primary text-on-primary" : "text-muted hover:text-text",
+            "min-h-9 min-w-10 rounded-md px-2.5 text-sm font-semibold uppercase transition-colors",
+            locale === l.code ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
           )}
         >
           {l.code}

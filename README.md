@@ -84,7 +84,7 @@ prisma/         Database schema (server data only — never student personal dat
 public/         Service worker (offline mode), icons, fonts
 scripts/        Icon maker, database helpers, translation index
 src/app/        Pages (each folder is a URL) and api/ (server routes — the only place the AI key is used)
-src/components/ Reusable pieces, grouped by feature
+src/components/ Reusable pieces, grouped by feature (shadcn/ = shadcn/ui components, ui/ = Rumbo's building blocks on top of them)
 src/data/       Hand-checked content: sample opportunities, plan templates, careers, colleges, guides
 src/lib/        App logic: on-device store, safety filters, AI, calendar, rate limits
 tests/          unit/ (Vitest) and e2e/ (Playwright)

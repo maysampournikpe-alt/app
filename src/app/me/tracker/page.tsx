@@ -144,7 +144,7 @@ export default function TrackerPage() {
           ) : (
             <ul className="space-y-2">
               {s.accomplishments.map((a) => (
-                <li key={a.id} className="flex items-start gap-2 rounded-2xl border border-border bg-surface p-3">
+                <li key={a.id} className="flex items-start gap-2 rounded-xl border border-border bg-surface p-3">
                   <div className="min-w-0 flex-1">
                     <p className="font-bold">{a.title}</p>
                     <p className="text-sm text-muted">{[t(`tracker.kind_${a.kind}`), a.org, a.date && formatDate(a.date, dateLocale)].filter(Boolean).join(" · ")}</p>
@@ -196,7 +196,7 @@ export default function TrackerPage() {
           ) : (
             <ul className="space-y-2">
               {s.volunteer.map((v) => (
-                <li key={v.id} className="flex items-start gap-2 rounded-2xl border border-border bg-surface p-3">
+                <li key={v.id} className="flex items-start gap-2 rounded-xl border border-border bg-surface p-3">
                   <div className="min-w-0 flex-1">
                     <p className="font-bold">
                       {v.org} — {t("resume.hoursLine", { hours: v.hours })}
@@ -253,7 +253,7 @@ export default function TrackerPage() {
               {s.certificates.map((c) => {
                 const exp = daysUntil(c.expires);
                 return (
-                  <li key={c.id} className="flex items-start gap-2 rounded-2xl border border-border bg-surface p-3">
+                  <li key={c.id} className="flex items-start gap-2 rounded-xl border border-border bg-surface p-3">
                     <div className="min-w-0 flex-1">
                       <p className="font-bold">{c.name}</p>
                       <p className="text-sm text-muted">{[c.issuer, c.earned && formatDate(c.earned, dateLocale)].filter(Boolean).join(" · ")}</p>

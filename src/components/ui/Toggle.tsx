@@ -1,9 +1,11 @@
 "use client";
 
 import { useId, type ReactNode } from "react";
+import { Switch } from "@/components/shadcn/switch";
+import { Label } from "@/components/shadcn/label";
 import { cn } from "@/lib/utils";
 
-/** An on/off switch. Uses role="switch" so screen readers announce "on" or "off". */
+/** An on/off setting with a label, using the shadcn/ui switch (screen readers announce "on" or "off"). */
 export function Toggle({
   checked,
   onChange,
@@ -23,36 +25,25 @@ export function Toggle({
   return (
     <div className={cn("flex items-start justify-between gap-4 py-2", className)}>
       <div className="min-w-0">
-        <label htmlFor={id} className="block font-bold">
+        <Label htmlFor={id} className="block text-sm leading-snug font-semibold">
           {label}
-        </label>
+        </Label>
         {help && (
-          <p id={`${id}-help`} className="mt-0.5 text-sm text-muted">
+          <p id={`${id}-help`} className="mt-1 text-sm text-muted-foreground">
             {help}
           </p>
         )}
       </div>
-      <button
+      {/* Bigger than shadcn's default switch so it's easy to tap. */}
+      <Switch
         id={id}
-        type="button"
-        role="switch"
-        aria-checked={checked}
-        aria-describedby={help ? `${id}-help` : undefined}
+        checked={checked}
+        onCheckedChange={onChange}
         disabled={disabled}
-        onClick={() => onChange(!checked)}
-        className={cn(
-          "relative mt-0.5 inline-flex h-8 w-14 shrink-0 items-center rounded-full border-2 transition-colors disabled:opacity-50",
-          checked ? "border-primary bg-primary" : "border-border bg-surface-2",
-        )}
-      >
-        <span
-          aria-hidden="true"
-          className={cn(
-            "inline-block size-6 rounded-full shadow transition-transform",
-            checked ? "translate-x-6 bg-on-primary" : "translate-x-0.5 bg-muted",
-          )}
-        />
-      </button>
+        aria-describedby={help ? `${id}-help` : undefined}
+        size="lg"
+        className="mt-0.5"
+      />
     </div>
   );
 }

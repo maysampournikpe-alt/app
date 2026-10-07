@@ -77,7 +77,7 @@ export default function DataPage() {
         <Card>
           <h2 className="font-bold">{t("me.importLabel")}</h2>
           <p className="mt-1 text-sm text-muted">{t("me.importHelp")}</p>
-          <label className="mt-3 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border-2 border-border px-4 font-bold focus-within:outline focus-within:outline-3 focus-within:outline-focus">
+          <label className="mt-3 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-input bg-card px-4 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2 focus-within:outline focus-within:outline-3 focus-within:outline-focus">
             <Upload aria-hidden="true" className="size-4" />
             {t("me.importLabel")}
             <input type="file" accept="application/json,.json" className="sr-only" onChange={(e) => e.target.files?.[0] && void restore(e.target.files[0])} />

@@ -34,7 +34,7 @@ export function ReadAloudButton({ text, className, compact }: { text: string; cl
       aria-label={compact ? label : undefined}
       title={label}
       className={cn(
-        "inline-flex min-h-9 items-center gap-1.5 rounded-full border-2 border-border px-3 text-sm font-bold hover:border-primary",
+        "inline-flex min-h-9 items-center gap-1.5 rounded-md border border-input bg-card px-3 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2",
         compact && "size-9 justify-center px-0",
         className,
       )}

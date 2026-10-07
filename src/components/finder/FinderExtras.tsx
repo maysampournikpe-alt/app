@@ -97,12 +97,12 @@ function SurpriseAndExplore() {
             setQuery(q);
             void search(q, { surprise: true });
           }}
-          className="inline-flex min-h-11 items-center gap-2 rounded-2xl bg-accent-soft px-4 font-bold text-on-accent-soft hover:brightness-95"
+          className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-accent-soft px-4 font-bold text-on-accent-soft hover:brightness-95"
         >
           <Gift aria-hidden="true" className="size-5" />
           {t("find.surprise")}
         </button>
-        <Link href="/explore" className="inline-flex min-h-11 items-center gap-2 rounded-2xl bg-primary-soft px-4 font-bold text-on-primary-soft hover:brightness-95">
+        <Link href="/explore" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary-soft px-4 font-bold text-on-primary-soft hover:brightness-95">
           <Compass aria-hidden="true" className="size-5" />
           {t("find.explore")}
         </Link>
@@ -113,7 +113,7 @@ function SurpriseAndExplore() {
       <ul className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1 no-scrollbar">
         {EXPLORE_LINKS.slice(0, 8).map(({ href, key, icon: Icon }) => (
           <li key={href} className="shrink-0">
-            <Link href={href} className="flex w-28 flex-col items-center gap-1 rounded-2xl border border-border bg-surface p-3 text-center text-xs font-bold hover:border-primary">
+            <Link href={href} className="flex w-28 flex-col items-center gap-1 rounded-xl border border-border bg-surface p-3 text-center text-xs font-bold hover:border-primary">
               <Icon aria-hidden="true" className="size-6 text-primary" />
               {t(`explore.${key}`)}
             </Link>
@@ -145,7 +145,7 @@ function Seasonal() {
                 setQuery(q);
                 void search(q);
               }}
-              className="h-full w-full rounded-2xl border border-border bg-surface p-3 text-left hover:border-primary"
+              className="h-full w-full rounded-xl border border-border bg-surface p-3 text-left hover:border-primary"
             >
               <span className="block font-bold">
                 <span aria-hidden="true">{x.emoji}</span> {L(x.title)}
@@ -184,7 +184,7 @@ function Trending({ onOpen }: { onOpen: (o: Opportunity) => void }) {
       <ul className="space-y-2">
         {items.map(({ opp, count }) => (
           <li key={opp.id}>
-            <button type="button" onClick={() => onOpen(opp)} className="flex w-full items-center gap-3 rounded-2xl border border-border bg-surface p-3 text-left hover:border-primary">
+            <button type="button" onClick={() => onOpen(opp)} className="flex w-full items-center gap-3 rounded-xl border border-border bg-surface p-3 text-left hover:border-primary">
               <span aria-hidden="true" className="text-2xl">
                 {CATEGORY_EMOJI[opp.category]}
               </span>
@@ -218,7 +218,7 @@ function SavedSearches() {
       </SectionTitle>
       <ul className="space-y-2">
         {saved.map((x) => (
-          <li key={x.id} className="flex items-center gap-2 rounded-2xl border border-border bg-surface p-2 pl-3">
+          <li key={x.id} className="flex items-center gap-2 rounded-xl border border-border bg-surface p-2 pl-3">
             <button
               type="button"
               className="min-w-0 flex-1 text-left font-bold hover:underline"

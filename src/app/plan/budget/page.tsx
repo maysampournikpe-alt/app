@@ -72,7 +72,7 @@ export default function BudgetPage() {
             ["available", left, left < 0 ? "text-danger" : ""],
           ] as const
         ).map(([k, v, c]) => (
-          <li key={k} className="rounded-2xl border border-border bg-surface p-3 shadow-sm">
+          <li key={k} className="rounded-xl border border-border bg-surface p-3 shadow-sm">
             <p className="text-sm font-bold text-muted">{t(`life.${k}`)}</p>
             <p className={cn("text-xl font-bold", c)}>{money(v)}</p>
           </li>
@@ -127,7 +127,7 @@ export default function BudgetPage() {
         {goals.map((g) => {
           const s = entries.filter((e) => e.kind === "save" && e.goalId === g.id).reduce((n, e) => n + e.amount, 0);
           return (
-            <li key={g.id} className="rounded-2xl border border-border bg-surface p-3">
+            <li key={g.id} className="rounded-xl border border-border bg-surface p-3">
               <div className="flex items-center justify-between gap-2">
                 <p className="font-bold">{g.name}</p>
                 <button type="button" aria-label={`${t("common.remove")}: ${g.name}`} onClick={() => setGoals(goals.filter((x) => x.id !== g.id))} className="inline-flex size-9 items-center justify-center rounded-full text-danger hover:bg-danger-soft">

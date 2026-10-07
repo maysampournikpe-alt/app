@@ -32,7 +32,7 @@ export function ProgressExtras() {
       </SectionTitle>
       <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {badges.map((b) => (
-          <li key={b.id} className={cn("rounded-2xl border p-3 text-center", b.earned ? "border-accent bg-accent-soft" : "border-dashed border-border bg-surface")}>
+          <li key={b.id} className={cn("rounded-xl border p-3 text-center", b.earned ? "border-accent bg-accent-soft" : "border-dashed border-border bg-surface")}>
             <span aria-hidden="true" className={cn("block text-3xl", !b.earned && "opacity-40 grayscale")}>
               {b.icon}
             </span>

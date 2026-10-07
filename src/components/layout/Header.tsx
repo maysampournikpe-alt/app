@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Bell, Settings2 } from "lucide-react";
 import { useT } from "@/i18n/useT";
 import { useApp } from "@/lib/store";
-import { IconButton } from "@/components/ui/Button";
+import { Button, IconButton } from "@/components/ui/Button";
 import { Sheet } from "@/components/ui/Sheet";
 import { LanguageToggle } from "./LanguageToggle";
 import { SettingsControls } from "./QuickSettings";
@@ -22,7 +22,7 @@ export function Header({ minimal }: { minimal?: boolean }) {
   const unread = notifications.filter((n) => !n.read).length;
 
   return (
-    <header className="no-print sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
+    <header className="no-print sticky top-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex h-16 max-w-5xl items-center gap-2 px-4 lg:pl-60">
         <Link href="/" aria-label={t("nav.home")} className="mr-auto flex items-center gap-2 rounded-lg">
           <Logo className="size-9" />
@@ -37,7 +37,7 @@ export function Header({ minimal }: { minimal?: boolean }) {
             }}
             className="relative"
           >
-            <Bell aria-hidden="true" className="size-6" />
+            <Bell aria-hidden="true" className="size-5" />
             {unread > 0 && (
               <span aria-hidden="true" className="absolute right-1.5 top-1.5 flex min-w-5 items-center justify-center rounded-full bg-accent px-1 text-xs font-bold text-white dark:text-black">
                 {unread > 9 ? "9+" : unread}
@@ -46,7 +46,7 @@ export function Header({ minimal }: { minimal?: boolean }) {
           </IconButton>
         )}
         <IconButton label={t("nav.quickSettings")} onClick={() => setSettingsOpen(true)}>
-          <Settings2 aria-hidden="true" className="size-6" />
+          <Settings2 aria-hidden="true" className="size-5" />
         </IconButton>
       </div>
 
@@ -64,12 +64,12 @@ export function Header({ minimal }: { minimal?: boolean }) {
         closeLabel={t("common.close")}
       >
         {notifications.length === 0 ? (
-          <p className="text-muted">{t("common.noNotifications")}</p>
+          <p className="text-muted-foreground">{t("common.noNotifications")}</p>
         ) : (
           <>
             <ul className="space-y-2">
               {notifications.map((n) => (
-                <li key={n.id} className="rounded-xl border border-border p-3">
+                <li key={n.id} className="rounded-lg border p-3">
                   {n.href ? (
                     <Link href={n.href} onClick={() => setBellOpen(false)} className="font-bold underline-offset-4 hover:underline">
                       {!n.read && <span className="mr-1 inline-block size-2 rounded-full bg-accent align-middle" aria-hidden="true" />}
@@ -83,9 +83,9 @@ export function Header({ minimal }: { minimal?: boolean }) {
               ))}
             </ul>
             <div className="mt-4 flex gap-2">
-              <button type="button" className="font-bold text-primary underline underline-offset-4" onClick={clear}>
+              <Button variant="secondary" size="sm" onClick={clear}>
                 {t("common.clearAll")}
-              </button>
+              </Button>
             </div>
           </>
         )}

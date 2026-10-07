@@ -30,3 +30,18 @@ test("Spanish toggle translates the page", async ({ page }) => {
   await expect(page.getByRole("navigation", { name: "Navegación principal" })).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
 });
+
+// No page may be wider than a 375px phone screen (sideways scrolling hides buttons).
+test("no page scrolls sideways on a phone", async ({ page }, info) => {
+  test.skip(info.project.name !== "phone");
+  test.setTimeout(240_000);
+  await asStudent(page);
+  const wide: string[] = [];
+  for (const r of ROUTES) {
+    await page.goto(r);
+    await waitForApp(page);
+    const w = await page.evaluate(() => document.documentElement.scrollWidth);
+    if (w > 376) wide.push(`${r}: ${w}px`);
+  }
+  expect(wide).toEqual([]);
+});

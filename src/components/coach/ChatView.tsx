@@ -52,7 +52,7 @@ export function ChatView({
         {/* Coach introduction for this mode */}
         <div className="flex items-start gap-2">
           <Logo className="size-9 shrink-0" />
-          <div className="rounded-2xl rounded-tl-sm bg-surface p-3 shadow-sm">
+          <div className="rounded-xl rounded-tl-sm bg-surface p-3 shadow-sm">
             <p>{intro}</p>
           </div>
         </div>
@@ -60,7 +60,7 @@ export function ChatView({
         {messages.length === 0 && (
           <div className="flex flex-wrap gap-2 pl-11">
             {starters.map((s) => (
-              <button key={s} type="button" onClick={() => onSend(s)} className="rounded-2xl border-2 border-primary/40 bg-surface px-3 py-2 text-left text-sm font-bold text-primary hover:border-primary">
+              <button key={s} type="button" onClick={() => onSend(s)} className="rounded-xl border-2 border-primary/40 bg-surface px-3 py-2 text-left text-sm font-bold text-primary hover:border-primary">
                 {s}
               </button>
             ))}
@@ -70,7 +70,7 @@ export function ChatView({
         {messages.map((m, i) =>
           m.role === "user" ? (
             <div key={i} className="flex justify-end">
-              <div className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-tr-sm bg-primary px-3.5 py-2.5 text-on-primary">
+              <div className="max-w-[85%] whitespace-pre-wrap rounded-xl rounded-tr-sm bg-primary px-3.5 py-2.5 text-on-primary">
                 <span className="sr-only">{t("coach.you")}: </span>
                 {m.text}
               </div>
@@ -79,7 +79,7 @@ export function ChatView({
             <div key={i} className="flex items-start gap-2">
               <Logo className="size-9 shrink-0" />
               <div className="min-w-0 max-w-[85%] space-y-2">
-                <div className={cn("rounded-2xl rounded-tl-sm bg-surface p-3.5 shadow-sm", m.crisis && "border-2 border-danger/40")}>
+                <div className={cn("rounded-xl rounded-tl-sm bg-surface p-3.5 shadow-sm", m.crisis && "border-2 border-danger/40")}>
                   <span className="sr-only">{t("coach.coach")}: </span>
                   {m.text ? <Markdown text={m.text} /> : <span className="inline-flex gap-1" aria-label={t("coach.thinking")}><Dot /><Dot d={150} /><Dot d={300} /></span>}
                 </div>
@@ -92,7 +92,7 @@ export function ChatView({
         <div ref={endRef} />
       </div>
 
-      <form onSubmit={submit} className="sticky bottom-[calc(4.5rem+env(safe-area-inset-bottom))] mt-4 flex items-end gap-2 rounded-2xl border-2 border-border bg-surface p-1.5 shadow-lg focus-within:border-primary lg:bottom-4">
+      <form onSubmit={submit} className="sticky bottom-[calc(4.5rem+env(safe-area-inset-bottom))] mt-4 flex items-end gap-2 rounded-xl border border-input bg-card p-1.5 shadow-lg focus-within:border-primary lg:bottom-4">
         <label htmlFor="coach-input" className="sr-only">
           {t("coach.inputLabel")}
         </label>

@@ -55,7 +55,7 @@ function EventBuddy({ opp }: { opp: Opportunity }) {
 
   if (peopleOff) return null;
   return (
-    <section aria-labelledby={`buddy-${key}`} className="rounded-2xl border border-border p-3">
+    <section aria-labelledby={`buddy-${key}`} className="rounded-xl border border-border p-3">
       <h3 id={`buddy-${key}`} className="flex items-center gap-2 font-bold">
         <UserCheck aria-hidden="true" className="size-5 text-primary" />
         {t("people.buddyTitle")}

@@ -99,7 +99,7 @@ function GroupSection({ title, groups }: { title: string; groups: PeopleGroup[] 
           const Icon = KIND_ICON[g.kind] ?? Users;
           return (
             <li key={g.slug}>
-              <Link href={`/people/group?slug=${encodeURIComponent(g.slug)}`} className="flex h-full gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm hover:border-primary">
+              <Link href={`/people/group?slug=${encodeURIComponent(g.slug)}`} className="flex h-full gap-3 rounded-xl border border-border bg-surface p-4 shadow-sm hover:border-primary">
                 <Icon aria-hidden="true" className="mt-0.5 size-6 shrink-0 text-primary" />
                 <span className="min-w-0">
                   <span className="block font-bold">{L({ en: g.name, es: g.nameEs ?? g.name })}</span>

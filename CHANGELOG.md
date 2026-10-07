@@ -2,6 +2,14 @@
 
 What was built in each work session. Newest at the top.
 
+## Session 5 — Wed Oct 7, 2026 — New look with shadcn/ui
+
+- The whole app now uses **shadcn/ui** components (https://github.com/shadcn-ui/ui): buttons, cards, badges, inputs, switches, toggle chips, tabs, alerts, progress bars and pop-up sheets. The shadcn source files live in `src/components/shadcn/` (and `components.json` lets the shadcn CLI add more later).
+- New neutral "zinc" color palette for backgrounds, cards and borders in light and dark mode, keeping Rumbo's teal and orange brand colors.
+- Pop-up sheets now use the shadcn/Radix dialog: slide up from the bottom on phones, centered on computers, with focus trapping and Esc to close.
+- Kept for students: 44px tap targets, a bigger on/off switch, the easy-to-read Atkinson Hyperlegible font, strong keyboard focus outlines, and form borders with enough contrast to see.
+- New automatic check: no page may scroll sideways on a 375px phone.
+
 ## Session 4 — Tue Oct 6, 2026 — Phases 9 and 10
 
 ### Phase 9 — Motivation and fun

@@ -70,7 +70,7 @@ export default function SchedulePage() {
       <PageHeader title={t("life.scheduleTitle")} subtitle={t("life.scheduleSub")} />
 
       {check.level === "overloaded" && (
-        <Link href="/plan/wellbeing" className="mb-4 flex items-center gap-2 rounded-2xl border border-warning/40 bg-warning-soft p-3 font-bold text-warning">
+        <Link href="/plan/wellbeing" className="mb-4 flex items-center gap-2 rounded-xl border border-warning/40 bg-warning-soft p-3 font-bold text-warning">
           <AlertTriangle aria-hidden="true" className="size-5 shrink-0" />
           {t("wellbeing.warnLink")}
         </Link>

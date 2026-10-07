@@ -1,8 +1,11 @@
 import { forwardRef, useId, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
+import { Label } from "@/components/shadcn/label";
 import { cn } from "@/lib/utils";
 
+// Form fields in the shadcn/ui style. Inputs are 44px tall (easy to tap) and use 16px text,
+// which also stops iPhones from zooming in when you tap a box.
 const inputCls =
-  "w-full rounded-xl border-2 border-border bg-surface px-3 py-2.5 text-base text-text placeholder:text-muted focus:border-primary focus:outline-none focus-visible:outline-none focus:ring-2 focus:ring-focus";
+  "w-full min-w-0 rounded-md border border-input bg-card px-3 py-2 text-base text-foreground shadow-xs transition-[color,box-shadow] outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20";
 
 /** A labeled form field. The label is always connected to the input for screen readers. */
 export function Field({
@@ -24,13 +27,13 @@ export function Field({
   const fid = id ?? auto;
   const helpId = help ? `${fid}-help` : undefined;
   return (
-    <div className={cn("space-y-1.5", className)}>
-      <label htmlFor={fid} className={cn("block font-bold", hideLabel && "sr-only")}>
+    <div data-slot="field" className={cn("grid gap-2", className)}>
+      <Label htmlFor={fid} className={cn("text-sm leading-snug font-semibold", hideLabel && "sr-only")}>
         {label}
-      </label>
+      </Label>
       {children(fid, helpId)}
       {help && (
-        <p id={helpId} className="text-sm text-muted">
+        <p id={helpId} className="text-sm text-muted-foreground">
           {help}
         </p>
       )}
@@ -39,22 +42,23 @@ export function Field({
 }
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function Input({ className, ...rest }, ref) {
-  return <input ref={ref} className={cn(inputCls, className)} {...rest} />;
+  return <input ref={ref} data-slot="input" className={cn(inputCls, "min-h-11", className)} {...rest} />;
 });
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(function Textarea(
   { className, ...rest },
   ref,
 ) {
-  return <textarea ref={ref} className={cn(inputCls, "min-h-24", className)} {...rest} />;
+  return <textarea ref={ref} data-slot="textarea" className={cn(inputCls, "min-h-24", className)} {...rest} />;
 });
 
+/** Native <select> in the shadcn "native select" style (keeps phones' built-in pickers). */
 export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSelectElement>>(function Select(
   { className, children, ...rest },
   ref,
 ) {
   return (
-    <select ref={ref} className={cn(inputCls, "pr-8", className)} {...rest}>
+    <select ref={ref} data-slot="native-select" className={cn(inputCls, "select-chevron min-h-11 pr-9", className)} {...rest}>
       {children}
     </select>
   );

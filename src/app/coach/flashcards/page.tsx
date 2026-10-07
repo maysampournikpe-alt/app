@@ -157,7 +157,7 @@ function Study({ deck, onExit }: { deck: FlashcardDeck; onExit: () => void }) {
             type="button"
             onClick={() => setFlipped((f) => !f)}
             aria-label={`${t("skills.flashFlip")}. ${flipped ? t("skills.flashBack") : t("skills.flashFront")}: ${flipped ? card.back : card.front}`}
-            className={cn("flex min-h-56 w-full flex-col items-center justify-center rounded-3xl border-2 p-6 text-center shadow-md", flipped ? "border-primary bg-primary-soft text-on-primary-soft" : "border-border bg-surface")}
+            className={cn("flex min-h-56 w-full flex-col items-center justify-center rounded-2xl border-2 p-6 text-center shadow-md", flipped ? "border-primary bg-primary-soft text-on-primary-soft" : "border-border bg-surface")}
           >
             <span className="mb-2 text-xs font-bold uppercase tracking-wide text-muted">{flipped ? t("skills.flashBack") : t("skills.flashFront")}</span>
             <span className="text-xl font-bold" aria-live="polite">

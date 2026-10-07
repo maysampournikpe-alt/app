@@ -37,7 +37,7 @@ export default function CareersPage() {
       <ul className="grid gap-3 sm:grid-cols-2">
         {list.map((c) => (
           <li key={c.id}>
-            <button type="button" onClick={() => setOpen(c)} className="flex w-full items-start gap-3 rounded-2xl border border-border bg-surface p-4 text-left shadow-sm hover:border-primary">
+            <button type="button" onClick={() => setOpen(c)} className="flex w-full items-start gap-3 rounded-xl border border-border bg-surface p-4 text-left shadow-sm hover:border-primary">
               <span aria-hidden="true" className="text-3xl">
                 {c.emoji}
               </span>

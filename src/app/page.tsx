@@ -22,7 +22,7 @@ import { CrisisHelp } from "@/components/safety/CrisisHelp";
 import { Segmented } from "@/components/ui/misc";
 
 // The map library is big, so it's only downloaded when the student opens the map.
-const ResultsMap = dynamic(() => import("@/components/finder/ResultsMap"), { ssr: false, loading: () => <div className="h-80 animate-pulse rounded-2xl bg-surface-2" /> });
+const ResultsMap = dynamic(() => import("@/components/finder/ResultsMap"), { ssr: false, loading: () => <div className="h-80 animate-pulse rounded-xl bg-surface-2" /> });
 
 /** 1.1 Opportunity Finder — the home page. */
 export default function FindPage() {
@@ -53,13 +53,13 @@ export default function FindPage() {
       {/* Friendly AI greeting */}
       <div className="mb-4 flex items-start gap-3">
         <Logo className="size-11 shrink-0" />
-        <div className="rounded-2xl rounded-tl-sm bg-surface p-4 shadow-sm">
+        <div className="rounded-xl rounded-tl-sm bg-surface p-4 shadow-sm">
           <h1 className="text-xl font-bold sm:text-2xl">{nickname ? t("find.greetingName", { name: nickname }) : t("find.greeting")}</h1>
           <p className="mt-1 text-sm text-muted">{t("find.subtitle")}</p>
         </div>
       </div>
 
-      <form role="search" onSubmit={submit} className="flex items-center gap-2 rounded-2xl border-2 border-border bg-surface p-1.5 focus-within:border-primary">
+      <form role="search" onSubmit={submit} className="flex items-center gap-2 rounded-xl border border-input bg-card p-1.5 shadow-xs focus-within:border-primary">
         <label htmlFor="finder-q" className="sr-only">
           {t("find.searchLabel")}
         </label>
@@ -116,7 +116,7 @@ export default function FindPage() {
             {aiAllowed ? t("find.searching") : t("find.searchingDemo")}
           </p>
           {[0, 1, 2].map((i) => (
-            <div key={i} className="h-40 animate-pulse rounded-2xl bg-surface-2" />
+            <div key={i} className="h-40 animate-pulse rounded-xl bg-surface-2" />
           ))}
         </div>
       )}
@@ -149,7 +149,7 @@ export default function FindPage() {
                 </Alert>
               )}
               {response.message && (
-                <div className="mb-3 flex items-start gap-2 rounded-2xl bg-surface p-3 text-sm shadow-sm">
+                <div className="mb-3 flex items-start gap-2 rounded-xl bg-surface p-3 text-sm shadow-sm">
                   <Sparkles aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-primary" />
                   <p className="flex-1">
                     <span className="sr-only">{t("find.aiMessage")}: </span>
@@ -202,7 +202,7 @@ export default function FindPage() {
                   )}
                 </div>
               ) : visible.length === 0 ? (
-                <div className="mt-3 rounded-2xl border-2 border-dashed border-border p-5 text-center">
+                <div className="mt-3 rounded-xl border border-dashed p-5 text-center">
                   <p className="font-bold">{t("find.noResults")}</p>
                   <p className="mt-1 text-sm text-muted">{t("find.noResultsHelp")}</p>
                 </div>

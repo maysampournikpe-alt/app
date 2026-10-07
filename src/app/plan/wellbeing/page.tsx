@@ -99,7 +99,7 @@ export default function WellbeingPage() {
               type="button"
               aria-pressed={feel === f.id}
               onClick={() => setFeel(f.id)}
-              className={cn("flex min-h-20 flex-col items-center justify-center gap-1 rounded-2xl border-2 text-sm font-bold", feel === f.id ? "border-primary bg-primary-soft text-on-primary-soft" : "border-border hover:border-primary")}
+              className={cn("flex min-h-20 flex-col items-center justify-center gap-1 rounded-xl border-2 text-sm font-bold", feel === f.id ? "border-primary bg-primary-soft text-on-primary-soft" : "border-border hover:border-primary")}
             >
               <span aria-hidden="true" className="text-3xl">
                 {f.emoji}
@@ -161,7 +161,7 @@ export default function WellbeingPage() {
       <SectionTitle>{t("wellbeing.tips")}</SectionTitle>
       <ul className="space-y-2">
         {tips.map((n) => (
-          <li key={n} className="rounded-2xl border border-border bg-surface p-3">
+          <li key={n} className="rounded-xl border border-border bg-surface p-3">
             💡 {t(`wellbeing.tip${n}`)}
           </li>
         ))}

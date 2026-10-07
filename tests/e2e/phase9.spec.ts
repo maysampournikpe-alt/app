@@ -36,7 +36,7 @@ test("progress shows badges and the monthly challenge; avatar unlocks by level",
   // Crown needs level 8 — can't be picked.
   const crown = page.getByRole("radio", { name: /Crown — Unlocks at level 8/ });
   await expect(crown).toHaveAttribute("aria-disabled", "true");
-  await crown.click({ force: true });
+  await crown.dispatchEvent("click"); // tap the locked item itself (a forced tap can land on the tab bar on phones)
   await expect(crown).toHaveAttribute("aria-checked", "false");
   await expectAccessible(page);
   expect(errors).toEqual([]);

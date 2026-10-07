@@ -34,7 +34,7 @@ export function AskParentButton({ opp }: { opp: Opportunity }) {
             setBusy(false);
           }
         }}
-        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border-2 border-border px-4 font-bold hover:border-primary disabled:opacity-60"
+        className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-input bg-card px-4 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2 disabled:opacity-60"
       >
         <Users aria-hidden="true" className="size-4" />
         {busy ? t("family.creating") : t("family.askParent")}
