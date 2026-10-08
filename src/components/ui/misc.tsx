@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 
 export function PageHeader({ title, subtitle, action, icon }: { title: ReactNode; subtitle?: ReactNode; action?: ReactNode; icon?: ReactNode }) {
   return (
-    <div className="mb-5 flex items-start justify-between gap-3">
+    <div data-slot="page-header" className="-mx-4 mb-6 flex items-end justify-between gap-3 border-y-2 border-foreground bg-block px-4 py-7 text-ink first:-mt-5 sm:py-10">
       <div className="min-w-0">
-        <h1 className="flex items-center gap-2 text-3xl sm:text-4xl">
+        <h1 className="flex items-center gap-3 text-4xl break-words sm:text-6xl">
           {icon && <span aria-hidden="true">{icon}</span>}
           {title}
         </h1>
-        {subtitle && <p className="mt-1 text-muted-foreground">{subtitle}</p>}
+        {subtitle && <p className="mt-3 max-w-2xl text-lg font-bold">{subtitle}</p>}
       </div>
       {action}
     </div>
@@ -24,8 +24,8 @@ export function PageHeader({ title, subtitle, action, icon }: { title: ReactNode
 
 export function SectionTitle({ children, action, id }: { children: ReactNode; action?: ReactNode; id?: string }) {
   return (
-    <div className="mb-3 mt-7 flex items-center justify-between gap-3">
-      <h2 id={id} className="text-xl">
+    <div className="mt-9 mb-4 flex items-center justify-between gap-3 border-b-4 border-foreground pb-2">
+      <h2 id={id} className="text-2xl">
         {children}
       </h2>
       {action}
@@ -36,12 +36,10 @@ export function SectionTitle({ children, action, id }: { children: ReactNode; ac
 /** Progress bar (shadcn/ui progress, Radix). */
 export function ProgressBar({ value, label, className, tone = "primary" }: { value: number; label: string; className?: string; tone?: "primary" | "accent" | "success" }) {
   const pct = Math.round(Math.max(0, Math.min(1, value)) * 100);
-  const color = tone === "accent" ? "bg-accent" : tone === "success" ? "bg-success" : "bg-primary";
+  const color = tone === "accent" ? "bg-[var(--c-orange)]" : tone === "success" ? "bg-[var(--c-green)]" : "bg-primary";
   return (
-    <ProgressPrimitive.Root data-slot="progress" value={pct} aria-label={label} className={cn("relative h-4 w-full overflow-hidden rounded-full bg-surface-2", className)}>
-      <ProgressPrimitive.Indicator className={cn("relative h-full w-full flex-1 rounded-full transition-all", color)} style={{ transform: `translateX(-${100 - pct}%)` }}>
-        {/* shine stripe, like a game progress bar */}
-        <span aria-hidden="true" className="absolute inset-x-2 top-1 h-1 rounded-full bg-white/35" />
+    <ProgressPrimitive.Root data-slot="progress" value={pct} aria-label={label} className={cn("relative h-5 w-full overflow-hidden rounded-sm border-2 border-foreground bg-surface", className)}>
+      <ProgressPrimitive.Indicator className={cn("relative h-full w-full flex-1 transition-all", color)} style={{ transform: `translateX(-${100 - pct}%)` }}>
       </ProgressPrimitive.Indicator>
     </ProgressPrimitive.Root>
   );
@@ -49,13 +47,13 @@ export function ProgressBar({ value, label, className, tone = "primary" }: { val
 
 export function EmptyState({ icon, title, body, action }: { icon?: ReactNode; title: ReactNode; body?: ReactNode; action?: ReactNode }) {
   return (
-    <div data-slot="empty" className="flex flex-col items-center rounded-2xl border-2 border-dashed p-6 text-center">
+    <div data-slot="empty" className="flex flex-col items-center rounded-md border-2 border-dashed border-foreground p-6 text-center">
       {icon && (
         <div aria-hidden="true" className="mb-2 text-4xl">
           {icon}
         </div>
       )}
-      <p className="font-display text-lg font-extrabold">{title}</p>
+      <p className="font-display text-lg uppercase">{title}</p>
       {body && <p className="mt-1 max-w-sm text-sm text-muted-foreground">{body}</p>}
       {action && <div className="mt-4 flex justify-center">{action}</div>}
     </div>
@@ -87,10 +85,10 @@ export function Alert({ tone = "info", title, children, className, role }: { ton
     <div
       data-slot="alert"
       role={role}
-      className={cn("relative grid w-full grid-cols-[calc(var(--spacing)*5)_1fr] items-start gap-x-3 gap-y-0.5 rounded-2xl border-2 px-4 py-3 text-sm", alertStyles[tone], className)}
+      className={cn("relative grid w-full grid-cols-[calc(var(--spacing)*5)_1fr] items-start gap-x-3 gap-y-0.5 rounded-md border-2 border-current px-4 py-3 text-sm", alertStyles[tone], className)}
     >
       <Icon aria-hidden="true" className="mt-0.5 size-5" />
-      {title && <p className="col-start-2 font-display text-base font-extrabold">{title}</p>}
+      {title && <p className="col-start-2 text-base font-bold">{title}</p>}
       {children && <div className="col-start-2 min-w-0 [&_p]:leading-relaxed">{children}</div>}
     </div>
   );
@@ -115,16 +113,16 @@ export function Segmented<T extends string>({
       onValueChange={(v) => v && onChange(v as T)}
       aria-label={label}
       data-slot="tabs-list"
-      className="flex gap-1 overflow-x-auto rounded-2xl border-2 bg-surface-2 p-1 no-scrollbar"
+      className="flex overflow-x-auto rounded-md border-2 border-foreground bg-surface no-scrollbar"
     >
       {options.map((o) => (
         <ToggleGroupPrimitive.Item
           key={o.value}
           value={o.value}
           className={cn(
-            "min-h-10 flex-1 shrink-0 rounded-xl px-3 font-display text-sm font-extrabold whitespace-nowrap text-muted-foreground transition-[color,box-shadow] outline-none hover:text-foreground",
+            "min-h-11 flex-1 shrink-0 border-r-2 border-foreground px-3 text-sm font-bold whitespace-nowrap uppercase text-foreground outline-none last:border-r-0 hover:bg-surface-2",
             "focus-visible:ring-[3px] focus-visible:ring-ring/50",
-            "data-[state=on]:bg-card data-[state=on]:text-primary data-[state=on]:shadow-[0_3px_0_var(--border)]",
+            "focus-visible:ring-inset data-[state=on]:bg-foreground data-[state=on]:text-background",
           )}
         >
           {o.label}

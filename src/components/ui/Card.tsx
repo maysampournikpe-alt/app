@@ -3,10 +3,10 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Chunky game-style cards: thick border with a deeper bottom edge.
+// Poster-style cards: black outline with a hard offset shadow. Link cards get a big color block.
 
 export function Card({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
-  return <div data-slot="card" className={cn("rounded-2xl border-2 border-b-4 bg-card p-4 text-card-foreground", className)} {...rest} />;
+  return <div data-slot="card" className={cn("rounded-md border-2 border-foreground bg-card p-4 text-card-foreground shadow-[4px_4px_0_var(--border)]", className)} {...rest} />;
 }
 
 /** A tappable card that links somewhere (used in hubs and lists). */
@@ -28,25 +28,25 @@ export function LinkCard({
   return (
     <Link
       href={href}
-      data-slot="card"
+      data-slot="linkcard"
       className={cn(
-        "press group flex items-center gap-3 rounded-2xl border-2 border-b-4 bg-card p-4 text-card-foreground hover:bg-surface-2 active:border-b-2",
+        "press group flex items-stretch gap-0 overflow-hidden rounded-md border-2 border-foreground bg-card text-card-foreground shadow-[4px_4px_0_var(--border)] hover:-translate-x-px hover:-translate-y-px hover:shadow-[6px_6px_0_var(--border)] active:translate-x-1 active:translate-y-1 active:shadow-none",
         className,
       )}
     >
       {icon && (
-        <span aria-hidden="true" className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-xl text-on-primary-soft">
+        <span aria-hidden="true" className="flex w-16 shrink-0 items-center justify-center border-r-2 border-foreground bg-[var(--tile,var(--block))] text-2xl text-ink [&_svg]:size-7">
           {icon}
         </span>
       )}
-      <span className="min-w-0 flex-1">
-        <span className="flex items-center gap-2 font-display text-base font-extrabold">
+      <span className="min-w-0 flex-1 self-center p-4">
+        <span className="flex items-center gap-2 font-display text-base uppercase leading-tight">
           {title}
           {badge}
         </span>
         {subtitle && <span className="mt-0.5 block text-sm text-muted-foreground">{subtitle}</span>}
       </span>
-      <ChevronRight aria-hidden="true" className="size-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+      <ChevronRight aria-hidden="true" className="mr-3 size-6 shrink-0 self-center transition-transform group-hover:translate-x-1" />
     </Link>
   );
 }

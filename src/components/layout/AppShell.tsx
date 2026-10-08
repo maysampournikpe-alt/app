@@ -11,6 +11,7 @@ import { TabBar } from "./TabBar";
 import { OfflineBanner } from "./OfflineBanner";
 import { Logo } from "./Logo";
 import { BackgroundTasks } from "./BackgroundTasks";
+import { activeTab } from "./nav-items";
 
 /** Pages anyone can open without finishing the welcome steps (parents, staff, judges). */
 const PUBLIC_PREFIXES = ["/welcome", "/privacy", "/how-ai-works", "/help", "/parent", "/staff", "/offline"];
@@ -26,6 +27,12 @@ export function AppShell({ children }: { children: ReactNode }) {
   const isPublic = PUBLIC_PREFIXES.some((p) => pathname.startsWith(p));
   const showTabs = onboarded && !NO_TABS_PREFIXES.some((p) => pathname.startsWith(p));
   const mustOnboard = hydrated && !onboarded && !isPublic;
+
+  // Each tab has its own big block color (set on <html> so the whole page can use it).
+  const tab = activeTab(pathname) ?? "find";
+  useEffect(() => {
+    document.documentElement.dataset.tab = tab;
+  }, [tab]);
 
   // First time here? Go to the welcome steps.
   useEffect(() => {
