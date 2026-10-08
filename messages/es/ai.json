@@ -1,6 +1,6 @@
 {
   "title": "Cómo funciona la IA",
-  "intro": "La IA de Rumbo viene de una empresa llamada Anthropic (la IA se llama Claude). En la versión gratis, el Coach, los planes y las tarjetas usan Groq, y la búsqueda usa nuestra lista de ejemplos revisada a mano. Aquí te explicamos qué hace la IA, cómo la revisamos y qué no puede hacer.",
+  "intro": "La IA de Rumbo viene de una empresa llamada Anthropic (la IA se llama Claude), o en la versión gratis, de Groq. En los dos casos, un resultado solo aparece si su enlace de verdad salió en una búsqueda en internet. Aquí te explicamos qué hace la IA, cómo la revisamos y qué no puede hacer.",
   "findTitle": "Cómo busca Buscar",
   "find1": "Escribes lo que buscas, con tus propias palabras.",
   "find2": "Nuestro servidor manda tu pregunta — junto con tu grado, edad, intereses y ciudad (nunca tu nombre) — a la IA.",

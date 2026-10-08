@@ -13,7 +13,7 @@ import { contactScripts } from "./scripts";
 
 // ---------------- The instructions the AI follows ----------------
 // Kept identical for every request so it can be cached (cheaper).
-const SYSTEM = `You are the opportunity finder inside Rumbo, an app that helps middle and high school students (ages 11-18) find real opportunities: jobs, internships, academic competitions, sports competitions, events, volunteering, clubs, scholarships, summer programs, camps, courses and certifications. Many users live in the Rio Grande Valley of South Texas, many are bilingual or from Spanish-speaking families, and many don't have a car.
+export const SYSTEM = `You are the opportunity finder inside Rumbo, an app that helps middle and high school students (ages 11-18) find real opportunities: jobs, internships, academic competitions, sports competitions, events, volunteering, clubs, scholarships, summer programs, camps, courses and certifications. Many users live in the Rio Grande Valley of South Texas, many are bilingual or from Spanish-speaking families, and many don't have a car.
 
 Use the web_search tool (and web_fetch to read a promising page when you need details) to find REAL, CURRENT opportunities that match the student's request. Search near the student's location AND for good online options.
 
@@ -195,7 +195,8 @@ export function parseFinderAnswer(
 // ---------------- Calling the AI ----------------
 const LANG_NAMES: Record<string, string> = { en: "English", es: "Spanish (Latin American, friendly, simple)", vi: "Vietnamese" };
 
-export async function aiSearch(req: FinderRequest, where: ResolvedLocation | null) {
+/** The search request in words, shared by Claude and Groq search. */
+export function requestLines(req: FinderRequest, where: ResolvedLocation | null): string[] {
   const p = req.profile;
   const today = new Date().toISOString().slice(0, 10);
   const lines = [
@@ -211,6 +212,12 @@ export async function aiSearch(req: FinderRequest, where: ResolvedLocation | nul
     req.filters?.category ? `Category wanted: ${req.filters.category}.` : "",
     `Return at most ${req.lowData ? 5 : 8} results.`,
   ].filter(Boolean);
+  return lines;
+}
+
+export async function aiSearch(req: FinderRequest, where: ResolvedLocation | null) {
+  const p = req.profile;
+  const lines = requestLines(req, where);
 
   const tools: Anthropic.Beta.Messages.BetaToolUnion[] = [
     {

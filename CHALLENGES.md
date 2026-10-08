@@ -85,3 +85,7 @@ Technical problems we hit and how we solved them. Useful for the submission vide
 ## 21. A button that pushed the page sideways
 **Problem:** After the switch, the "Next" button on the welcome screen became unclickable on phones in the tests. shadcn buttons never shrink, so a full-width "Next" next to "Back" made the page wider than the phone, and other content covered the button.
 **Solution:** Full-width buttons are now allowed to shrink. A new test opens every page at phone size and fails if anything is wider than the screen.
+
+## 22. Free AI without breaking the "never invent listings" rule
+**Problem:** Claude's API costs money, and the free Groq API doesn't have Claude's web tools. An AI without a way to check links might make up programs.
+**Solution:** Groq's "compound" models run real web searches and report which pages they found. Rumbo keeps a listing only if its link is in that record of real search results; links that appear only in the AI's own answer are thrown away (a test checks this with a made-up link).

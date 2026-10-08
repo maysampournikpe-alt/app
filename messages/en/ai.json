@@ -1,6 +1,6 @@
 {
   "title": "How the AI works",
-  "intro": "Rumbo's AI comes from a company called Anthropic (the AI is named Claude). On the free setup, the Coach, plans and flashcards use Groq instead, and search uses our hand-checked sample list. Here's what the AI does, how we check it, and what it can't do.",
+  "intro": "Rumbo's AI comes from a company called Anthropic (the AI is named Claude), or on the free setup from Groq. Either way, search results only appear if their link really came up in a live web search. Here's what the AI does, how we check it, and what it can't do.",
   "findTitle": "How Find searches",
   "find1": "You type what you're looking for, in your own words.",
   "find2": "Our server sends your request — plus your grade, age, interests and town (never your name) — to the AI.",

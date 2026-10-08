@@ -120,3 +120,16 @@ describe("speaking coach", () => {
     expect(analyzeSpeech("hi", 2).pace).toBe("unknown");
   });
 });
+
+import { urlsFromGroq } from "@/lib/server/finder/groq-search";
+describe("Groq search link check", () => {
+  it("only trusts links from Groq's real search results, not its own answer", () => {
+    const known = urlsFromGroq({
+      content: "see https://made-up.example/intern",
+      executed_tools: [{ type: "search", output: "URL: https://www.texasbar.com/law-camp\n", search_results: { results: [{ url: "https://uil.utexas.edu/academics/" }] } }],
+    });
+    expect(known.has("texasbar.com/law-camp")).toBe(true);
+    expect(known.has("uil.utexas.edu/academics")).toBe(true);
+    expect([...known].some((u) => u.includes("made-up"))).toBe(false);
+  });
+});

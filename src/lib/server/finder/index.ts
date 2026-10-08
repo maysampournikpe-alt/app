@@ -13,6 +13,7 @@ import { resolveLocation, distanceTo, type ResolvedLocation } from "../geo";
 import { getDb } from "../db";
 import { demoSearch } from "./demo";
 import { aiSearch } from "./ai";
+import { groqSearch } from "./groq-search";
 import type { FinderRequest } from "./types";
 
 export const FinderRequestSchema = z.object({
@@ -127,8 +128,9 @@ export async function runFinder(httpReq: Request, input: FinderRequest): Promise
     return { results: finish([...staff, ...d.results], input, where), suggestions: d.suggestions, demo: true, notice, areaLabel, center };
   };
 
-  // With only the free Groq key, the AI is on (Coach, plans) but search still uses the checked sample list.
-  if (!aiEnabled() || input.demoOnly) return demo(groqEnabled() && !input.demoOnly ? "sample" : "demo");
+  // No AI key at all (or demo requested) → hand-checked sample list.
+  const useGroq = !aiEnabled() && groqEnabled();
+  if ((!aiEnabled() && !useGroq) || input.demoOnly) return demo("demo");
 
   const gradeBand = input.profile.grade ? (input.profile.grade <= 8 ? "ms" : "hs") : "any";
   const key = cacheKey([input.query.toLowerCase().replace(/\s+/g, " "), where?.zip3 ?? where?.label ?? "none", gradeBand, input.locale, input.filters ?? {}, !!input.lowData]);
@@ -139,6 +141,24 @@ export async function runFinder(httpReq: Request, input: FinderRequest): Promise
 
   const limit = await checkLimits(httpReq, "search");
   if (!limit.ok) return demo(limit.reason);
+
+  // Free option: Groq web search. Same link check; if it finds nothing, fall back to the sample list.
+  if (useGroq) {
+    try {
+      const g = await groqSearch(input, where);
+      await recordUsage(httpReq, "search", { inputTokens: 0, outputTokens: 0, searches: 1, costCents: 0 });
+      if (!g.results.length) {
+        const d = demo("sample");
+        return { ...d, suggestions: g.suggestions.length ? g.suggestions : d.suggestions, removedCount: g.removed };
+      }
+      const response: FinderResponse = { results: g.results, suggestions: g.suggestions, message: g.message, demo: false, removedCount: g.removed };
+      await setCached(key, response);
+      return { ...response, results: finish([...staff, ...g.results], input, where), areaLabel, center };
+    } catch (e) {
+      console.error("finder Groq error", e);
+      return demo("sample");
+    }
+  }
 
   try {
     const ai = await aiSearch(input, where);

@@ -76,3 +76,25 @@ export async function* groqStream(messages: ChatMsg[], maxTokens = 2048): AsyncG
     }
   }
 }
+
+/** Full reply message (including Groq's record of the web searches it ran). Used by search. */
+export async function groqMessage(messages: ChatMsg[], models: string[], maxTokens = 6000): Promise<{ content: string; raw: unknown; model: string }> {
+  let last = "";
+  for (const model of models) {
+    const res = await fetch(URL, {
+      method: "POST",
+      headers: headers(),
+      body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature: 0.2 }),
+      signal: AbortSignal.timeout(90_000),
+    });
+    if (res.ok) {
+      const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
+      const msg = data.choices?.[0]?.message;
+      return { content: msg?.content ?? "", raw: msg, model };
+    }
+    last = `Groq HTTP ${res.status} (${model}): ${(await res.text()).slice(0, 300)}`;
+    console.error(last);
+    if (res.status === 401 || res.status === 403 || res.status === 429) break;
+  }
+  throw new Error(last);
+}
