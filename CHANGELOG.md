@@ -2,12 +2,6 @@
 
 What was built in each work session. Newest at the top.
 
-## Session 7 — Thu Oct 8, 2026 — Bold color-block redesign
-
-- Brand-new poster look: huge uppercase Archivo Black headlines, a full-width color block at the top of each page, black header and tab bar, sharp corners, black outlines and hard offset shadows.
-- Every tab has its own color: Find yellow, Coach blue, Plan orange, People green, Me pink. Menu cards take turns showing yellow, blue, orange, green and pink blocks.
-- Body text keeps the easy-to-read font; the dyslexia option turns off all-caps headlines. All accessibility and contrast checks still pass.
-
 ## Session 6 — Thu Oct 8, 2026 — Playful game-like look
 
 - New design inspired by learning games: chunky "3D" buttons, chips and cards with a thicker bottom edge that press down when tapped, bright teal and sunshine-yellow colors, and the rounded Nunito font for headings and buttons (self-hosted, with Vietnamese letters).

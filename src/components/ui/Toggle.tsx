@@ -25,7 +25,7 @@ export function Toggle({
   return (
     <div className={cn("flex items-start justify-between gap-4 py-2", className)}>
       <div className="min-w-0">
-        <Label htmlFor={id} className="block text-base leading-snug font-bold">
+        <Label htmlFor={id} className="block font-display text-base leading-snug font-extrabold">
           {label}
         </Label>
         {help && (

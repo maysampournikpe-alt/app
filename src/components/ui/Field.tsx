@@ -2,10 +2,10 @@ import { forwardRef, useId, type InputHTMLAttributes, type ReactNode, type Selec
 import { Label } from "@/components/shadcn/label";
 import { cn } from "@/lib/utils";
 
-// Form fields: big boxes with a black outline. Inputs are 44px tall (easy to tap) and use 16px text,
+// Form fields: big rounded boxes. Inputs are 44px tall (easy to tap) and use 16px text,
 // which also stops iPhones from zooming in when you tap a box.
 const inputCls =
-  "w-full min-w-0 rounded-md border-2 border-input bg-surface px-4 py-2 text-base text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-[3px] focus-visible:ring-ring/60 focus-visible:shadow-[3px_3px_0_var(--block)] aria-invalid:border-destructive";
+  "w-full min-w-0 rounded-2xl border-2 border-input bg-surface px-4 py-2 text-base text-foreground transition-[color,box-shadow,border-color] outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-primary/25 aria-invalid:border-destructive";
 
 /** A labeled form field. The label is always connected to the input for screen readers. */
 export function Field({
@@ -28,7 +28,7 @@ export function Field({
   const helpId = help ? `${fid}-help` : undefined;
   return (
     <div data-slot="field" className={cn("grid gap-2", className)}>
-      <Label htmlFor={fid} className={cn("text-base leading-snug font-bold", hideLabel && "sr-only")}>
+      <Label htmlFor={fid} className={cn("font-display text-base leading-snug font-extrabold", hideLabel && "sr-only")}>
         {label}
       </Label>
       {children(fid, helpId)}

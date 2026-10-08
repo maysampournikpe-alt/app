@@ -22,11 +22,11 @@ export function Header({ minimal }: { minimal?: boolean }) {
   const unread = notifications.filter((n) => !n.read).length;
 
   return (
-    <header className="no-print sticky top-0 z-40 border-b-2 border-foreground bg-ink text-white">
+    <header className="no-print sticky top-0 z-40 border-b-2 bg-background">
       <div className="mx-auto flex h-16 max-w-5xl items-center gap-2 px-4 lg:pl-60">
         <Link href="/" aria-label={t("nav.home")} className="mr-auto flex items-center gap-2 rounded-lg">
           <Logo className="size-9" />
-          <span className="font-display text-2xl uppercase tracking-tight">{t("common.appName")}</span>
+          <span className="font-display text-2xl font-black tracking-tight text-primary">{t("common.appName")}</span>
         </Link>
         <LanguageToggle />
         {!minimal && (
@@ -39,7 +39,7 @@ export function Header({ minimal }: { minimal?: boolean }) {
           >
             <Bell aria-hidden="true" className="size-5" />
             {unread > 0 && (
-              <span aria-hidden="true" className="absolute right-1.5 top-1.5 flex min-w-5 items-center justify-center rounded-sm bg-[var(--c-yellow)] px-1 text-xs font-bold text-ink">
+              <span aria-hidden="true" className="absolute right-1.5 top-1.5 flex min-w-5 items-center justify-center rounded-full bg-accent px-1 text-xs font-bold text-white dark:text-black">
                 {unread > 9 ? "9+" : unread}
               </span>
             )}
@@ -69,7 +69,7 @@ export function Header({ minimal }: { minimal?: boolean }) {
           <>
             <ul className="space-y-2">
               {notifications.map((n) => (
-                <li key={n.id} className="rounded-md border-2 border-foreground p-3">
+                <li key={n.id} className="rounded-2xl border-2 border-b-4 p-3">
                   {n.href ? (
                     <Link href={n.href} onClick={() => setBellOpen(false)} className="font-bold underline-offset-4 hover:underline">
                       {!n.read && <span className="mr-1 inline-block size-2 rounded-full bg-accent align-middle" aria-hidden="true" />}

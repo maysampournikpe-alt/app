@@ -5,7 +5,7 @@ import { Toggle as TogglePrimitive } from "radix-ui";
 import { cn } from "@/lib/utils";
 
 /**
- * A pill-shaped button for filters and choices (poster style: black outline, fills with the tab's color when on).
+ * A pill-shaped button for filters and choices (a chunky game-style button).
  * With `selected` it is an on/off toggle (screen readers hear "pressed");
  * without it, it's a plain action button (like the "Try:" search examples).
  */
@@ -25,9 +25,9 @@ export function Chip({
   size?: "sm" | "md";
 }) {
   const cls = cn(
-    "press inline-flex shrink-0 items-center gap-1.5 rounded-md border-2 border-foreground bg-surface font-bold text-foreground outline-none hover:bg-surface-2",
-    "focus-visible:ring-[3px] focus-visible:ring-ring/60",
-    "data-[state=on]:bg-block data-[state=on]:text-ink data-[state=on]:shadow-[3px_3px_0_var(--border)]",
+    "press inline-flex shrink-0 items-center gap-1.5 rounded-2xl border-2 border-b-4 border-border bg-surface font-display font-extrabold text-text outline-none hover:bg-surface-2 active:border-b-2",
+    "focus-visible:ring-[3px] focus-visible:ring-ring/50",
+    "data-[state=on]:border-primary data-[state=on]:bg-primary-soft data-[state=on]:text-on-primary-soft",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0",
     size === "sm" ? "min-h-9 px-3 text-sm" : "min-h-11 px-4 text-sm",
     className,

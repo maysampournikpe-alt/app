@@ -41,23 +41,6 @@
   src: url("/fonts/atkinson-hyperlegible-latin-ext-700-normal.woff2") format("woff2");
   unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* Archivo Black: big poster headlines. Open Font License, see public/fonts/ARCHIVO-BLACK-LICENSE.txt */
-@font-face {
-  font-family: "Archivo Black";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/archivo-black-latin-400-normal.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: "Archivo Black";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/archivo-black-latin-ext-400-normal.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
 /* Nunito (rounded, bold): headings and buttons. Open Font License, see public/fonts/NUNITO-LICENSE.txt */
 @font-face {
   font-family: "Nunito";
@@ -123,80 +106,71 @@
 }
 
 /* ---------- Color tokens ----------
-   "Bold color blocks" poster look: black ink, sharp corners, and one big bright color
-   per tab (Find yellow, Coach blue, Plan orange, People green, Me pink).
-   Block colors always carry black text (contrast 9:1 or more), in light and dark mode. */
+   Playful, game-like look: bright colors and chunky 3D buttons/cards.
+   Every text/background pair still passes WCAG AA contrast (4.5:1+), and form borders pass 3:1.
+   Teal = the river, orange/yellow = the Valley sunset. "-shadow" colors are the darker 3D edges. */
 :root {
-  --radius: 0.25rem;
-  --ink: #111111;
-  --c-yellow: #ffd400;
-  --c-blue: #7cc4ff;
-  --c-orange: #ff8a4c;
-  --c-green: #3fdc95;
-  --c-pink: #ff9fd0;
-  --block: var(--c-yellow);
-  --bg: #fffbf0;
+  --radius: 1rem;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #f3eedf;
-  --border: #111111;
-  --input: #111111;
-  --text: #111111;
-  --muted: #45413a;
-  --primary: #1d3cf0;
-  --primary-hover: #142dc4;
-  --primary-shadow: #111111;
+  --surface-2: #f1f4f6;
+  --border: #e1e6e9;
+  --input: #8b969c;
+  --text: #1d2a31;
+  --muted: #536169;
+  --primary: #0a7a70;
+  --primary-hover: #0c8a7f;
+  --primary-shadow: #05544d;
   --on-primary: #ffffff;
-  --primary-soft: #dfe5ff;
-  --on-primary-soft: #14228a;
-  --accent: #b23a00;
-  --accent-soft: #ffe2cf;
-  --on-accent-soft: #5e1f00;
-  --sun: #ffd400;
-  --sun-shadow: #111111;
-  --on-sun: #111111;
-  --success: #12672e;
-  --success-soft: #d6f7e3;
-  --warning: #6e4600;
-  --warning-soft: #fff0bf;
+  --primary-soft: #d7f5f0;
+  --on-primary-soft: #064a44;
+  --accent: #b93f05;
+  --accent-soft: #ffe7cc;
+  --on-accent-soft: #6b2600;
+  --sun: #ffc93c;
+  --sun-shadow: #d99a00;
+  --on-sun: #3d2a00;
+  --success: #1b6e32;
+  --success-soft: #dcf7e3;
+  --warning: #7a4e00;
+  --warning-soft: #fff1c9;
   --danger: #b4231b;
-  --danger-shadow: #111111;
-  --danger-soft: #ffe0dc;
-  --focus: #1d3cf0;
+  --danger-shadow: #7f150f;
+  --danger-soft: #ffe1dd;
+  --focus: #1d4ed8;
   --font-body: "Atkinson Hyperlegible", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-heading: "Archivo Black", "Nunito", "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-heading: "Nunito", "Atkinson Hyperlegible", ui-rounded, system-ui, sans-serif;
   color-scheme: light;
 }
-html[data-tab="coach"] { --block: var(--c-blue); }
-html[data-tab="plan"] { --block: var(--c-orange); }
-html[data-tab="people"] { --block: var(--c-green); }
-html[data-tab="me"] { --block: var(--c-pink); }
 
 .dark {
-  --bg: #0e0e0e;
-  --surface: #191919;
-  --surface-2: #262626;
-  --border: #ececec;
-  --input: #ececec;
-  --text: #f6f6f6;
-  --muted: #c9c9c9;
-  --primary: #9db0ff;
-  --primary-hover: #b9c7ff;
-  --primary-shadow: #ececec;
-  --on-primary: #0b1450;
-  --primary-soft: #1d2552;
-  --on-primary-soft: #d3dbff;
+  --bg: #121d22;
+  --surface: #1a2a31;
+  --surface-2: #22353e;
+  --border: #33474f;
+  --input: #6f858f;
+  --text: #f1f7fa;
+  --muted: #a9bcc4;
+  --primary: #4fd8c9;
+  --primary-hover: #74e3d6;
+  --primary-shadow: #239e91;
+  --on-primary: #032c28;
+  --primary-soft: #10393a;
+  --on-primary-soft: #bdf3ec;
   --accent: #ffab78;
   --accent-soft: #432611;
   --on-accent-soft: #ffd9bf;
-  --sun-shadow: #ececec;
+  --sun: #ffd25c;
+  --sun-shadow: #c99300;
+  --on-sun: #2e2000;
   --success: #7ddc98;
   --success-soft: #153222;
   --warning: #f7cd61;
   --warning-soft: #352a0d;
   --danger: #ff958c;
-  --danger-shadow: #ececec;
+  --danger-shadow: #c8584f;
   --danger-soft: #3d1714;
-  --focus: #9db0ff;
+  --focus: #93b4ff;
   color-scheme: dark;
 }
 
@@ -278,15 +252,10 @@ html[data-tab="me"] { --block: var(--c-pink); }
   --color-destructive: var(--destructive);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  /* Sharp poster corners everywhere (rounded-full stays round for avatars and pills). */
-  --radius-sm: 2px;
-  --radius-md: 3px;
-  --radius-lg: 4px;
-  --radius-xl: 5px;
-  --radius-2xl: 6px;
-  --radius-3xl: 8px;
-  --color-ink: var(--ink);
-  --color-block: var(--block);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 /* Borders default to the theme border color (shadcn/ui convention). */
@@ -321,28 +290,12 @@ body {
 
 /* Headings use the rounded game-style font */
 h1,
-h2 {
-  font-family: var(--font-heading);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
-}
+h2,
 h3 {
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
-.dyslexia h1,
-.dyslexia h2 {
-  text-transform: none;
-}
-
-/* Tappable cards in a list take turns being yellow, blue, orange, green and pink. */
-[data-slot="linkcard"]:nth-child(5n + 1), li:nth-child(5n + 1) > [data-slot="linkcard"] { --tile: var(--c-yellow); }
-[data-slot="linkcard"]:nth-child(5n + 2), li:nth-child(5n + 2) > [data-slot="linkcard"] { --tile: var(--c-blue); }
-[data-slot="linkcard"]:nth-child(5n + 3), li:nth-child(5n + 3) > [data-slot="linkcard"] { --tile: var(--c-orange); }
-[data-slot="linkcard"]:nth-child(5n + 4), li:nth-child(5n + 4) > [data-slot="linkcard"] { --tile: var(--c-green); }
-[data-slot="linkcard"]:nth-child(5n + 5), li:nth-child(5n + 5) > [data-slot="linkcard"] { --tile: var(--c-pink); }
 
 /* Chunky "press down" effect for 3D buttons, chips and cards (game-like feel). */
 .press {
