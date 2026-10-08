@@ -65,7 +65,7 @@ npm run test:e2e    # browser tests: every page at phone + desktop size, light +
 
 1. Push this project to GitHub (it already is, if you're reading this there).
 2. Go to https://vercel.com, sign in with GitHub, click **Add New → Project**, and pick this repository.
-3. Under **Environment Variables**, add `ANTHROPIC_API_KEY` (optional) and `HASH_SALT` (any long random text).
+3. Under **Environment Variables**, add `HASH_SALT` (any long random text) and an AI key (optional): `ANTHROPIC_API_KEY` for everything, or the free `GROQ_API_KEY` for the Coach, plans and flashcards (search then stays on the sample list).
 4. Click **Deploy**. In about two minutes you get a public `https://...vercel.app` link that works on phones and can be installed as an app.
 
 **About the database on Vercel:** with no `DATABASE_URL`, the app uses a temporary SQLite file. Everything works, but shared data (staff posts, reviews, parent links) can reset when Vercel restarts the server. For a permanent database:

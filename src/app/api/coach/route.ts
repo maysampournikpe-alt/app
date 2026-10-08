@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type Anthropic from "@anthropic-ai/sdk";
 import { getAI, aiEnabled, MODELS, EFFORT, estimateCostCents, type UsageLike } from "@/lib/server/ai/client";
+import { groqEnabled, groqStream } from "@/lib/server/ai/groq";
 import { checkLimits, recordUsage } from "@/lib/server/ratelimit";
 import { coachSystemPrompt, studentContext } from "@/lib/server/coach/prompts";
 import { demoCoachReply } from "@/lib/server/coach/demo";
@@ -75,7 +76,7 @@ export async function POST(req: Request) {
   if (isBlockedRequest(lastUser)) return textStream(BLOCKED_REPLY[loc], { "x-rumbo-blocked": "1" });
 
   // 2. Demo mode (no key) or daily limit reached → scripted coach.
-  if (!aiEnabled()) return textStream(demoCoachReply(body.mode, body.messages, body.locale, body.opp), { "x-rumbo-demo": "1" });
+  if (!aiEnabled() && !groqEnabled()) return textStream(demoCoachReply(body.mode, body.messages, body.locale, body.opp), { "x-rumbo-demo": "1" });
   const limit = await checkLimits(req, "coach");
   if (!limit.ok) return textStream(demoCoachReply(body.mode, body.messages, body.locale, body.opp), { "x-rumbo-demo": "1", "x-rumbo-notice": limit.reason });
 
@@ -88,8 +89,30 @@ export async function POST(req: Request) {
   }));
   if (messages[0]?.role !== "user") messages.unshift({ role: "user", content: context || "Hi!" });
 
-  const ai = getAI()!;
   const enc = new TextEncoder();
+
+  // Free option: Groq (only when there is no Anthropic key). Same safety checks and limits as above.
+  if (!aiEnabled()) {
+    const groqMessages = [
+      { role: "system" as const, content: coachSystemPrompt(body.mode, body.locale) },
+      ...messages.map((m) => ({ role: m.role, content: String(m.content) })),
+    ];
+    const gStream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const piece of groqStream(groqMessages)) controller.enqueue(enc.encode(piece));
+          await recordUsage(req, "coach", { inputTokens: 0, outputTokens: 0, searches: 0, costCents: 0 }).catch(() => {});
+        } catch (e) {
+          console.error("coach Groq error", e);
+          controller.enqueue(enc.encode(loc === "es" ? "\n\n(Hubo un problema con la IA. Intenta de nuevo.)" : "\n\n(The AI had a problem. Please try again.)"));
+        }
+        controller.close();
+      },
+    });
+    return new Response(gStream, { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
+  }
+
+  const ai = getAI()!;
   const stream = new ReadableStream({
     async start(controller) {
       try {

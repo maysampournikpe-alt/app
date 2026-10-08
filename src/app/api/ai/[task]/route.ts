@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { getAI, aiEnabled, MODELS, EFFORT, estimateCostCents, type UsageLike } from "@/lib/server/ai/client";
+import { groqEnabled, groqComplete } from "@/lib/server/ai/groq";
+import { z as zod } from "zod";
 import { checkLimits, recordUsage } from "@/lib/server/ratelimit";
 import { TASKS } from "@/lib/server/tasks";
 import { detectCrisis, isBlockedRequest } from "@/lib/safety/crisis";
@@ -43,9 +45,30 @@ export async function POST(req: Request, ctx: { params: Promise<{ task: string }
   if (crisis) return NextResponse.json({ crisis });
   if (isBlockedRequest(safetyText)) return NextResponse.json({ blocked: true });
 
-  if (!aiEnabled()) return NextResponse.json({ output: task.demo(input, c), demo: true });
+  if (!aiEnabled() && !groqEnabled()) return NextResponse.json({ output: task.demo(input, c), demo: true });
   const limit = await checkLimits(req, "task");
   if (!limit.ok) return NextResponse.json({ output: task.demo(input, c), demo: true, notice: limit.reason });
+
+  // Free option: Groq (only when there is no Anthropic key). The answer must match the same
+  // JSON shape; if it doesn't, the student gets the built-in demo answer instead.
+  if (!aiEnabled()) {
+    try {
+      const schema = JSON.stringify(zod.toJSONSchema(task.output));
+      const text = await groqComplete(
+        [
+          { role: "system", content: `${task.system}\n\nReply with ONLY one JSON object that matches this JSON Schema:\n${schema}` },
+          { role: "user", content: task.prompt(input, c) },
+        ],
+        { json: true, maxTokens: task.maxTokens ?? 6000 },
+      );
+      await recordUsage(req, "task", { inputTokens: 0, outputTokens: 0, searches: 0, costCents: 0 });
+      const checked = task.output.safeParse(JSON.parse(text));
+      if (checked.success) return NextResponse.json({ output: checked.data, demo: false });
+    } catch (e) {
+      console.error(`task ${name} Groq error`, e);
+    }
+    return NextResponse.json({ output: task.demo(input, c), demo: true, notice: "error" });
+  }
 
   try {
     const ai = getAI()!;
