@@ -138,7 +138,7 @@ export default function FindPage() {
           {!response.crisis && !response.blocked && (
             <>
               {notice && (
-                <Alert tone={notice === "demo" ? "info" : "warning"} className="mb-3">
+                <Alert tone={notice === "demo" || notice === "sample" ? "info" : "warning"} className="mb-3">
                   {t(`find.${notice}Notice`)}
                 </Alert>
               )}

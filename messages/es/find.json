@@ -87,5 +87,6 @@
   "mapView": "Mapa",
   "listView": "Lista",
   "online_only_mode": "El modo solo en línea está activado",
-  "aiMessage": "Rumbo dice"
+  "aiMessage": "Rumbo dice",
+  "sampleNotice": "La búsqueda muestra programas reales de nuestra lista revisada a mano. Siempre confirma las fechas en el sitio oficial."
 }

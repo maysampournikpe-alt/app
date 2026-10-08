@@ -6,6 +6,7 @@ import { scamCheck } from "@/lib/safety/scam";
 import { filterByAge } from "@/lib/safety/age";
 import { guessCategory } from "@/lib/categories";
 import { aiEnabled, estimateCostCents } from "../ai/client";
+import { groqEnabled } from "../ai/groq";
 import { checkLimits, recordUsage } from "../ratelimit";
 import { cacheKey, getCached, setCached } from "../cache";
 import { resolveLocation, distanceTo, type ResolvedLocation } from "../geo";
@@ -126,7 +127,8 @@ export async function runFinder(httpReq: Request, input: FinderRequest): Promise
     return { results: finish([...staff, ...d.results], input, where), suggestions: d.suggestions, demo: true, notice, areaLabel, center };
   };
 
-  if (!aiEnabled() || input.demoOnly) return demo("demo");
+  // With only the free Groq key, the AI is on (Coach, plans) but search still uses the checked sample list.
+  if (!aiEnabled() || input.demoOnly) return demo(groqEnabled() && !input.demoOnly ? "sample" : "demo");
 
   const gradeBand = input.profile.grade ? (input.profile.grade <= 8 ? "ms" : "hs") : "any";
   const key = cacheKey([input.query.toLowerCase().replace(/\s+/g, " "), where?.zip3 ?? where?.label ?? "none", gradeBand, input.locale, input.filters ?? {}, !!input.lowData]);

@@ -81,7 +81,7 @@ export interface FinderResponse {
   /** listings removed because their link was not a real search result */
   removedCount?: number;
   /** "limit" when the daily limit was reached */
-  notice?: "limit" | "budget" | "error" | "demo";
+  notice?: "limit" | "budget" | "error" | "demo" | "sample";
   areaLabel?: string;
   /** Approximate center of the search area (for the map). */
   center?: { lat: number; lng: number };

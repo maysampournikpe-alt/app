@@ -87,5 +87,6 @@
   "mapView": "Map",
   "listView": "List",
   "online_only_mode": "Online-only mode is on",
-  "aiMessage": "Rumbo says"
+  "aiMessage": "Rumbo says",
+  "sampleNotice": "Search shows real programs from our hand-checked list. Always check dates on the official site."
 }
