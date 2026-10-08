@@ -37,13 +37,13 @@ export function ShareLinkSheet({ url, message, onClose }: { url: string | null; 
               <button
                 type="button"
                 onClick={() => void navigator.share({ title: "Rumbo", text: message, url }).catch(() => {})}
-                className="inline-flex min-h-11 items-center gap-2 rounded-md border border-input bg-card px-4 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2"
+                className="inline-flex min-h-11 items-center gap-2 press rounded-2xl border-2 border-b-4 border-border bg-surface px-4 font-display text-sm font-extrabold hover:bg-surface-2 active:border-b-2"
               >
                 <Share2 aria-hidden="true" className="size-4" />
                 {t("family.shareLink")}
               </button>
             )}
-            <a href={`sms:?&body=${encodeURIComponent(`${message} ${url}`)}`} className="inline-flex min-h-11 items-center gap-2 rounded-md border border-input bg-card px-4 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2">
+            <a href={`sms:?&body=${encodeURIComponent(`${message} ${url}`)}`} className="inline-flex min-h-11 items-center gap-2 press rounded-2xl border-2 border-b-4 border-border bg-surface px-4 font-display text-sm font-extrabold hover:bg-surface-2 active:border-b-2">
               <MessageSquare aria-hidden="true" className="size-4" />
               {t("family.textLink")}
             </a>

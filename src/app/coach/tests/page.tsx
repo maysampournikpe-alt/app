@@ -102,7 +102,7 @@ export default function PracticeTestsPage() {
               <SectionTitle>{t("skills.testHistory")}</SectionTitle>
               <ul className="space-y-2">
                 {scores.slice(0, 10).map((s, i) => (
-                  <li key={i} className="flex items-center justify-between rounded-xl border border-border bg-surface p-3">
+                  <li key={i} className="flex items-center justify-between rounded-2xl border-2 border-b-4 border-border bg-surface p-3">
                     <span className="font-bold">{s.test}</span>
                     <span>
                       {s.score}/{s.total} <span className="text-sm text-muted">· {formatRelative(s.at, locale)}</span>

@@ -52,7 +52,7 @@ export function ChatView({
         {/* Coach introduction for this mode */}
         <div className="flex items-start gap-2">
           <Logo className="size-9 shrink-0" />
-          <div className="rounded-xl rounded-tl-sm bg-surface p-3 shadow-sm">
+          <div className="rounded-xl rounded-tl-sm bg-surface p-3">
             <p>{intro}</p>
           </div>
         </div>
@@ -92,7 +92,7 @@ export function ChatView({
         <div ref={endRef} />
       </div>
 
-      <form onSubmit={submit} className="sticky bottom-[calc(4.5rem+env(safe-area-inset-bottom))] mt-4 flex items-end gap-2 rounded-xl border border-input bg-card p-1.5 shadow-lg focus-within:border-primary lg:bottom-4">
+      <form onSubmit={submit} className="sticky bottom-[calc(4.5rem+env(safe-area-inset-bottom))] mt-4 flex items-end gap-2 rounded-2xl border-2 border-b-4 border-input bg-surface p-1.5 shadow-lg focus-within:border-primary lg:bottom-4">
         <label htmlFor="coach-input" className="sr-only">
           {t("coach.inputLabel")}
         </label>

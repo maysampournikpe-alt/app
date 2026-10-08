@@ -1,40 +1,31 @@
 import Link from "next/link";
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
-import { buttonVariants } from "@/components/shadcn/button";
 import { cn } from "@/lib/utils";
 
-// Rumbo's buttons, built on the shadcn/ui button. Same look as shadcn, but:
-//  - at least 44px tall (easy to tap for younger students),
-//  - text can wrap onto two lines (long Spanish labels on small phones),
-//  - extra "soft" and "accent" styles for Rumbo's brand colors.
+// Rumbo's buttons: chunky "3D" game-style buttons with a darker bottom edge that
+// press down when tapped. At least 44px tall, and text can wrap (long Spanish labels).
 
 type Variant = "primary" | "secondary" | "ghost" | "danger" | "soft" | "accent";
 type Size = "sm" | "md" | "lg";
 
-const variantMap: Record<Variant, Parameters<typeof buttonVariants>[0]> = {
-  primary: { variant: "default" },
-  secondary: { variant: "outline" },
-  ghost: { variant: "ghost" },
-  danger: { variant: "destructive" },
-  soft: { variant: "secondary" },
-  accent: { variant: "secondary" },
-};
-const extra: Record<Variant, string> = {
-  primary: "hover:bg-primary-hover",
-  secondary: "border-input bg-card dark:bg-card",
-  ghost: "",
-  danger: "",
-  soft: "bg-primary-soft text-on-primary-soft hover:bg-primary-soft/75",
-  accent: "bg-accent-soft text-on-accent-soft hover:bg-accent-soft/75",
+const base =
+  "press inline-flex items-center justify-center gap-2 rounded-2xl font-display font-extrabold text-center whitespace-normal select-none outline-none disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-[3px] focus-visible:ring-ring/50 [&_svg]:pointer-events-none [&_svg]:shrink-0";
+const variants: Record<Variant, string> = {
+  primary: "bg-primary text-on-primary border-b-4 border-primary-shadow hover:brightness-110 active:border-b-2",
+  secondary: "bg-surface text-text border-2 border-b-4 border-border hover:bg-surface-2 active:border-b-2",
+  ghost: "text-text hover:bg-surface-2",
+  danger: "bg-danger text-white border-b-4 border-danger-shadow hover:brightness-110 active:border-b-2 dark:text-black",
+  soft: "bg-primary-soft text-on-primary-soft border-2 border-b-4 border-primary/25 hover:brightness-105 active:border-b-2",
+  accent: "bg-sun text-on-sun border-b-4 border-sun-shadow hover:brightness-105 active:border-b-2",
 };
 const sizes: Record<Size, string> = {
-  sm: "h-auto min-h-9 px-3 py-1.5 text-sm",
-  md: "h-auto min-h-11 px-4 py-2 text-sm",
-  lg: "h-auto min-h-12 px-6 py-2.5 text-base",
+  sm: "min-h-9 px-3 py-1 text-sm",
+  md: "min-h-12 px-5 py-2 text-base",
+  lg: "min-h-14 px-7 py-2.5 text-lg",
 };
 
 export function buttonClass(variant: Variant = "primary", size: Size = "md", full?: boolean, className?: string) {
-  return cn(buttonVariants(variantMap[variant]), "whitespace-normal text-center font-semibold select-none", extra[variant], sizes[size], full && "w-full min-w-0 shrink", className);
+  return cn(base, variants[variant], sizes[size], full ? "w-full min-w-0" : "shrink-0", className);
 }
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -44,7 +35,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   full?: boolean;
 }
 
-/** Our standard button (shadcn/ui style). */
+/** Our standard button. */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { variant = "primary", size = "md", icon, full, className, children, type = "button", ...rest },
   ref,
@@ -95,7 +86,7 @@ export function ButtonLink({
   );
 }
 
-/** Icon-only button (shadcn ghost icon button). Always needs a label for screen readers. */
+/** Icon-only button. Always needs a label for screen readers. */
 export function IconButton({
   label,
   children,
@@ -103,7 +94,7 @@ export function IconButton({
   ...rest
 }: ButtonHTMLAttributes<HTMLButtonElement> & { label: string }) {
   return (
-    <button type="button" aria-label={label} title={label} className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "size-11 rounded-full", className)} {...rest}>
+    <button type="button" aria-label={label} title={label} className={cn("press inline-flex size-11 shrink-0 items-center justify-center rounded-2xl text-text outline-none hover:bg-surface-2 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50", className)} {...rest}>
       {children}
     </button>
   );

@@ -161,7 +161,7 @@ export default function WellbeingPage() {
       <SectionTitle>{t("wellbeing.tips")}</SectionTitle>
       <ul className="space-y-2">
         {tips.map((n) => (
-          <li key={n} className="rounded-xl border border-border bg-surface p-3">
+          <li key={n} className="rounded-2xl border-2 border-b-4 border-border bg-surface p-3">
             💡 {t(`wellbeing.tip${n}`)}
           </li>
         ))}

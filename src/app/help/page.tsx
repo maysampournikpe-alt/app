@@ -59,7 +59,7 @@ export default function HelpPage() {
                   {h.text && (
                     <a
                       href={`sms:${h.text.number.replace(/[^\d]/g, "")}${word ? `?&body=${encodeURIComponent(word)}` : ""}`}
-                      className="inline-flex min-h-11 items-center gap-2 rounded-md border border-input bg-card px-4 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2"
+                      className="inline-flex min-h-11 items-center gap-2 press rounded-2xl border-2 border-b-4 border-border bg-surface px-4 font-display text-sm font-extrabold hover:bg-surface-2 active:border-b-2"
                     >
                       <MessageSquare aria-hidden="true" className="size-4" />
                       {word ? t("help.text", { word, n: h.text.number }) : t("help.textOnly", { n: h.text.number })}

@@ -232,7 +232,7 @@ export default function SpeakingPage() {
           <ul className="space-y-2">
             {[1, 2, 3, 4].map((n) => (
               <li key={n}>
-                <label className="flex items-start gap-3 rounded-xl border border-border bg-surface p-3">
+                <label className="flex items-start gap-3 rounded-2xl border-2 border-b-4 border-border bg-surface p-3">
                   <input type="checkbox" className="mt-1 size-5 accent-[var(--primary)]" />
                   <span>{t(`skills.speakCheck${n}`)}</span>
                 </label>

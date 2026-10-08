@@ -253,7 +253,7 @@ function PostTab({ code, staffName, locale }: { code: string; staffName: string;
       {posts.length ? (
         <ul className="space-y-2">
           {posts.map((p) => (
-            <li key={p.id} className="flex items-center gap-2 rounded-xl border border-border bg-surface p-3">
+            <li key={p.id} className="flex items-center gap-2 rounded-2xl border-2 border-b-4 border-border bg-surface p-3">
               <span className="min-w-0 flex-1">
                 <span className="block font-bold">{p.opp.title}</span>
                 <span className="text-xs text-muted">
@@ -433,7 +433,7 @@ function ClubsTab({ code }: { code: string }) {
       <SectionTitle>{t("staff.clubsTitle")}</SectionTitle>
       <ul className="space-y-2">
         {clubs.map((c) => (
-          <li key={c.id} className="flex items-start gap-2 rounded-xl border border-border bg-surface p-3">
+          <li key={c.id} className="flex items-start gap-2 rounded-2xl border-2 border-b-4 border-border bg-surface p-3">
             <div className="min-w-0 flex-1">
               <p className="font-bold">{c.name}</p>
               <p className="text-sm">{c.description}</p>

@@ -53,13 +53,13 @@ export default function FindPage() {
       {/* Friendly AI greeting */}
       <div className="mb-4 flex items-start gap-3">
         <Logo className="size-11 shrink-0" />
-        <div className="rounded-xl rounded-tl-sm bg-surface p-4 shadow-sm">
+        <div className="rounded-xl rounded-tl-sm bg-surface p-4">
           <h1 className="text-xl font-bold sm:text-2xl">{nickname ? t("find.greetingName", { name: nickname }) : t("find.greeting")}</h1>
           <p className="mt-1 text-sm text-muted">{t("find.subtitle")}</p>
         </div>
       </div>
 
-      <form role="search" onSubmit={submit} className="flex items-center gap-2 rounded-xl border border-input bg-card p-1.5 shadow-xs focus-within:border-primary">
+      <form role="search" onSubmit={submit} className="flex items-center gap-2 rounded-2xl border-2 border-b-4 border-input bg-surface p-1.5 focus-within:border-primary">
         <label htmlFor="finder-q" className="sr-only">
           {t("find.searchLabel")}
         </label>

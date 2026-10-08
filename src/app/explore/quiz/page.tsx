@@ -45,7 +45,7 @@ export default function QuizPage() {
           <ol className="space-y-3">
             {QUIZ_QUESTIONS.map((q, i) => (
               <li key={i}>
-                <fieldset className="rounded-xl border border-border bg-surface p-4">
+                <fieldset className="rounded-2xl border-2 border-b-4 border-border bg-surface p-4">
                   <legend className="sr-only">{L(q.q)}</legend>
                   <p aria-hidden="true" className="mb-2 font-bold">
                     {i + 1}. {L(q.q)}

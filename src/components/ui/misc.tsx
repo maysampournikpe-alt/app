@@ -5,13 +5,13 @@ import { AlertTriangle, Info, CheckCircle2, ShieldAlert, Loader2 } from "lucide-
 import { Progress as ProgressPrimitive, ToggleGroup as ToggleGroupPrimitive } from "radix-ui";
 import { cn } from "@/lib/utils";
 
-// Page building blocks in the shadcn/ui style.
+// Page building blocks.
 
 export function PageHeader({ title, subtitle, action, icon }: { title: ReactNode; subtitle?: ReactNode; action?: ReactNode; icon?: ReactNode }) {
   return (
     <div className="mb-5 flex items-start justify-between gap-3">
       <div className="min-w-0">
-        <h1 className="flex items-center gap-2 text-2xl font-bold tracking-tight sm:text-3xl">
+        <h1 className="flex items-center gap-2 text-3xl sm:text-4xl">
           {icon && <span aria-hidden="true">{icon}</span>}
           {title}
         </h1>
@@ -25,7 +25,7 @@ export function PageHeader({ title, subtitle, action, icon }: { title: ReactNode
 export function SectionTitle({ children, action, id }: { children: ReactNode; action?: ReactNode; id?: string }) {
   return (
     <div className="mb-3 mt-7 flex items-center justify-between gap-3">
-      <h2 id={id} className="text-lg font-semibold tracking-tight">
+      <h2 id={id} className="text-xl">
         {children}
       </h2>
       {action}
@@ -38,21 +38,24 @@ export function ProgressBar({ value, label, className, tone = "primary" }: { val
   const pct = Math.round(Math.max(0, Math.min(1, value)) * 100);
   const color = tone === "accent" ? "bg-accent" : tone === "success" ? "bg-success" : "bg-primary";
   return (
-    <ProgressPrimitive.Root data-slot="progress" value={pct} aria-label={label} className={cn("relative h-2.5 w-full overflow-hidden rounded-full bg-surface-2", className)}>
-      <ProgressPrimitive.Indicator className={cn("h-full w-full flex-1 rounded-full transition-all", color)} style={{ transform: `translateX(-${100 - pct}%)` }} />
+    <ProgressPrimitive.Root data-slot="progress" value={pct} aria-label={label} className={cn("relative h-4 w-full overflow-hidden rounded-full bg-surface-2", className)}>
+      <ProgressPrimitive.Indicator className={cn("relative h-full w-full flex-1 rounded-full transition-all", color)} style={{ transform: `translateX(-${100 - pct}%)` }}>
+        {/* shine stripe, like a game progress bar */}
+        <span aria-hidden="true" className="absolute inset-x-2 top-1 h-1 rounded-full bg-white/35" />
+      </ProgressPrimitive.Indicator>
     </ProgressPrimitive.Root>
   );
 }
 
 export function EmptyState({ icon, title, body, action }: { icon?: ReactNode; title: ReactNode; body?: ReactNode; action?: ReactNode }) {
   return (
-    <div data-slot="empty" className="flex flex-col items-center rounded-xl border border-dashed p-6 text-center">
+    <div data-slot="empty" className="flex flex-col items-center rounded-2xl border-2 border-dashed p-6 text-center">
       {icon && (
         <div aria-hidden="true" className="mb-2 text-4xl">
           {icon}
         </div>
       )}
-      <p className="font-semibold">{title}</p>
+      <p className="font-display text-lg font-extrabold">{title}</p>
       {body && <p className="mt-1 max-w-sm text-sm text-muted-foreground">{body}</p>}
       {action && <div className="mt-4 flex justify-center">{action}</div>}
     </div>
@@ -84,10 +87,10 @@ export function Alert({ tone = "info", title, children, className, role }: { ton
     <div
       data-slot="alert"
       role={role}
-      className={cn("relative grid w-full grid-cols-[calc(var(--spacing)*5)_1fr] items-start gap-x-3 gap-y-0.5 rounded-lg border px-4 py-3 text-sm", alertStyles[tone], className)}
+      className={cn("relative grid w-full grid-cols-[calc(var(--spacing)*5)_1fr] items-start gap-x-3 gap-y-0.5 rounded-2xl border-2 px-4 py-3 text-sm", alertStyles[tone], className)}
     >
       <Icon aria-hidden="true" className="mt-0.5 size-5" />
-      {title && <p className="col-start-2 font-semibold">{title}</p>}
+      {title && <p className="col-start-2 font-display text-base font-extrabold">{title}</p>}
       {children && <div className="col-start-2 min-w-0 [&_p]:leading-relaxed">{children}</div>}
     </div>
   );
@@ -112,16 +115,16 @@ export function Segmented<T extends string>({
       onValueChange={(v) => v && onChange(v as T)}
       aria-label={label}
       data-slot="tabs-list"
-      className="flex gap-1 overflow-x-auto rounded-lg bg-surface-2 p-1 no-scrollbar"
+      className="flex gap-1 overflow-x-auto rounded-2xl border-2 bg-surface-2 p-1 no-scrollbar"
     >
       {options.map((o) => (
         <ToggleGroupPrimitive.Item
           key={o.value}
           value={o.value}
           className={cn(
-            "min-h-10 flex-1 shrink-0 rounded-md px-3 text-sm font-semibold whitespace-nowrap text-muted-foreground transition-[color,box-shadow] outline-none hover:text-foreground",
+            "min-h-10 flex-1 shrink-0 rounded-xl px-3 font-display text-sm font-extrabold whitespace-nowrap text-muted-foreground transition-[color,box-shadow] outline-none hover:text-foreground",
             "focus-visible:ring-[3px] focus-visible:ring-ring/50",
-            "data-[state=on]:bg-card data-[state=on]:text-foreground data-[state=on]:shadow-sm",
+            "data-[state=on]:bg-card data-[state=on]:text-primary data-[state=on]:shadow-[0_3px_0_var(--border)]",
           )}
         >
           {o.label}

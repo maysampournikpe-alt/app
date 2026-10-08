@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
-import { badgeVariants } from "@/components/shadcn/badge";
 import { cn } from "@/lib/utils";
 
-// shadcn/ui badge with Rumbo's soft brand colors.
+// Small labels in Rumbo's soft brand colors.
 type Tone = "neutral" | "primary" | "accent" | "success" | "warning" | "danger";
 const tones: Record<Tone, string> = {
   neutral: "bg-secondary text-secondary-foreground",
@@ -15,7 +14,7 @@ const tones: Record<Tone, string> = {
 
 export function Badge({ tone = "neutral", children, className, icon }: { tone?: Tone; children: ReactNode; className?: string; icon?: ReactNode }) {
   return (
-    <span data-slot="badge" className={cn(badgeVariants({ variant: "secondary" }), "font-semibold whitespace-normal", tones[tone], className)}>
+    <span data-slot="badge" className={cn("inline-flex w-fit shrink-0 items-center gap-1 rounded-xl px-2.5 py-0.5 font-display text-xs font-extrabold whitespace-normal [&>svg]:size-3.5", tones[tone], className)}>
       {icon}
       {children}
     </span>

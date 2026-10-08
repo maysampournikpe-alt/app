@@ -16,7 +16,7 @@ export function ShareListButton() {
   const [busy, setBusy] = useState(false);
   if (!saved.length) return null;
   return (
-    <div className="mb-4 rounded-xl bg-surface p-4 shadow-sm">
+    <div className="mb-4 rounded-xl bg-surface p-4">
       <Button
         variant="soft"
         disabled={busy}
