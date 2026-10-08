@@ -33,7 +33,7 @@ export default function ProgressPage() {
       <PageHeader title={t("progress.title")} subtitle={t("progress.subtitle")} />
       <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {tiles.map(([k, n, e]) => (
-          <li key={k} className="rounded-2xl border-2 border-b-4 border-border bg-surface p-4">
+          <li key={k} className="rounded-xl border border-border bg-surface p-4 shadow-sm">
             <p aria-hidden="true" className="text-2xl">
               {e}
             </p>
@@ -69,7 +69,7 @@ export default function ProgressPage() {
             const pr = planProgress(p);
             return (
               <li key={p.id}>
-                <Link href={`/plan/view?id=${p.id}`} className="block rounded-2xl border-2 border-b-4 border-border bg-surface p-3 hover:border-primary">
+                <Link href={`/plan/view?id=${p.id}`} className="block rounded-xl border border-border bg-surface p-3 hover:border-primary">
                   <span className="font-bold">{p.goal}</span>
                   <span className="ml-2 text-sm text-muted">{t("plan.stepsDone", { done: pr.done, total: pr.total })}</span>
                   <ProgressBar value={pr.pct} label={p.goal} className="mt-2" />

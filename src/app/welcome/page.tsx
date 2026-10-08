@@ -323,7 +323,7 @@ export default function WelcomePage() {
             ].map(([Icon, key]) => {
               const I = Icon as typeof Lock;
               return (
-                <li key={key as string} className="flex items-start gap-3 rounded-xl bg-surface p-4">
+                <li key={key as string} className="flex items-start gap-3 rounded-xl bg-surface p-4 shadow-sm">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-on-primary-soft">
                     <I aria-hidden="true" className="size-5" />
                   </span>

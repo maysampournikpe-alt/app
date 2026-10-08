@@ -2,10 +2,10 @@ import { forwardRef, useId, type InputHTMLAttributes, type ReactNode, type Selec
 import { Label } from "@/components/shadcn/label";
 import { cn } from "@/lib/utils";
 
-// Form fields: big rounded boxes. Inputs are 44px tall (easy to tap) and use 16px text,
+// Form fields in the shadcn/ui style. Inputs are 44px tall (easy to tap) and use 16px text,
 // which also stops iPhones from zooming in when you tap a box.
 const inputCls =
-  "w-full min-w-0 rounded-2xl border-2 border-input bg-surface px-4 py-2 text-base text-foreground transition-[color,box-shadow,border-color] outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-primary/25 aria-invalid:border-destructive";
+  "w-full min-w-0 rounded-md border border-input bg-card px-3 py-2 text-base text-foreground shadow-xs transition-[color,box-shadow] outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20";
 
 /** A labeled form field. The label is always connected to the input for screen readers. */
 export function Field({
@@ -28,7 +28,7 @@ export function Field({
   const helpId = help ? `${fid}-help` : undefined;
   return (
     <div data-slot="field" className={cn("grid gap-2", className)}>
-      <Label htmlFor={fid} className={cn("font-display text-base leading-snug font-extrabold", hideLabel && "sr-only")}>
+      <Label htmlFor={fid} className={cn("text-sm leading-snug font-semibold", hideLabel && "sr-only")}>
         {label}
       </Label>
       {children(fid, helpId)}
@@ -42,7 +42,7 @@ export function Field({
 }
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function Input({ className, ...rest }, ref) {
-  return <input ref={ref} data-slot="input" className={cn(inputCls, "min-h-12", className)} {...rest} />;
+  return <input ref={ref} data-slot="input" className={cn(inputCls, "min-h-11", className)} {...rest} />;
 });
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(function Textarea(
@@ -58,7 +58,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSel
   ref,
 ) {
   return (
-    <select ref={ref} data-slot="native-select" className={cn(inputCls, "select-chevron min-h-12 pr-10", className)} {...rest}>
+    <select ref={ref} data-slot="native-select" className={cn(inputCls, "select-chevron min-h-11 pr-9", className)} {...rest}>
       {children}
     </select>
   );

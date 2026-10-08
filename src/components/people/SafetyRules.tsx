@@ -7,7 +7,7 @@ import { useT } from "@/i18n/useT";
 export function SafetyRules() {
   const { t } = useT();
   return (
-    <details className="rounded-2xl border-2 border-b-4 border-border bg-surface p-4">
+    <details className="rounded-xl border border-border bg-surface p-4">
       <summary className="flex min-h-11 cursor-pointer items-center gap-2 font-bold">
         <ShieldCheck aria-hidden="true" className="size-5 text-success" />
         {t("people.rulesTitle")}

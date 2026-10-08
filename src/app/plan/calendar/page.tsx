@@ -62,7 +62,7 @@ export default function CalendarPage() {
   const EventRow = ({ e }: { e: CalEvent }) => {
     const d = daysUntil(e.date);
     return (
-      <li className="rounded-2xl border-2 border-b-4 border-border bg-surface p-3">
+      <li className="rounded-xl border border-border bg-surface p-3">
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone={e.kind === "deadline" ? "accent" : "primary"}>{e.kind === "deadline" ? t("calendar.deadline") : t("calendar.event")}</Badge>
           <span className="text-sm font-bold">{formatDate(e.date, dateLocale, { weekday: "short", month: "short", day: "numeric" })}</span>

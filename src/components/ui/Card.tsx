@@ -3,10 +3,11 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Chunky game-style cards: thick border with a deeper bottom edge.
+// Cards in the shadcn/ui style (white card, thin border, small shadow).
+// For cards with a header/title/content layout, use the parts in "@/components/shadcn/card".
 
 export function Card({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
-  return <div data-slot="card" className={cn("rounded-2xl border-2 border-b-4 bg-card p-4 text-card-foreground", className)} {...rest} />;
+  return <div data-slot="card" className={cn("rounded-xl border bg-card p-4 text-card-foreground shadow-sm", className)} {...rest} />;
 }
 
 /** A tappable card that links somewhere (used in hubs and lists). */
@@ -30,17 +31,17 @@ export function LinkCard({
       href={href}
       data-slot="card"
       className={cn(
-        "press group flex items-center gap-3 rounded-2xl border-2 border-b-4 bg-card p-4 text-card-foreground hover:bg-surface-2 active:border-b-2",
+        "group flex items-center gap-3 rounded-xl border bg-card p-4 text-card-foreground shadow-sm transition-colors hover:bg-surface-2/60",
         className,
       )}
     >
       {icon && (
-        <span aria-hidden="true" className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-xl text-on-primary-soft">
+        <span aria-hidden="true" className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-xl text-on-primary-soft">
           {icon}
         </span>
       )}
       <span className="min-w-0 flex-1">
-        <span className="flex items-center gap-2 font-display text-base font-extrabold">
+        <span className="flex items-center gap-2 font-semibold">
           {title}
           {badge}
         </span>

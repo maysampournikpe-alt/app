@@ -22,11 +22,11 @@ export function Header({ minimal }: { minimal?: boolean }) {
   const unread = notifications.filter((n) => !n.read).length;
 
   return (
-    <header className="no-print sticky top-0 z-40 border-b-2 bg-background">
+    <header className="no-print sticky top-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex h-16 max-w-5xl items-center gap-2 px-4 lg:pl-60">
         <Link href="/" aria-label={t("nav.home")} className="mr-auto flex items-center gap-2 rounded-lg">
           <Logo className="size-9" />
-          <span className="font-display text-2xl font-black tracking-tight text-primary">{t("common.appName")}</span>
+          <span className="text-xl font-bold tracking-tight">{t("common.appName")}</span>
         </Link>
         <LanguageToggle />
         {!minimal && (
@@ -69,7 +69,7 @@ export function Header({ minimal }: { minimal?: boolean }) {
           <>
             <ul className="space-y-2">
               {notifications.map((n) => (
-                <li key={n.id} className="rounded-2xl border-2 border-b-4 p-3">
+                <li key={n.id} className="rounded-lg border p-3">
                   {n.href ? (
                     <Link href={n.href} onClick={() => setBellOpen(false)} className="font-bold underline-offset-4 hover:underline">
                       {!n.read && <span className="mr-1 inline-block size-2 rounded-full bg-accent align-middle" aria-hidden="true" />}

@@ -20,7 +20,7 @@ export function OpportunityCard({ opp, onOpen, compact }: { opp: Opportunity; on
   const titleId = `opp-${opp.id}-title`;
 
   return (
-    <article aria-labelledby={titleId} className={cn("rounded-2xl border-2 border-b-4 border-border bg-surface p-4", warnings.length ? "border-danger/50" : "border-border")}>
+    <article aria-labelledby={titleId} className={cn("rounded-xl border bg-surface p-4 shadow-sm", warnings.length ? "border-danger/50" : "border-border")}>
       <div className="mb-2 flex flex-wrap items-center gap-1.5">
         <Badge tone="primary">
           <span aria-hidden="true">{CATEGORY_EMOJI[opp.category]}</span>
@@ -115,7 +115,7 @@ export function OpportunityCard({ opp, onOpen, compact }: { opp: Opportunity; on
           {isSaved ? t("opp.saved") : t("opp.save")}
           <span className="sr-only">: {opp.title}</span>
         </button>
-        <button type="button" onClick={() => onOpen(opp)} className="inline-flex min-h-11 items-center press rounded-2xl border-2 border-b-4 border-border bg-surface px-4 font-display text-sm font-extrabold hover:bg-surface-2 active:border-b-2">
+        <button type="button" onClick={() => onOpen(opp)} className="inline-flex min-h-11 items-center rounded-md border border-input bg-card px-4 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2">
           {t("opp.details")}
           <span className="sr-only">: {opp.title}</span>
         </button>

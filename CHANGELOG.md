@@ -2,12 +2,6 @@
 
 What was built in each work session. Newest at the top.
 
-## Session 6 — Thu Oct 8, 2026 — Playful game-like look
-
-- New design inspired by learning games: chunky "3D" buttons, chips and cards with a thicker bottom edge that press down when tapped, bright teal and sunshine-yellow colors, and the rounded Nunito font for headings and buttons (self-hosted, with Vietnamese letters).
-- Thick game-style progress bars with a shine stripe, bigger rounded text boxes, and a bottom tab bar with bold labels and a highlighted active icon.
-- Body text keeps the easy-to-read Atkinson Hyperlegible font; the dyslexia option switches headings too. All contrast and accessibility checks still pass.
-
 ## Session 5 — Wed Oct 7, 2026 — New look with shadcn/ui
 
 - The whole app now uses **shadcn/ui** components (https://github.com/shadcn-ui/ui): buttons, cards, badges, inputs, switches, toggle chips, tabs, alerts, progress bars and pop-up sheets. The shadcn source files live in `src/components/shadcn/` (and `components.json` lets the shadcn CLI add more later).

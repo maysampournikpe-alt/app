@@ -112,7 +112,7 @@ export default function PackingPage() {
         <ul className="space-y-2">
           {lists.map((l) => (
             <li key={l.id}>
-              <button type="button" aria-pressed={l.id === openId} onClick={() => setOpenId(l.id)} className={cn("flex w-full items-center justify-between rounded-2xl border-2 border-b-4 border-border bg-surface p-3 text-left", l.id === openId ? "border-primary" : "border-border")}>
+              <button type="button" aria-pressed={l.id === openId} onClick={() => setOpenId(l.id)} className={cn("flex w-full items-center justify-between rounded-xl border bg-surface p-3 text-left", l.id === openId ? "border-primary" : "border-border")}>
                 <span className="font-bold">{l.title}</span>
                 <span className="text-sm text-muted">{t("life.packingDone", { a: l.items.filter((i) => i.done).length, b: l.items.length })}</span>
               </button>

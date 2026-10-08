@@ -77,7 +77,7 @@ export default function SavedPage() {
                   {s.parentDecision === "approved" && <Badge tone="success" icon={<CheckCircle2 aria-hidden="true" className="size-3.5" />}>{t("me.parentApproved")}</Badge>}
                   {s.parentDecision === "declined" && <Badge tone="danger" icon={<XCircle aria-hidden="true" className="size-3.5" />}>{t("me.parentDeclined")}</Badge>}
                 </div>
-                <details className="rounded-2xl border-2 border-b-4 border-border bg-surface px-3">
+                <details className="rounded-xl border border-border bg-surface px-3">
                   <summary className="min-h-11 cursor-pointer py-2.5 text-sm font-bold">{t("me.notes")}</summary>
                   <label htmlFor={`n-${s.id}`} className="sr-only">
                     {t("me.notes")}: {s.opp.title}

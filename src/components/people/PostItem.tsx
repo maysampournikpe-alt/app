@@ -16,7 +16,7 @@ export function PostItem({ post, slug, canReply, replyKind, onChange }: { post: 
   const [replying, setReplying] = useState(false);
   const replies = post.replies ?? [];
   return (
-    <li className="rounded-2xl border-2 border-b-4 border-border bg-surface p-4">
+    <li className="rounded-xl border border-border bg-surface p-4">
       <PostBody post={post} locale={locale} onChange={onChange} />
       {replies.length > 0 &&
         (showReplies ? (

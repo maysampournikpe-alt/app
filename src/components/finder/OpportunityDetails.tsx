@@ -125,7 +125,7 @@ export function OpportunityDetails({
               href={opp.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center gap-1.5 press rounded-2xl border-2 border-b-4 border-border bg-surface px-4 font-display text-sm font-extrabold hover:bg-surface-2 active:border-b-2"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-input bg-card px-4 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2"
             >
               {t("opp.source")}
               <ExternalLink aria-hidden="true" className="size-4" />
@@ -138,7 +138,7 @@ export function OpportunityDetails({
               onClick={() => {
                 if (!saved) save(opp);
               }}
-              className="inline-flex min-h-11 items-center gap-1.5 press rounded-2xl border-2 border-b-4 border-border bg-surface px-4 font-display text-sm font-extrabold hover:bg-surface-2 active:border-b-2"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-input bg-card px-4 text-sm font-semibold shadow-xs transition-colors hover:bg-surface-2"
             >
               <MessageCircle aria-hidden="true" className="size-4" />
               {t("opp.interview")}
